@@ -1,41 +1,41 @@
 .dark-modal .modal-content {
-    background-color: #292b2c;
-    color: white;
-  }
-  .dark-modal .close {
-    color: white;
-  }
-  .light-blue-backdrop {
-    background-color: #5cb3fd;
-  }
-  .badge {
-    border-radius:12px;
-  }
+  background-color: #292b2c;
+  color: white;
+}
+.dark-modal .close {
+  color: white;
+}
+.light-blue-backdrop {
+  background-color: #5cb3fd;
+}
+.badge {
+  border-radius:12px;
+}
 
-  table { border-collapse: separate; border-spacing: 0 -10em; }
-  
-  tr.spaceUnder>td {
-    padding-bottom: -5em;
-  }
-  #div1{
-    float:left;
-    background-color:red;
-  }
-  #div2{
-    float:right;
-    background-color:blue;
-    height:100px
-  }
-  #div3{
-    margin:0 auto;
-    background-color:yellow;
-  }
-  h6{
+table { border-collapse: separate; border-spacing: 0 -10em; }
 
-  }
-  /* .table>tbody>tr>td, .table>tbody>tr>th,
-  .table>tfoot>tr>td, .table>tfoot>tr>th,
-  .table>thead>tr>td, .table>thead>tr>th
-  {
-    line-height : 15px; 
-  } */
+tr.spaceUnder>td {
+  padding-bottom: -5em;
+}
+#div1{
+  float:left;
+  background-color:red;
+}
+#div2{
+  float:right;
+  background-color:blue;
+  height:100px
+}
+#div3{
+  margin:0 auto;
+  background-color:yellow;
+}
+h6{
+
+}
+/* .table>tbody>tr>td, .table>tbody>tr>th,
+.table>tfoot>tr>td, .table>tfoot>tr>th,
+.table>thead>tr>td, .table>thead>tr>th
+{
+  line-height : 15px; 
+} */

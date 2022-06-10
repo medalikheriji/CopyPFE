@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit , ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import {NgbModal, ModalDismissReasons, NgbAccordionConfig, NgbActiveModal, NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
-
+import { MapCustomService } from 'src/app/_services/map-custom.service';
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
@@ -21,28 +22,30 @@ import {NgbModal, ModalDismissReasons, NgbAccordionConfig, NgbActiveModal, NgbDa
     .badge {
       border-radius:12px;
     }
-    table #albums 
+    /* table #albums 
     {
     border-collapse:separate;
     border-spacing:0 1rm;
-    }
-    #container{
+    background-color:cyan;
+    } */
+    /* #container{
       display : flex ;
       background-color:bisque;
       align-content:center;
       justify-content:center;
       display:inline-block;
-    }
+    } */
 
-    #container div {
-      background-color:white;
+    /* #container div {
+      background-color:red;
       align-items: center ;
       margin:5px;
       padding:5px;
       width:100%;
       border-right: double;
       display:inline-block;
-    }
+
+    } */
     .card-header{
       background-color:white;
       margin-left:30px;
@@ -120,6 +123,7 @@ export class ExpenseComponent implements OnInit {
   closeResult :any ="" ;
   isDisabled = false;
   urlFile : any ="assets/img/noFile.png";
+  urlFile1 : any ;
   /** */
   public fieldArray: Array<any> = [];
   private newAttribute: any = {};
@@ -133,10 +137,15 @@ export class ExpenseComponent implements OnInit {
   /** */
   public categories : Array<String> = ['Avion ','Carburant','Divers','Divertissement ' ,'Eau' ,'Frais postaux ', 'Gaz ', 'Hébergement' ,'Internet ' , 'Loyer', 'Matériel' , 'Parking' , 'Péage ' , 'Resturation' , 'Services' , 'Taxi' , 'Transport' ,' Téléphone ', 'Voiture '];
 
-  constructor(private modalService: NgbModal,private configAccor:NgbAccordionConfig,private formbuilder:FormBuilder ) {
+  /** */
+  distance : any = this.mapCustomService.getDistanceBetweenPonits() ;
 
+  /** */
+  PDF_File : any ="assets/img/guide pfe2021-2022 (1).pdf";
+  constructor(private modalService: NgbModal,private configAccor:NgbAccordionConfig,private formbuilder:FormBuilder , private mapCustomService : MapCustomService , private sanitizer : DomSanitizer) {
+    this.urlFile1 = sanitizer.bypassSecurityTrustUrl(this.urlFile);
 
-   }
+  }
 
   ngOnInit(): void {
     this.expensesList = [
@@ -151,7 +160,7 @@ export class ExpenseComponent implements OnInit {
       {id : "4", titre : "9 titre", date: "10/04/2022", description: "Desc 4 ", categorie:"Restauration",ville:"Sfax",noteFrais:"Note 4",montant:"9900",aRembourser:false,tva:"26500",etat:"En attente"},
       {id : "5", titre : "10 titre", date: "29/12/2022", description: "Desc 5 ", categorie:"Peage",ville:"Touzeur",noteFrais:"Note 5",montant:"3400",aRembourser:false,tva:"39100",etat:"Verfiée"},
       {id : "1", titre : "11 titre", date: "20/03/2022", description: "Desc 1 ", categorie:"Avion",ville:"Djerba",noteFrais:"Note 1",montant:"1500",aRembourser:true,tva:"12500",etat:"Verfiée"},
-      {id : "2", titre : "12 titre", date: "05/11/2022", description: "Desc 2 ", categorie:"Carburant",ville:"Tunisie",noteFrais:"Note 2",montant:"8700",aRembourser:false,tva:"17500",etat:"En attente"},
+      {id : "2"!, titre : "12 titre", date: "05/11/2022", description: "Desc 2 ", categorie:"Carburant",ville:"Tunisie",noteFrais:"Note 2",montant:"8700",aRembourser:false,tva:"17500",etat:"En attente"},
       {id : "3", titre : "13 titre", date: "17/02/2022", description: "Desc 3 ", categorie:"Internet",ville:"Bizerte",noteFrais:"Note 3",montant:"6300",aRembourser:true,tva:"9000",etat:"Rejetée"},
       {id : "4", titre : "14 titre", date: "10/04/2022", description: "Desc 4 ", categorie:"Restauration",ville:"Sfax",noteFrais:"Note 4",montant:"9900",aRembourser:false,tva:"26500",etat:"En attente"},
       {id : "5", titre : "15 titre", date: "29/12/2022", description: "Desc 5 ", categorie:"Peage",ville:"Touzeur",noteFrais:"Note 5",montant:"3400",aRembourser:false,tva:"39100",etat:"Verfiée"},
@@ -180,6 +189,9 @@ export class ExpenseComponent implements OnInit {
       taxDepense:[''],
       fichierDepense:['']
     });
+    console.log("SS --",this.mapCustomService.getDistanceBetweenPonits());
+    this.distance = this.mapCustomService.getDistanceBetweenPonits() ;
+
   }
 
   Search(){
@@ -203,14 +215,25 @@ export class ExpenseComponent implements OnInit {
   }
 
   onSelectFile(e:any){
+    console.log("------> ",e.target.files[0].type);
+    // application/pdf
+    // image/png -- image/jpeg
+    
     if (e.target.files){
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload=(event:any)=>{
-        this.urlFile=event.target.result;
+        console.log("OOO",event.target.result);
+        console.log("OOOPPPOOO",this.urlFile);
+        this.urlFile1=event.target.result;
+        console.log("TTT",this.urlFile1);
       }
     }
   }
+
+  // photoURL(url : any ) {
+  //   return this.sanitizer.bypassSecurityTrustUrl(url);
+  // }
 
   @ViewChild('taxValue') taxValue!:ElementRef;
   triggerSomeEvent() {
@@ -267,5 +290,9 @@ export class ExpenseComponent implements OnInit {
   }
 
   /** */
+  printDistance(){
+    console.log("SS --",this.mapCustomService.getDistanceBetweenPonits());
+    this.distance = this.mapCustomService.getDistanceBetweenPonits() ;
+  }
 
 }
