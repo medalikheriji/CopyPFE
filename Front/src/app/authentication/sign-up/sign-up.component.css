@@ -1,0 +1,26 @@
+#header-color{
+    background: linear-gradient(#F5F5F5, #ffffff);;
+}
+body{
+    background:  url("src/assets/img/background-12.png") no-repeat fixed center ;
+    background-size: 110%;
+}
+.card-body{
+    position:relative;
+}
+#header{
+    margin-top:2%;
+}
+#aside{
+    padding-top:7%;
+    padding-bottom:30%;
+}
+h4{
+    text-align:center;
+}
+.card-header{
+    padding-top:10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em
+}

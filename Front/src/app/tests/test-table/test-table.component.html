@@ -1,0 +1,66 @@
+<input type="search" class="form-control" name="firstName" placeholder="Enter your name " [(ngModel)] ="categorie" (ngModelChange)="Search()" />
+<!-- <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th (click)="sortField('id')">User Id &nbsp;<i class="fa-solid fa-sort"></i></th>
+            <th (click)="sortField('firstName')">First Name &nbsp; <i class="fa-solid fa-sort"></i></th>
+            <th (click)="sortField('lastName')">Last Name &nbsp; <i class="fa fa-sort"></i></th>
+            <th (click)="sortField('email')">E-mail &nbsp; <i class="fa fa-sort"></i></th>
+            <th>Mobile</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let member of membersList |orderBy: key: reverse | paginate: {itemsPerPage: 3 , currentPage : p} ;">
+            <td> {{ member.Id }} </td>
+            <td> {{ member.firstName }} </td>
+            <td> {{ member.lastName }} </td>
+            <td> {{ member.email }} </td>
+            <td> {{ member.mobile }} </td>
+            <td> {{ member.salary }} </td>
+        </tr>
+    </tbody>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</table> -->
+<table class="table table-borderless">
+    <thead>
+      <tr>
+        <th (click)="sortField('date')">Date &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th (click)="sortField('description')">Description &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th (click)="sortField('categorie')">Catégorie &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th (click)="sortField('ville')">Ville &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th (click)="sortField('noteFrais')">Note de frais &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th (click)="sortField('montant')">Montant TTC &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th >R</th>
+        <th (click)="sortField('tva')">TVA &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th></th>
+        <th (click)="sortField('etat')">Etat &nbsp; <i class="fa-solid fa-sort"></i></th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let expenses of membersList |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
+        <td> {{ expenses.date }}</td>
+        <td> {{ expenses.description }} </td>
+        <td>
+            {{ expenses.categorie }} 
+        </td>
+        <td>
+            {{ expenses.ville }} 
+        </td>
+        <td>{{ expenses.noteFrais }}</td>
+
+        <td>{{ expenses.montant }}</td>
+        <td>{{ expenses.aRembourser }}</td>
+        <td>{{ expenses.tva }}</td>
+        <td>Inv</td>
+        <td>
+          <div class="badge badge-success badge-shadow">{{ expenses.etat }}</div>
+        </td>
+        <td>
+
+        </td>                                 
+      </tr> 
+    </tbody>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </table>

@@ -1,0 +1,1563 @@
+<app-aside-bar></app-aside-bar>
+
+<body>
+
+    
+
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-content">
+            <section class="section" style="margin-top:-2%;">
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-light">
+                                <div class="card-header" style="margin-top:1%;">
+                                    <h4><b> Liste de mes dépenses</b></h4>
+
+                                </div>
+
+                                <div class="card-body" style="margin-top:-1%;">
+                                    <!---->
+                                    <table>
+                                        <tr>
+                                            <td>
+
+                                                <div class="input-group mb-2 me-6">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text form-control-sm">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="search" class="form-control " name="firstName"
+                                                        placeholder="Titre de la dépense " [(ngModel)]="titreDep"
+                                                        (ngModelChange)="Search()" />
+                                                </div>
+
+                                            </td>
+                                            <!--<td>
+                                            <button class="btn btn-sm btn-outline-warning mb-2 me-6" (click)="openScrollableContent(longContent)"><i class="fa-solid fa-plus"></i>Dépense</button>
+                                            </td>-->
+                                            <td>
+                                                <button class="btn btn-lg btn-outline-info mb-2 me-6"
+                                                    (click)="openXl(content)"><i
+                                                        class="fa-solid fa-plus"></i>Dépense</button>
+                                            </td>
+                                            <!--<td>
+                                            <button class="btn btn-lg btn-outline-info mb-2 me-4" (click)="openScrollableContent1(longContent1)" ><i class="fa-solid fa-plus"></i>Frais kilométrique</button>
+                                            </td>-->
+                                            <td>
+                                                <button class="btn btn-lg btn-outline-info mb-2 me-6"
+                                                    (click)="openXl(content1)"><i class="fa-solid fa-plus"></i>Frais
+                                                    kilométrique</button>
+                                            </td>
+                                            <td>
+                                                <!-- <button class="btn btn-sm btn-light" (click)="openSm(content2)"><i class="fa-solid fa-circle-plus" style="color:#7C83FD;"></i></button> -->
+                                                <button class="btn btn-lg btn-outline-info mb-2 me-6"
+                                                    (click)="openLg(content2)"><i class="fa-solid fa-plus"></i>Ajouter
+                                                    note frais</button>
+                                            </td>
+
+                                            <!-- RADIO BUTTON 
+                                        <td>
+                                            <label class="custom-switch">
+                                            <input type="radio" name="option" value="1" class="custom-switch-input" checked >
+                                            <span class="custom-switch-indicator"></span>
+                                            <span class="custom-switch-description">Vérifié</span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="custom-switch">
+                                            <input type="radio" name="option" value="2" class="custom-switch-input">
+                                            <span class="custom-switch-indicator"></span>
+                                            <span class="custom-switch-description">Rejeté</span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <label class="custom-switch">
+                                            <input type="radio" name="option" value="3" class="custom-switch-input">
+                                            <span class="custom-switch-indicator"></span>
+                                            <span class="custom-switch-description">Approuvé</span>
+                                            </label>
+                                        </td>  
+                                        RADIO BUTTON -->
+                                        </tr>
+
+                                    </table>
+
+                                    <!---->
+                                    <ngb-accordion #acc="ngbAccordion">
+                                        <ngb-panel id="toggle-2" title="Filtres Standards" hidden="">
+                                            <ng-template ngbPanelContent>
+                                                <div class="form-group" style="margin-bottom:0%;">
+                                                    <div class="form-row">
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                                <label>Du</label>
+                                                                <input type="date"
+                                                                    class="form-control form-control-sm mx-sm-3">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                                <label>Au</label>
+                                                                <input type="date"
+                                                                    class="form-control form-control-sm  mx-sm-3 ">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-inline">
+                                                            <div class="form-group ">
+                                                                <label>Nom de la catégorie</label>
+                                                                <select
+                                                                    class="form-select form-select-sm form-control mx-sm-3 col-lg-6">
+                                                                    <option *ngFor="let categorie of categories"
+                                                                        [ngValue]="categorie">{{ categorie }} </option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-inline">
+                                                            <div class="form-group ">
+                                                                <label>État de note</label>
+                                                                <select
+                                                                    class="form-select form-select-sm form-control mx-sm-3 col-lg-6">
+                                                                    <option selected>Zero AAA</option>
+                                                                    <option value="1">OneAAA</option>
+                                                                    <option value="2">TwoAAAA</option>
+                                                                    <option value="3">ThreeAAAAAAA</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <!--<div class="col-sm-4" style="background-color:yellow;">
+                                                            <p>Lorem ipsum...</p>
+                                                        </div>-->
+
+                                                        <!--
+                                                        <div class="form-inline">
+                                                            <div class="form-group">
+                                                              <label >Password</label>
+                                                              <input type="password" class="form-control mx-sm-3"
+                                                                aria-describedby="passwordHelpInline">
+                                                            </div>
+                                                        </div>
+                                                        -->
+
+                                                        <!--
+                                                        <div class="form-inline">
+                                                            <div class="form-group col-md-3">
+                                                                <label style="font-size:14px;">Du</label>
+                                                                <input type="date" class="form-control" id=""
+                                                                    placeholder="Ex:30/12/2022">
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label style="font-size:14px;">Au</label>
+                                                                <input type="date" class="form-control" id=""
+                                                                    placeholder="Ex:30/12/2022">
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label style="font-size:14px;">Nom de la
+                                                                    catégorie</label>
+                                                                <select class="custom-select">
+                                                                    <option selected>Zero</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                <label style="font-size:14px;">État de note</label>
+                                                                <select class="custom-select">
+                                                                    <option selected>Tous les états de notes</option>
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three4444</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        -->
+                                                    </div>
+                                                    <br>
+                                                    <div class="form-row">
+                                                        <div class="form-inline">
+                                                            <div class="form-group ">
+                                                                <label>État de facturation</label>
+                                                                <select
+                                                                    class="form-select form-select-sm form-control mx-sm-3 col-lg-9 ">
+                                                                    <option selected>Facturable / Non facturable
+                                                                    </option>
+                                                                    <option value="1">Non Facturable</option>
+                                                                    <option value="2">Facturable</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-inline">
+                                                            <div class="form-group ">
+                                                                <label>État de remboursement</label>
+                                                                <select
+                                                                    class="form-select form-select-sm form-control mx-sm-3 col-lg-9">
+                                                                    <option selected>Remboursable / Non Remboursable
+                                                                    </option>
+                                                                    <option value="1">Remboursable</option>
+                                                                    <option value="2">Non remboursable</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <!--
+                                                    <div class="form-row">
+
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">État de facturation</label>
+                                                            <select class="custom-select">
+                                                                <option selected>Facturable / Non facturable</option>
+                                                                <option value="1">Facturable</option>
+                                                                <option value="2">Non facturable</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">État de remboursement</label>
+                                                            <select class="custom-select">
+                                                                <option selected>Remboursable / Non Remboursable
+                                                                </option>
+                                                                <option value="1">Remboursable</option>
+                                                                <option value="2">Non remboursable</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    -->
+                                                </div>
+
+
+                                                <!--
+                                                <form>
+                                                    <div class="pretty p-switch p-fill">
+                                                    <input type="checkbox" />
+                                                    <div class="state p-info">
+                                                        <label>Facturable au client</label>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                    <div class="pretty p-switch p-fill">
+                                                    <input type="checkbox" />
+                                                    <div class="state p-info">
+                                                        <label>A rembourser</label>
+                                                    </div>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <select id="inputCategorie" class="form-control form-control-sm">
+                                                            <option selected hidden> -- Sélectionnez la catégorie de dépense -- </option>
+                                                            <option>Option 1</option>
+                                                            <option>Option 2</option>
+                                                            <option>Option 3</option>
+                                                        </select>
+                                                        <select id="inputCategorie" class="form-control form-control-sm">
+                                                            <option selected hidden> -- Sélectionnez la catégorie de dépense -- </option>
+                                                            <option>Option 1</option>
+                                                            <option>Option 2</option>
+                                                            <option>Option 3</option>
+                                                        </select>
+                                                    </div>
+                                                    <form class="form-inline col-md-6">
+                                                        <div class="form-floating mb-2">
+                                                        <input type="text" class="form-control mb-2 mr-sm-2"  id="floatingInput"
+                                                            placeholder="Jane Doe">
+                                                        <label class="sr-only" for="floatingInput" >Username</label>
+                                                        </div>                        
+                                                        <div class="input-group mb-2 mr-sm-2">
+                                                            <input type="text" class="form-control" id="inlineFormInputGroupUsername2"
+                                                            placeholder="Username">
+                                                        </div>
+                                                        <div class="form-floating mb-2">
+                                                            <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com" value="mdo@example.com">
+                                                            <label for="floatingInput" >Email address</label>
+                                                        </div>
+                                                    </form>                          
+                                                </form>
+                                                -->
+                                            </ng-template>
+                                        </ngb-panel>
+                                    </ngb-accordion>
+                                    <!---->
+
+                                    <font size="2">
+
+                                        <table width="100%" class="table  table-light table-hover table-md" id="albums"
+                                            cellspacing="0" border="1px">
+                                            <thead >
+                                                <tr class="spaceUnder" border="1px">
+                                                    <th (click)="sortField('date')">Date &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th (click)="sortField('titre')">Titre &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th (click)="sortField('description')">Description &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th (click)="sortField('categorie')">Catégorie &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th (click)="sortField('ville')">Ville &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th (click)="sortField('noteFrais')">Note de frais &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th (click)="sortField('montant')"> TTC &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th>R</th>
+                                                    <th (click)="sortField('tva')">TVA &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th></th>
+                                                    <th (click)="sortField('etat')">Etat &nbsp; <i
+                                                            class="fa-solid fa-sort"></i></th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="spaceUnder"
+                                                    *ngFor="let expenses of expensesList |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
+                                                    <td style="width:3%;"> {{ expenses.date }}</td>
+                                                    <td style="width:10%;"> {{ expenses.titre }}</td>
+                                                    <td style="width:12%;"> {{ expenses.description }} </td>
+                                                    <td style="width:12%;">
+                                                        {{ expenses.categorie }}
+                                                    </td>
+                                                    <td style="width:7%;">
+                                                        {{ expenses.ville }}
+                                                    </td>
+                                                    <td style="width:15%;">{{ expenses.noteFrais }}</td>
+
+                                                    <td style="width:7%;">{{ expenses.montant }}</td>
+                                                    <td style="width:2%;">{{ expenses.aRembourser }}</td>
+                                                    <td style="width:7%;">{{ expenses.tva }}</td>
+                                                    <td style="width:2%;"><i class="fa-solid fa-eye"></i></td>
+                                                    <td style="width:7%; text-align:center;">
+                                                        <div class="badge badge-success badge-shadow">{{ expenses.etat
+                                                            }}</div>
+                                                    </td>
+                                                    <td style="width:10%"><a href="#" id="btn1"
+                                                            class="btn btn-sm btn-primary "
+                                                            style="padding-left:20%;padding-right:20%; margin : auto ; display:inline-block;justify-content: center;">Detail</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+                                        </table>
+                                    </font>
+                                </div>
+                                <!---->
+
+                                <!-- BEGIN : MODEL TEMPLATE ( NOTE FRAIS )-->
+                                <ng-template #content2 let-modal>
+
+                                    <div class="modal-header modal-lg">
+                                        <div class="form-group col-md-9" style="margin-bottom:0%;">
+                                            <label class="modal-title" style="font-size: 16px;">Ajouter une note
+                                                frais</label>
+                                        </div>
+                                        <button type="button" class="btn-close" aria-label="Close"
+                                            (click)="modal.dismiss('Cross click')"></button>
+                                    </div>
+                                    <!--***********************************************************************************-->
+                                    <!--////////////////////////////////////////// FORM ///////////////////////////////////-->
+                                    <!--***********************************************************************************-->
+                                    <form [formGroup]="myForm1" (ngSubmit)="print()">
+                                        <div class="form-row" style="margin:20px;">
+                                            <!--BEGIN : Départ-->
+
+                                            <div class="form-group col-md-6">
+                                                <label style="font-size:14px;">Titre note frais</label>
+                                                <input type="text" class="form-control" id=""
+                                                    formControlName="titreNoteFrais" [ngClass]="
+                                                            (myForm1.get('titreNoteFrais').touched ||
+                                                            myForm1.get('titreNoteFrais').dirty) &&
+                                                            myForm1.get('titreNoteFrais').hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                                ((myForm1.get('titreNoteFrais').touched ||
+                                                                myForm1.get('titreNoteFrais').dirty) &&
+                                                                  !myForm1.get('titreNoteFrais').invalid)
+                                                              ? 'is-valid'
+                                                              : ''
+                                                            ">
+
+                                                <div class="invalid-feedback">Titre note frais est obligatoire</div>
+                                            </div>
+                                            <!-- END : Départ -->
+                                            <!-- BEGIN : Arrivée -->
+                                            <div class="form-group col-md-6">
+                                                <label style="font-size:14px;">Description note frais </label>
+                                                <input type="text" class="form-control" id=""
+                                                    formControlName="descNoteFrais" [ngClass]="
+                                                            (myForm1.get('descNoteFrais').touched ||
+                                                            myForm1.get('descNoteFrais').dirty) &&
+                                                            myForm1.get('descNoteFrais').hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                                ((myForm1.get('descNoteFrais').touched ||
+                                                                myForm1.get('descNoteFrais').dirty) &&
+                                                                  !myForm1.get('descNoteFrais').invalid)
+                                                              ? 'is-valid'
+                                                              : ''
+                                                            ">
+                                                <div class="invalid-feedback">Description note frais est obligatoire
+                                                </div>
+                                            </div>
+
+                                            <!-- END : Arrivée -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                (click)="modal.close('Close click')">Annuler</button>
+                                            <button type="button" class="btn btn-info" type="submit"
+                                                [disabled]="myForm1.invalid"
+                                                (click)="modal.close('Close click')">Sauvegarder</button>
+                                        </div>
+                                    </form>
+                                    <!--***********************************************************************************-->
+                                    <!--////////////////////////////////////////// FORM ///////////////////////////////////-->
+                                    <!--***********************************************************************************-->
+                                </ng-template>
+                                <!-- END : MODEL TEMPLATE ( NOTE FRAIS  )-->
+                                <div class="card-body shadow-none p-4 mb-4 bg-light">
+                                    <!-- BEGIN : MODEL TEMPLATE ( Expenses )-->
+                                    <ng-template #content let-modal>
+                                        <div class="modal-header">
+                                            <div class="form-group col-md-9" style="margin-bottom:0%;">
+                                                <label class="modal-title" style="font-size: 16px;">Ajouter une
+                                                    dépense</label>
+                                            </div>
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                (click)="modal.dismiss('Cross click')"></button>
+                                        </div>
+
+                                        <!--BEGIN : LARGE MODEL-->
+
+                                        <!--
+                                            <div id="div1" style="float:left">
+                                                <div class="form-group col-md-4">
+                                                <label style="font-size:14px;">État de facturation</label>
+                                                <select class="custom-select">
+                                                    <option selected>Facturable / Non facturable</option>
+                                                    <option value="1">Facturable</option>
+                                                    <option value="2">Non facturable</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div id="div2">
+                                                <div class="form-group col-md-4">
+                                                    <label style="font-size:14px;">État de facturation</label>
+                                                    <select class="custom-select">
+                                                        <option selected>Facturable / Non facturable</option>
+                                                        <option value="1">Facturable</option>
+                                                        <option value="2">Non facturable</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="div3" style="float:right;background-color:red">
+                                                <div class="form-group col-md-4">
+                                                    <label style="font-size:14px;">Aaslema</label>
+                                                    <select class="custom-select">
+                                                        <option selected>Facturable / Non facturable</option>
+                                                        <option value="1">Facturable</option>
+                                                        <option value="2">Non facturable</option>
+                                                        <option value="3">Three</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        -->
+
+
+                                        <!--***********************************************************************************-->
+                                        <!--////////////////////////////////////////// FORM ///////////////////////////////////-->
+                                        <!--***********************************************************************************-->
+                                        <form [formGroup]="myFormDepense" (ngSubmit)="printDepense()">
+                                            <div class="row">
+
+                                                <!--First Card -->
+                                                <div class="col-4 col-md-6 col-lg-4">
+                                                    <div class="card shadow-none border-0 " id="card1"
+                                                        style="margin-left:5px;height:100%;">
+
+                                                        <div class="card-body" style="margin-top:0%;">
+                                                            <div class="form-group" style="margin-bottom:0%;">
+                                                                <!---->
+                                                                <div class="pretty p-switch p-fill"
+                                                                    style="position: absolute; right: 20px; font-size:80%">
+                                                                    <input type="checkbox"
+                                                                        formControlName="facturableDepense" />
+                                                                    <div class="state p-info">
+                                                                        <label>Facturable au client</label>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <!--<div class="badge badge-success" style="position: absolute; right: 20px;">Verfié</div>   -->
+                                                                <!---->
+
+                                                                <!--<label style="font-size: 15px;">Généralités</label>    -->
+                                                                <br>
+                                                                <!--Titre-->
+                                                                <div class="form-group" style="margin-bottom: -1%;"> 
+                                                                    <label> Titre </label>
+                                                                    <input type="text"
+                                                                        class="form-control form-control-sm"
+                                                                        id="inputTitre" placeholder="Titre" width="5%"
+                                                                        formControlName="titreDepense" [ngClass]="
+                                                                        (myFormDepense.get('titreDepense').touched ||
+                                                                        myFormDepense.get('titreDepense').dirty) &&
+                                                                        myFormDepense.get('titreDepense').hasError('required')
+                                                                        ? 'is-invalid'
+                                                                        : '' ||
+                                                                            ((myFormDepense.get('titreDepense').touched ||
+                                                                            myFormDepense.get('titreDepense').dirty) &&
+                                                                            !myFormDepense.get('titreDepense').invalid)
+                                                                        ? 'is-valid'
+                                                                        : ''
+                                                                        ">
+                                                                    <div class="invalid-feedback">Titre du depense est
+                                                                        obligatoire</div>
+                                                                </div>
+                                                                <!--Date-->
+                                                                <div class="form-group" style="margin-bottom: -1%;">
+                                                                    <label style="margin-top:20px;">Date</label>
+                                                                    <input type="date" class="form-control form-control-sm"
+                                                                        placeholder="Date" formControlName="dateDepense"
+                                                                        [ngClass]="
+                                                                        (myFormDepense.get('dateDepense').touched ||
+                                                                        myFormDepense.get('dateDepense').dirty) &&
+                                                                        myFormDepense.get('dateDepense').hasError('required')
+                                                                        ? 'is-invalid'
+                                                                        : '' ||
+                                                                            ((myFormDepense.get('dateDepense').touched ||
+                                                                            myFormDepense.get('dateDepense').dirty) &&
+                                                                            !myFormDepense.get('dateDepense').invalid)
+                                                                        ? 'is-valid'
+                                                                        : ''
+                                                                        ">
+                                                                    <div class="invalid-feedback">Date du depense est
+                                                                        obligatoire</div>
+                                                                </div>
+                                                                <!--Categorie-->
+                                                                <!-- <label style="font-size:14px;" >État de note</label> -->
+                                                                <div class="form-group" style="margin-bottom: -1%;">
+                                                                    <label style="margin-top:20px;"> Sélectionnez la
+                                                                        catégorie
+                                                                        de dépense</label>
+                                                                    <select class="custom-select form-control-sm"
+                                                                        formControlName="cateDepense" 
+                                                                        [ngClass]="
+                                                                        (myFormDepense.get('cateDepense').touched ||
+                                                                        myFormDepense.get('cateDepense').dirty) &&
+                                                                        myFormDepense.get('cateDepense').hasError('required')
+                                                                        ? 'is-invalid'
+                                                                        : '' ||
+                                                                            ((myFormDepense.get('cateDepense').touched ||
+                                                                            myFormDepense.get('cateDepense').dirty) &&
+                                                                            !myFormDepense.get('cateDepense').invalid)
+                                                                        ? 'is-valid'
+                                                                        : ''
+                                                                        ">
+
+                                                                        <option value="1">One</option>
+                                                                        <option value="2">Two</option>
+                                                                        <option value="3">Three</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">Catégorie de depense est
+                                                                        obligatoire</div>
+                                                                </div>
+                                                                <br>
+                                                                <!--Moyen de paiement-->
+                                                                <div class="form-group"  style="margin-bottom: -1%;">
+                                                                    <label style="margin-top:20px;">  Sélectionnez l'état du note
+                                                                    </label>
+                                                                    <select class="custom-select form-control-sm" formControlName="etatDepense" 
+                                                                    [ngClass]="
+                                                                    (myFormDepense.get('etatDepense').touched ||
+                                                                    myFormDepense.get('etatDepense').dirty) &&
+                                                                    myFormDepense.get('etatDepense').hasError('required')
+                                                                    ? 'is-invalid'
+                                                                    : '' ||
+                                                                        ((myFormDepense.get('etatDepense').touched ||
+                                                                        myFormDepense.get('etatDepense').dirty) &&
+                                                                        !myFormDepense.get('etatDepense').invalid)
+                                                                    ? 'is-valid'
+                                                                    : ''
+                                                                    ">
+                                                                        <option selected value="0">Zero</option>
+                                                                        <option value="1">One</option>
+                                                                        <option value="2">Two</option>
+                                                                        <option value="3">Three</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">État de depense est
+                                                                        obligatoire
+                                                                    </div>
+                                                                </div>
+                                                                <!---->
+                                                                <label style="margin-top:20px;"> Sélectionnez votre
+                                                                    pays</label>
+                                                                <select class="custom-select form-control-sm"
+                                                                    formControlName="paysDepense">
+
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div style="max-height: 100%;"></div>
+                                                </div>
+                                                <!--END : First Card -->
+                                                <!--BEGIN : Second Card -->
+                                                <div class="col-4 col-md-6 col-lg-4">
+                                                    <div class="card shadow-none border-0" id="card1"
+                                                        style="margin-left:-20px;margin-right:-20px;height:100%;">
+                                                        <div class="card-body" style="margin-top:0%;">
+                                                            <div class="form-group">
+                                                                <!--Note frais-->
+                                                                <!---->
+                                                                <div class="pretty p-switch p-fill"
+                                                                    style="position: absolute; right: 20px; font-size:80%">
+                                                                    <input type="checkbox"
+                                                                        formControlName="rembourserDepense" />
+                                                                    <div class="state p-info">
+                                                                        <label>A rembourser</label>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <!--<div class="input-group mb-3">
+                                                                <input type="text" class="form-control form-control-sm" placeholder="Note de frais" aria-label="">
+                                                                <div class="input-group-append">
+                                                                <button class="btn btn-sm btn-light" (click)="openSm(content2)"><i class="fa-solid fa-circle-plus" style="color:#7C83FD;"></i></button>
+                                                                </div>
+                                                            </div>-->
+                                                                <label> Sélectionnez le note frais </label>
+                                                                <select class="custom-select form-control-sm"
+                                                                    formControlName="noteFraisDepense" [ngClass]="
+                                                                (myFormDepense.get('noteFraisDepense').touched ||
+                                                                myFormDepense.get('noteFraisDepense').dirty) &&
+                                                                myFormDepense.get('noteFraisDepense').hasError('required')
+                                                                  ? 'is-invalid'
+                                                                  : '' ||
+                                                                    ((myFormDepense.get('noteFraisDepense').touched ||
+                                                                    myFormDepense.get('noteFraisDepense').dirty) &&
+                                                                    !myFormDepense.get('noteFraisDepense').invalid)
+                                                                  ? 'is-valid'
+                                                                  : ''
+                                                                ">
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                                <div class="invalid-feedback"> Note frais est
+                                                                    obligatoire</div>
+                                                                <!--Note-->
+                                                                <label style="margin-top:20px;"> Description </label>
+                                                                <textarea class="form-control form-control-sm"
+                                                                    placeholder="Description"
+                                                                    formControlName="descDepense"></textarea>
+                                                                <!-- Généralités -->
+                                                                <br>
+                                                                <label style="margin-top:-50px">
+                                                                    <h6> Données financières </h6>
+                                                                </label>
+                                                                <!-- Table -->
+                                                                <table class="table ">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th colspan="2">
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="text" readonly=""
+                                                                                    value="250.000"
+                                                                                    style="text-align:center;"
+                                                                                     />
+                                                                            </th>
+                                                                            <th colspan="2">
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="text" readonly=""
+                                                                                    value="TND" />
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <small id="passwordHelpInline"
+                                                                                    class="text-muted">
+                                                                                    Montant.
+                                                                                </small>
+                                                                            </td>
+                                                                            <td>
+                                                                                <small id="passwordHelpInline"
+                                                                                    class="text-muted">
+                                                                                    Taux tva.
+                                                                                </small>
+                                                                            </td>
+                                                                            <td colspan="2">
+                                                                                <small id="passwordHelpInline"
+                                                                                    class="text-muted">
+                                                                                    Montant hors tva.
+                                                                                </small>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr
+                                                                            *ngFor="let field of fieldArray; let i = index">
+                                                                            <td>
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="text"
+                                                                                    formControlName="mntDepense" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="number" placeholder="TVA" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="text"
+                                                                                    placeholder="Montant hors TVA" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <button class="btn btn-sm btn-light"
+                                                                                    type="button"
+                                                                                    (click)="deleteFieldValue(i)"
+                                                                                    style="color:#7C83FD;"><i
+                                                                                        class="fa-solid fa-circle-minus"></i></button>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="text" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="number" placeholder="TVA" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <input
+                                                                                    class="form-control form-control-sm"
+                                                                                    type="text"
+                                                                                    placeholder="Montant hors TVA" />
+                                                                            </td>
+                                                                            <td>
+                                                                                <button class="btn btn-sm btn-light"
+                                                                                    type="button"
+                                                                                    (click)="addFieldValue()"
+                                                                                    style="color:#7C83FD;"><i
+                                                                                        class="fa-solid fa-circle-plus"></i></button>
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                                <!-- End : Table -->
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-4 col-md-6 col-lg-4">
+                                                    <div class="card shadow-none border-0" id="card1"
+                                                        style="margin-right:5px;height:100%">
+                                                        <!--p-4 mb-4-->
+                                                        <div class="card-body" style="margin-top:0%;">
+                                                            <div class="form-group">
+                                                                <!-- BEGIN : MONTANT -->
+                                                                <p>
+                                                                    <button type="button"
+                                                                        class="btn btn-sm btn-outline-info" name="myChk"
+                                                                        id="myChk" (click)="collapse.toggle()"
+                                                                        [attr.aria-expanded]="!isCollapsed"
+                                                                        aria-controls="collapseExample"
+                                                                        (change)="triggerSomeEvent()"
+                                                                        style="width:100%">
+                                                                        La dépense contient un montant non taxable
+                                                                    </button>
+                                                                </p>
+                                                                <div #collapse="ngbCollapse"
+                                                                    [(ngbCollapse)]="isCollapsed">
+                                                                    <div class="form-row">
+                                                                        <div class="form-group col-md-6">
+                                                                            <input type="text"
+                                                                                class="form-control form-control-sm"
+                                                                                name="myTxt" id="myTxt" value=""
+                                                                                #taxValue [disabled]="isDisabled"
+                                                                                placeholder="Montant non taxtable"
+                                                                                formControlName="taxDepense" />
+                                                                        </div>
+                                                                        <div class="form-group col-md-6">
+                                                                            <input type="text"
+                                                                                class="form-control form-control-sm"
+                                                                                value="TND" readonly="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- END : MONTANT -->
+                                                                <!--BEGIN : Upload file -->
+                                                                <div class="form-group">
+                                                                    <label> Selectionner un reçu </label>
+                                                                    <!--<label><h6 style="font-size:14px;"> Selectionner un reçu </h6></label>-->
+                                                                    <input type="file" class="form-control"
+                                                                        (change)="onSelectFile($event)"
+                                                                        value="src/assets/img/noFile.png"
+                                                                        formControlName="fichierDepense" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <img [src]="urlFile" alt="" srcset="" height="300"
+                                                                        width="300" value="src/assets/img/noFile.png">
+                                                                </div>
+                                                                <!--END : Upload file-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="max-height: 100%;"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- END : LARGE MODEL -->
+                                            <!-- <div class="form-row">
+                                        <!--
+                                          <div class="form-group col-md-4">
+                                            <label style="font-size:14px;">État de facturation</label>
+                                            <select class="custom-select">
+                                                <option selected>Facturable / Non facturable</option>
+                                                <option value="1">Facturable</option>
+                                                <option value="2">Non facturable</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                            <label style="font-size:14px;">État de remboursement</label>
+                                            <select class="custom-select">
+                                                <option selected>Remboursable / Non Remboursable</option>
+                                                <option value="1">Remboursable</option>
+                                                <option value="2">Non remboursable</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                          </div>  
+                                          <div class="form-group col-md-4">
+                                            <label style="font-size:14px;">État de remboursement</label>
+                                            <select class="custom-select">
+                                                <option selected>Remboursable / Non Remboursable</option>
+                                                <option value="1">Remboursable</option>
+                                                <option value="2">Non remboursable</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                          </div> 
+                                        </div>-->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light"
+                                                    (click)="modal.close('Close click')">Annuler</button>
+                                                <button type="button" class="btn btn-info" type="submit"
+                                                    [disabled]="myFormDepense.invalid"
+                                                    (click)="modal.close('Close click')">Sauvegarder</button>
+                                            </div>
+                                        </form>
+                                    </ng-template>
+                                    <!-- BEGIN : MODAL EXPENSES FIRST ONE MODEL -->
+                                    <ng-template #longContent let-modal>
+                                        <div class="modal-header">
+                                            <div class="form-group col-md-9" style="margin-bottom:0%;">
+                                                <label class="modal-title" style="font-size: 16px;">Ajouter une
+                                                    dépense</label>
+                                            </div>
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                (click)="modal.dismiss('Cross click')"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- BEGIN : MODEL 1 -->
+                                            <form>
+                                                <!---->
+                                                <div class="pretty p-switch p-fill">
+                                                    <input type="checkbox" />
+                                                    <div class="state p-info">
+                                                        <label>Facturable au client</label>
+                                                    </div>
+                                                </div>
+                                                <!---->
+                                                <div class="pretty p-switch p-fill">
+                                                    <input type="checkbox" />
+                                                    <div class="state p-info">
+                                                        <label>A rembourser</label>
+                                                    </div>
+                                                </div>
+                                                <div class="badge badge-success"
+                                                    style="position: absolute; right: 20px;">Verfié</div>
+                                                <!--
+                                            <div class="pretty p-icon p-jelly p-round p-bigger">
+                                            <input type="checkbox" />
+                                            <div class="state p-info">
+                                                <i class="icon material-icons">done</i>
+                                                <label>done</label>
+                                            </div>
+                                            </div>
+                                            -->
+                                                <br>
+                                                <div class="form-group">
+                                                    <!--Titre-->
+                                                    <br>
+                                                    <label>
+                                                        <h6> Généralités</h6>
+                                                    </label>
+                                                    <input type="text" class="form-control" id="inputTitre"
+                                                        placeholder="Titre">
+                                                    <!--Date-->
+                                                    <label></label>
+                                                    <input type="date" class="form-control" placeholder="Date">
+                                                    <!--Categorie-->
+                                                    <label></label>
+                                                    <select id="inputCategorie" class="form-control form-control-sm">
+                                                        <option selected hidden> -- Sélectionnez la catégorie de dépense
+                                                            -- </option>
+                                                        <option>Option 1</option>
+                                                        <option>Option 2</option>
+                                                        <option>Option 3</option>
+                                                    </select>
+                                                    <!--Moyen de paiement-->
+                                                    <label></label>
+                                                    <select id="inputPaiement" class="form-control form-control-sm">
+                                                        <option selected hidden> -- Sélectionnez le moyen de paiement --
+                                                        </option>
+                                                        <option>Option 1</option>
+                                                        <option>Option 2</option>
+                                                        <option>Option 3</option>
+                                                    </select>
+                                                    <!--Pays-->
+                                                    <label></label>
+                                                    <select id="inputPays" class="form-control form-control-sm">
+                                                        <option selected hidden> -- Sélectionnez le pays -- </option>
+                                                        <option>Option 1</option>
+                                                        <option>Option 2</option>
+                                                        <option>Option 3</option>
+                                                    </select>
+                                                    <!--Note frais-->
+                                                    <label></label>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Note de frais" aria-label="">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-light" type="submit"><i
+                                                                    class="fa-solid fa-circle-plus"
+                                                                    style="color:#7C83FD;"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <!--
+                                            <div class="input-group">
+                                                <select class="custom-select" id="inputGroupSelect04">
+                                                <option selected>Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                                </select>
+                                                <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">Button</button>
+                                                </div>
+                                            </div>
+                                            -->
+                                                    <!--Note-->
+                                                    <textarea class="form-control" placeholder="Commentaire"></textarea>
+                                                    <!-- Généralités -->
+                                                    <br>
+                                                    <label>
+                                                        <h6> Données financières </h6>
+                                                    </label>
+                                                    <!-- Table -->
+                                                    <table class="table ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="2">
+                                                                    <input class="form-control" type="text" readonly=""
+                                                                        value="250.000" style="text-align:center;" />
+                                                                </th>
+                                                                <th colspan="2">
+                                                                    <input class="form-control" type="text" readonly=""
+                                                                        value="TND" />
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let field of fieldArray; let i = index">
+                                                                <td>
+                                                                    <input class="form-control" type="text" />
+                                                                </td>
+                                                                <td>
+                                                                    <select id="inputCategory"
+                                                                        class="form-control form-control-sm">
+                                                                        <option selected hidden>TVA</option>
+                                                                        <option value="1">7%</option>
+                                                                        <option value="2">10%</option>
+                                                                        <option value="3">19%</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input class="form-control" type="text"
+                                                                        placeholder="Montant hors TVA" />
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-light" type="button"
+                                                                        (click)="deleteFieldValue(i)"
+                                                                        style="color:#7C83FD;"><i
+                                                                            class="fa-solid fa-circle-minus"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <input class="form-control" type="text" />
+                                                                </td>
+                                                                <td>
+                                                                    <select id="inputCategory"
+                                                                        class="form-control form-control-sm">
+                                                                        <option selected hidden>TVA</option>
+                                                                        <option value="1">7%</option>
+                                                                        <option value="2">10%</option>
+                                                                        <option value="3">19%</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input class="form-control" type="text"
+                                                                        placeholder="Montant hors TVA" />
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-light" type="button"
+                                                                        (click)="addFieldValue()"
+                                                                        style="color:#7C83FD;"><i
+                                                                            class="fa-solid fa-circle-plus"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <!-- End : Table -->
+
+                                                    <!-- BEGIN : Montant non taxtable-->
+                                                    <div class="pretty p-switch p-fill">
+                                                        <input type="checkbox" name="myChk" id="myChk"
+                                                            (change)="triggerSomeEvent()" />
+                                                        <div class="state p-info">
+                                                            <label>La dépense contient un montant non taxable</label>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <label></label>
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" class="form-control" name="myTxt"
+                                                                id="myTxt" value="" #taxValue [disabled]="isDisabled"
+                                                                placeholder="Montant non taxtable" />
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <input type="text" class="form-control" value="TND"
+                                                                readonly="">
+                                                        </div>
+                                                    </div>
+                                                    <!--END : Montant non taxtable -->
+                                                    <!--BEGIN : Upload file -->
+                                                    <div class="form-group">
+                                                        <label style="font-size: 15px;">Selectionner un reçu</label>
+                                                        <input type="file" class="form-control"
+                                                            (change)="onSelectFile($event)" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <img [src]="urlFile" alt="" srcset="" height="230">
+                                                    </div>
+                                                    <!--END : Upload file-->
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- END : MODEL 1 -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                (click)="modal.close('Close click')">AKKKnnuler</button>
+                                            <button type="button" class="btn btn-info"
+                                                (click)="modal.close('Close click')">Sauvegarder</button>
+                                        </div>
+
+                                    </ng-template>
+
+                                    <!-- END : MODEL TEMPLATE-->
+
+                                    <!-- BEGIN : MODEL TEMPLATE ( Expense report )-->
+
+                                    <ng-template #content1 let-modal>
+                                        <div class="modal-header">
+                                            <div class="form-group col-md-9" style="margin-bottom:0%;">
+                                                <label class="modal-title" style="font-size: 16px;">Ajouter frais
+                                                    kilométriques</label>
+                                            </div>
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                (click)="modal.dismiss('Cross click')"></button>
+                                        </div>
+
+                                        <!--////////////////////////////////////////////////////////////-->
+                                        <div class="row">
+                                            <!--First Card -->
+                                            <div class="col-4 col-md-6 col-lg-4">
+                                                <div class="card shadow-none border-0" id="card1"
+                                                    style="margin-left:3px;">
+
+                                                    <div class="card-body" style="margin-top:0%;">
+                                                        <div class="form-row">
+                                                            <!---->
+                                                            <div class="pretty p-switch p-fill"
+                                                                style="position: absolute; right: 20px; font-size:80%">
+                                                                <input type="checkbox" />
+                                                                <div class="state p-info">
+                                                                    <label>Facturable au client</label>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <!---->
+                                                            <div class="form-group col-md-12">
+                                                                <label
+                                                                    style="font-size:14px; margin-top:8%;">Titre</label>
+                                                                <input type="text" class="form-control " id="inputTitre"
+                                                                    placeholder="Titre">
+                                                            </div>
+                                                        </div>
+                                                        <!-- BEGIN : Depart / Arrivée -->
+                                                        <div class="form-row">
+                                                            <!--BEGIN : Départ-->
+
+                                                            <div class="form-group col-md-6">
+                                                                <label style="font-size:14px;">Départ</label>
+                                                                <input type="text" class="form-control " id=""
+                                                                    placeholder="De">
+                                                            </div>
+                                                            <!-- END : Départ -->
+                                                            <!-- BEGIN : Arrivée -->
+                                                            <div class="form-group col-md-6">
+                                                                <label style="font-size:14px;">Arrivée</label>
+                                                                <input type="text" class="form-control" id=""
+                                                                    placeholder="À">
+                                                            </div>
+                                                            <!-- END : Arrivée -->
+                                                        </div>
+                                                        <!-- END : Depart / Arrivée -->
+                                                        <!-- BEGIN : Trajet -->
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-6">
+                                                                <label style="font-size:14px;">Trajet</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control "
+                                                                        placeholder="1" min="1">
+                                                                    <select class="custom-select "
+                                                                        id="inputGroupSelect">
+                                                                        <option value="1" selected>Aller</option>
+                                                                        <option value="2">Retour</option>
+                                                                        <option value="3">Aller / Retour</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>.</label>
+                                                                <div class="input-group ">
+                                                                    <input type="number" class="form-control "
+                                                                        placeholder="120" min="10" max="180">
+                                                                    <input type="text" class="form-control " value="KM"
+                                                                        disabled>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--END : Trajet-->
+                                                        <!--BEGIN : Total -->
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-6">
+                                                                <label style="font-size:14px;">Total</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="196" min="1" disabled>
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            KM
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>.</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="125.000" min="1" disabled>
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            DT
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--END : Total-->
+                                                        <!-- BEGIN : Tarif -->
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-6">
+                                                                <label style="font-size:14px;">Tarification</label>
+                                                                <div class="input-group">
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="3.750 DT" min="1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>.</label>
+                                                                <div class="input-group">
+                                                                    <select class="custom-select form-control-sm"
+                                                                        id="inputGroupSelect">
+                                                                        <option value="1" selected>Tarif Std.</option>
+                                                                        <option value="2">Option 2</option>
+                                                                        <option value="3">Option 3</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--END : Tarif -->
+
+                                                        <!-- ************************************  -->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--END : First Card -->
+                                            <!--BEGIN : Second Card -->
+                                            <div class="col-4 col-md-6 col-lg-4">
+                                                <div class="card shadow-none border-0" id="card2"
+                                                    style="margin-left:-20px;margin-right:-20px; height:100%;">
+                                                    <div class="card-body" style="margin-top:0%;">
+
+                                                        <!--BEGIN : Valeur a rembourser -->
+                                                        <div class="form-row">
+                                                            <div class="badge badge-warning"
+                                                                style="position: absolute; right: 20px;">Verfié</div>
+                                                            <br>
+                                                            <div class="form-group col-md-6" style="margin-top:8%;">
+
+                                                                <label style="font-size:14px;">Valeur à
+                                                                    rembourser</label>
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="125.000" min="1" disabled>
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">
+                                                                            DT
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-6" style="margin-top:8%;">
+                                                                <label>'</label>
+                                                                <div class="input-group">
+                                                                    <select class="custom-select form-control-sm"
+                                                                        id="inputGroupSelect">
+                                                                        <option value="1" selected>100%</option>
+                                                                        <option value="2">50%</option>
+                                                                        <option value="3">0%</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--END : Valeur a rembourser-->
+                                                        <!--BEGIN : Date-->
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-6">
+                                                                <label style="font-size:14px;">Période</label>
+                                                                <div class="input-group">
+                                                                    <input type="date" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>.</label>
+                                                                <div class="input-group">
+                                                                    <input type="date" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--END : Date -->
+
+                                                        <!--BEGIN : Note frais-->
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-12">
+                                                                <label> Sélectionnez le note frais </label>
+                                                                <select class="custom-select form-control-sm">
+                                                                    <option value="1">One</option>
+                                                                    <option value="2">Two</option>
+                                                                    <option value="3">Three</option>
+                                                                </select>
+                                                                <div class="invalid-feedback"> Note frais est
+                                                                    obligatoire</div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- END : Note frais -->
+
+                                                        <!--BEGIN : Commenataire-->
+                                                        <div class="form-row">
+                                                            <div class="form-group col-md-12">
+                                                                <label style="font-size:14px;">Commentaire</label>
+                                                                <textarea class="form-control"
+                                                                    placeholder="Commentaire"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <!--END : Commenataire-->
+
+                                                    </div>
+                                                </div>
+                                                <!---->
+                                                <div style="max-height: 100%;"></div>
+                                                <!---->
+                                            </div>
+                                            <div class="col-4 col-md-6 col-lg-4">
+                                                <div class="card shadow-none border-0" id="card3"
+                                                    style="margin-right:5px;">
+
+                                                    <div class="card-body" style="margin-top:0%;">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<div id="div2" >
+                                            <Pays
+                                            <label></label>
+                                            <select id="inputPays" class="form-control form-control-sm">
+                                                <option selected hidden > -- Sélectionnez le pays -- </option>
+                                                <option>Option 1</option>
+                                                <option>Option 2</option>
+                                                <option>Option 3</option>
+                                            </select>
+                                            Note frais
+                                            <label></label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Note de frais" aria-label="">
+                                                <div class="input-group-append">
+                                                <button class="btn btn-light" type="submit"><i class="fa-solid fa-circle-plus" style="color:#7C83FD;"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="div3" >ITEM 3</div>
+                                        <!-->
+                                        </div>
+                                        <!--////////////////////////////////////////////////////////////-->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                (click)="modal.close('Close click')">Close</button>
+                                            <button type="button" class="btn btn-info"
+                                                (click)="modal.close('Close click')">Sauvegarder</button>
+                                        </div>
+                                    </ng-template>
+                                    <!-- BEGIN : MODEL KILO FIRST ONE -->
+                                    <ng-template #longContent1 let-modal>
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Ajouter frais kilométriques1</h4>
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                (click)="modal.dismiss('Cross click')"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- BEGIN : MODEL 2 -->
+                                            <form>
+                                                <!---->
+                                                <div class="pretty p-switch p-fill">
+                                                    <input type="checkbox" />
+                                                    <div class="state p-info">
+                                                        <label>Facturable au client</label>
+                                                    </div>
+                                                </div>
+                                                <!---->
+                                                <div class="badge badge-warning"
+                                                    style="position: absolute; right: 20px;">Verfié</div>
+                                                <!--
+                                            <div class="pretty p-icon p-jelly p-round p-bigger">
+                                            <input type="checkbox" />
+                                            <div class="state p-info">
+                                                <i class="icon material-icons">done</i>
+                                                <label>done</label>
+                                            </div>
+                                            </div>
+                                            -->
+                                                <br>
+                                                <div class="form-group">
+                                                    <!--Titre-->
+                                                    <br>
+                                                    <label>Frais</label>
+                                                    <br>
+                                                    <input type="text" class="form-control" id="inputTitre"
+                                                        placeholder="Titre">
+                                                    <!-- BEGIN : Depart / Arrivée -->
+                                                    <div class="form-row">
+                                                        <!--BEGIN : Départ-->
+
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">Départ</label>
+                                                            <input type="text" class="form-control" id=""
+                                                                placeholder="De">
+                                                        </div>
+                                                        <!-- END : Départ -->
+                                                        <!-- BEGIN : Arrivée -->
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">Arrivée</label>
+                                                            <input type="text" class="form-control" id=""
+                                                                placeholder="À">
+                                                        </div>
+                                                        <!-- END : Arrivée -->
+                                                    </div>
+                                                    <!-- END : Depart / Arrivée -->
+                                                    <!-- BEGIN : Trajet -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">Trajet</label>
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="1" min="1">
+                                                                <select class="custom-select" id="inputGroupSelect">
+                                                                    <option value="1" selected>Aller</option>
+                                                                    <option value="2">Retour</option>
+                                                                    <option value="3">Aller / Retour</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>.</label>
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="120" min="10" max="180">
+                                                                <input type="text" class="form-control" value="KM"
+                                                                    disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--END : Trajet-->
+                                                    <!-- BEGIN : Tarif -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">Tarification</label>
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="3.750 DT" min="1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>.</label>
+                                                            <div class="input-group">
+                                                                <select class="custom-select" id="inputGroupSelect">
+                                                                    <option value="1" selected>Tarif Std.</option>
+                                                                    <option value="2">Option 2</option>
+                                                                    <option value="3">Option 3</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--END : Tarif -->
+                                                    <!--BEGIN : Total -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">Total</label>
+                                                            <div class="input-group">
+                                                                <input type="number" class="form-control"
+                                                                    placeholder="-- KM" min="1">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>.</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="125.000" min="1" disabled>
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">
+                                                                        DT
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--END : Total-->
+                                                    <!--BEGIN : Valeur a rembourser -->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">Valeur à rembourser</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="125.000" min="1" disabled>
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">
+                                                                        DT
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>'</label>
+                                                            <div class="input-group">
+                                                                <select class="custom-select" id="inputGroupSelect">
+                                                                    <option value="1" selected>100%</option>
+                                                                    <option value="2">50%</option>
+                                                                    <option value="3">0%</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--END : Total-->
+
+
+                                                    <!--BEGIN : Date-->
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label style="font-size:14px;">Période</label>
+                                                            <div class="input-group">
+                                                                <input type="date" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>.</label>
+                                                            <div class="input-group">
+                                                                <input type="date" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--END : Date -->
+
+                                                    <!--BEGIN : Note frais-->
+                                                    <label></label>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Note de frais" aria-label="">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-light" type="submit"><i
+                                                                    class="fa-solid fa-circle-plus"
+                                                                    style="color:#7C83FD;"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- END : Note frais -->
+                                                    <!--BEGIN : Commenataire-->
+                                                    <textarea class="form-control" placeholder="Commentaire"></textarea>
+                                                    <!--END : Commenataire-->
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!-- END : MODEL 2 -->
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                (click)="modal.close('Close click')">AnNNnuler</button>
+                                            <button type="button" class="btn btn-primary"
+                                                (click)="modal.close('Close click')">Sauvgarder</button>
+                                        </div>
+
+                                    </ng-template>
+                                    <!-- END : MODEL TEMPLATE-->
+                                </div>
+                                <!---->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>

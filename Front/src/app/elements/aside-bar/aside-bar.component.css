@@ -1,0 +1,13 @@
+body{
+    font-family: 'Sofia Pro', sans-serif;
+    font-size:14px;
+}
+i{
+    color:#45aaf2;
+}
+i:hover{
+    color:gray;
+}
+hr{
+    width:30%;
+}
