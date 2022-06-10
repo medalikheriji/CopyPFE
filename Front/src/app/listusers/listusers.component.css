@@ -159,3 +159,12 @@ html {
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
+
+.line {
+  content: "";
+  background-color: #2a73e8;
+  font-weight: bolder;
+  height: 0.4em;
+  width: 10.2em;
+  border-radius: 8px;
+}
