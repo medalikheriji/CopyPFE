@@ -38,14 +38,12 @@ import { TestHereComponent } from './test-here/test-here.component';
 import { ListusersComponent } from './listusers/listusers.component';
 import { Test2Component } from './tests/test2/test2.component';
 import { ToastrModule } from 'ngx-toastr';
-<<<<<<< HEAD
-import { NgToastModule } from 'ng-angular-popup';
+
 import { ProjectsComponent } from './intervention/projects/projects.component';
 import { ListProjectsComponent } from './intervention/list-projects/list-projects.component';
 
  import { NgToastModule } from 'ng-angular-popup' ;
 
->>>>>>> d9a14955dd593d79bf3f172b9aa47cf18d4919be
 @NgModule({
   declarations: [
     AppComponent,

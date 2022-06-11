@@ -225,12 +225,9 @@
               <button type="button" class="btn-close" aria-label="Close"
                 (click)="modal.dismiss('Cross click')"></button>
             </div>
-<<<<<<< HEAD
-              <!--<form>
-=======
+            <!--<form>
             <div class="modal-body">
               <form #timeform="ngForm">
->>>>>>> d9a14955dd593d79bf3f172b9aa47cf18d4919be
                 <div class="input-group">
                   <label for="">date_deb</label>
                   <input type="text" class="form-control ms-3" placeholder="Normal" name="date_deb" ngModel #date_deb="ngModel"
@@ -247,7 +244,7 @@
                   required></textarea>
                 </div>
                 <div class="input-group">
-<<<<<<< HEAD
+
                   <label for="">Activité</label>
                   <input type="text" class="form-control ms-3" placeholder="Planification" />
                 </div>
@@ -331,17 +328,16 @@
                 </div>
               
               <div class="modal-footer d-flex justify-content-center">
-              <button class="btn btn-light" type="submit" style="
-=======
-                  <label for="">matricule</label>
-                  <input type="text" class="form-control ms-3" placeholder="Tunisie – TN (Par défaut)"
-                   name="matricule" ngModel #matricule="ngModel"
-                        required />
-                </div>
-              </form>
-            </div>
+                <button class="btn btn-light" type="submit" >
+                    <label for="">matricule</label>
+                    <input type="text" class="form-control ms-3" placeholder="Tunisie – TN (Par défaut)"
+                    name="matricule" ngModel #matricule="ngModel"
+                          required />
+                </button>
+              </div>
+
             <div class="modal-footer d-flex justify-content-center">
-              <button class="btn btn-light" type="reset" style="d9a14955dd593d79bf3f172b9aa47cf18d4919be
+              <button class="btn btn-light" type="reset" style="
                   border: none;
                   border-radius: 8px;
                   font-size: 12px;
@@ -357,8 +353,7 @@
                   background-color: #2a73e8;
                   width: 200px;
                   height: 30px;
-                  font-size: 12px;"
-                  (click)="addfeuill(timeform)" (click)="modal.close('Close click')">
+                  font-size: 12px;" (click)="modal.close('Close click')">
                 <i class="fas fa-solid fa-paper-plane"></i>&nbsp;&nbsp;
                 Enregistrer et Suivant
               </button>

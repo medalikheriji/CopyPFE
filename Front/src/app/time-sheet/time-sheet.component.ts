@@ -65,16 +65,10 @@ datarray:any=[]
     this.displayStyle = "none";
   }
 
-<<<<<<< HEAD
+
   openXl(content : any) {
     this.modalService.open(content, { size: 'lg' });
-=======
-  openXl(content : any)
-  {
-    this.modalService.open(content, { size: 'xl' });
->>>>>>> d9a14955dd593d79bf3f172b9aa47cf18d4919be
   }
-
   show()
   {
     this.aff=!this.aff
