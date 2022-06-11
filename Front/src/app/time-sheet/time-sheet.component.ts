@@ -1,3 +1,4 @@
+import { NgForm } from '@angular/forms';
 import { BackapiService } from './../_services/backapi.service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,39 +11,83 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./time-sheet.component.css']
 })
 export class TimeSheetComponent implements OnInit {
+  feuill:any
+  datarraydetail={
+    date_deb :"",
+    date_fin:"",
+    ajouter_par:"",
+    matricule:""
+}
+
 aff:Boolean = false
 hide:Boolean = true
 timesheet:any
 datarray:any=[]
+
   constructor(private modalService: NgbModal,private route:Router,private api:BackapiService) {
     this.api.gettimesheet().subscribe(data => this.timesheet=data)  }
 
   ngOnInit(): void {
+    this.api.gettimesheet().subscribe(data => this.feuill=data)
   }
+
+
+  getdata(date_deb:string,date_fin:string,ajouter_par:any,matricule:any)
+  {
+    this.datarraydetail.date_deb=date_deb
+    this.datarraydetail.date_fin=date_fin
+    this.datarraydetail.ajouter_par=ajouter_par
+    this.datarraydetail.matricule=matricule
+  }
+
+
+  addfeuill(context:NgForm)
+  {
+  let data = context.value
+  console.log(context.value)
+  this.api.AddFeuill(data).subscribe(data => {console.log(data)
+  })
+  this.ngOnInit()
+  location.reload();
+  }
+
+
+
   displayStyle = "none";
 
-  openPopup() {
+  openPopup()
+  {
     this.displayStyle = "block";
   }
-  closePopup() {
+
+  closePopup()
+  {
     this.displayStyle = "none";
   }
 
+<<<<<<< HEAD
   openXl(content : any) {
     this.modalService.open(content, { size: 'lg' });
+=======
+  openXl(content : any)
+  {
+    this.modalService.open(content, { size: 'xl' });
+>>>>>>> d9a14955dd593d79bf3f172b9aa47cf18d4919be
   }
-  show(){
-this.aff=!this.aff
-this.hide=!this.hide
 
+  show()
+  {
+    this.aff=!this.aff
+    this.hide=!this.hide
   }
+
 goto()
 {
   this.route.navigate(['/test-here'])
 }
 
-add(e:any){
-
+add(e:any)
+{
     this.datarray.push(e)
 }
 
@@ -52,7 +97,8 @@ delete(){
     this.api.deletetimesheet(this.datarray[i]._id).subscribe(data => {
       this.timesheet.splice(i,1)
       })
-  }
+  }  location.reload();
+
   }
 
 change(){
@@ -63,7 +109,5 @@ change(){
     })
   }
 }
-
-
 
 }

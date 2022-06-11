@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
+  baseurl:"http://localhost:1000",
   mapboxKey:'pk.eyJ1Ijoia2FyaW1tbW1tbW1tbW1tbW1tbW0iLCJhIjoiY2wzdTVtZmdzMGZqZzNubnZpMmw1cTRlayJ9.XMsoHYv1CnmUR7UoyOJe-g'
+  // 5e5e54d9a4c402d8bfb9ebfd3022aaa25c8e843b
 };
 
 /*
