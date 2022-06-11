@@ -1,2 +1,75 @@
-<button class="btn btn-sm btn-light" (click)="open()"><i class="fa-solid fa-circle-plus" style="color:#7C83FD;"></i></button>
+<!--
+<div class="form-row" style=" margin-top:-3%;margin-bottom:-5%;">
+  <div class="form-group col-md-12">
+      <label >Point </label>
+      <textarea class="form-control form-control-sm"
+          placeholder="Commentaire"></textarea>
+  </div>
+</div>
+-->
 
+<div class="wrapper">
+    <div class="box-inputs">
+      <table>
+        <tr>
+          <td colspan="2"> 
+            <div>
+              <div id="geocoder" #asGeoCoder class="geocoder"></div>
+            </div>
+          </td>
+          <td>
+              <button type="button" (click)="drawRoute()" class="btn btn-outline-light btn-sm" style="margin-bottom: 7%;width:max-content">
+                <!--<div class="form-row">-->
+                  <div class="form-group" style="margin:2%;width:100%;margin-top:5%;">
+                    <label><i class="fa-solid fa-location-dot" style="color:#40DFEF;"></i> &nbsp; Tracer un chemin</label>
+                  </div>
+                <!--</div>-->
+              </button>
+          </td>
+          <!--
+          <td>
+            <div>
+              <button (click)="drawMarker()" class="btn-route">Marker</button>
+            </div>
+          </td>
+          -->
+          <td>
+            <div>
+              <div class="mock-label">{{distance | number : '1.2-2'}} KM</div>
+            </div>
+          </td>
+        </tr>
+      <!---->
+  
+        <tr>
+          <td colspan="2">
+            <div (click)="changeMode('start')" [ngClass]="{'active-way':modeInput ==='start'}">
+              <!--<div class="mock-label">Point initial :</div>-->
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label >Point initial : </label>
+                  <div class="mock-input">{{ wayPoints?.start?.place_name }} </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td colspan="2">
+            <div (click)="changeMode('end')" [ngClass]="{'active-way':modeInput ==='end'}">
+              <!--<div class="mock-label">Point final : </div>-->
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label >Point final : </label>
+                  <div class="mock-input">{{ wayPoints?.end?.place_name }} </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!---->
+    </div>
+  </div> 
+  <div class="wrapper">
+    <div id="map" #asMap class="map-container"></div>
+  </div>
+  

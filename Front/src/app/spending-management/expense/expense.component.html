@@ -100,9 +100,9 @@
                                                         </div>
                                                         <div class="form-inline">
                                                             <div class="form-group">
-                                                                <label>Au</label>
+                                                                <label>Au &nbsp;&nbsp;&nbsp;&nbsp;</label>
                                                                 <input type="date"
-                                                                    class="form-control form-control-sm  mx-sm-3 ">
+                                                                    class="form-control form-control-sm  mx-sm-3 " value="&nbsp;&nbsp;&nbsp;">
                                                             </div>
                                                         </div>
                                                         <div class="form-inline">
@@ -111,7 +111,7 @@
                                                                 <select
                                                                     class="form-select form-select-sm form-control mx-sm-3 col-lg-6">
                                                                     <option *ngFor="let categorie of categories"
-                                                                        [ngValue]="categorie">{{ categorie }} </option>
+                                                                        [ngValue]="categorie">{{ categorie }}  </option>
 
                                                                 </select>
                                                             </div>
@@ -814,9 +814,14 @@
                                                                         value="src/assets/img/noFile.png"
                                                                         formControlName="fichierDepense" />
                                                                 </div>
-                                                                <div class="form-group">
+                                                                <div class="form-group" >
+                                                                <!-- %% *ngIf="urlFile != 'assets/img/noFile.png' " %%      
                                                                     <img [src]="urlFile" alt="" srcset="" height="300"
-                                                                        width="300" value="src/assets/img/noFile.png">
+                                                                        width="300" value="src/assets/img/noFile.png">-->
+                                                                    
+                                                                    <div class="ExternalFiles">
+                                                                        <iframe [src]="urlFile" value="" height="300" width="300"></iframe>
+                                                                    </div>
                                                                 </div>
                                                                 <!--END : Upload file-->
                                                             </div>
@@ -1102,7 +1107,7 @@
                                         <!--////////////////////////////////////////////////////////////-->
                                         <div class="row">
                                             <!--First Card -->
-                                            <div class="col-4 col-md-6 col-lg-4">
+                                            <div class="col-4 col-md-6 col-lg-6" >
                                                 <div class="card shadow-none border-0" id="card1"
                                                     style="margin-left:3px;">
 
@@ -1118,16 +1123,17 @@
                                                             </div>
                                                             <br>
                                                             <!---->
+                                                            <h1>{{ distance }}</h1>
                                                             <div class="form-group col-md-12">
                                                                 <label
-                                                                    style="font-size:14px; margin-top:8%;">Titre</label>
-                                                                <input type="text" class="form-control " id="inputTitre"
+                                                                    style=" margin-top:2%;">Titre</label>
+                                                                <input type="text" class="form-control form-control-sm " id="inputTitre"
                                                                     placeholder="Titre">
                                                             </div>
                                                         </div>
                                                         <!-- BEGIN : Depart / Arrivée -->
-                                                        <div class="form-row">
-                                                            <!--BEGIN : Départ-->
+                                                        <!-- <div class="form-row">
+                                                            <!--BEGIN : Départ
 
                                                             <div class="form-group col-md-6">
                                                                 <label style="font-size:14px;">Départ</label>
@@ -1135,19 +1141,20 @@
                                                                     placeholder="De">
                                                             </div>
                                                             <!-- END : Départ -->
-                                                            <!-- BEGIN : Arrivée -->
+                                                            <!-- BEGIN : Arrivée 
                                                             <div class="form-group col-md-6">
                                                                 <label style="font-size:14px;">Arrivée</label>
                                                                 <input type="text" class="form-control" id=""
                                                                     placeholder="À">
                                                             </div>
-                                                            <!-- END : Arrivée -->
+                                                            <!-- END : Arrivée 
                                                         </div>
+                                                        -->
                                                         <!-- END : Depart / Arrivée -->
                                                         <!-- BEGIN : Trajet -->
-                                                        <div class="form-row">
-                                                            <div class="form-group col-md-6">
-                                                                <label style="font-size:14px;">Trajet</label>
+                                                        <div class="form-row" style=" margin-top:-3%;">
+                                                            <div class="form-group col-md-6"  >
+                                                                <label >Trajet</label>
                                                                 <div class="input-group">
                                                                     <input type="number" class="form-control "
                                                                         placeholder="1" min="1">
@@ -1163,14 +1170,14 @@
                                                                 <label>.</label>
                                                                 <div class="input-group ">
                                                                     <input type="number" class="form-control "
-                                                                        placeholder="120" min="10" max="180">
+                                                                        placeholder="120" min="10" max="180" >
                                                                     <input type="text" class="form-control " value="KM"
                                                                         disabled>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <!--END : Trajet-->
-                                                        <!--BEGIN : Total -->
+                                                        <!--BEGIN : Total 
                                                         <div class="form-row">
                                                             <div class="form-group col-md-6">
                                                                 <label style="font-size:14px;">Total</label>
@@ -1197,11 +1204,11 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!--END : Total-->
+                                                        END : Total-->
                                                         <!-- BEGIN : Tarif -->
-                                                        <div class="form-row">
+                                                        <div class="form-row" style=" margin-top:-3%;">
                                                             <div class="form-group col-md-6">
-                                                                <label style="font-size:14px;">Tarification</label>
+                                                                <label>Tarification</label>
                                                                 <div class="input-group">
                                                                     <input type="number" class="form-control"
                                                                         placeholder="3.750 DT" min="1">
@@ -1223,25 +1230,13 @@
 
                                                         <!-- ************************************  -->
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!--END : First Card -->
-                                            <!--BEGIN : Second Card -->
-                                            <div class="col-4 col-md-6 col-lg-4">
-                                                <div class="card shadow-none border-0" id="card2"
-                                                    style="margin-left:-20px;margin-right:-20px; height:100%;">
-                                                    <div class="card-body" style="margin-top:0%;">
-
                                                         <!--BEGIN : Valeur a rembourser -->
-                                                        <div class="form-row">
-                                                            <div class="badge badge-warning"
+                                                        <div class="form-row" style=" margin-top:-3%;">
+                                                            <div class="form-group col-md-6" style="margin-top:2%;">
+                                                                <!--<div class="badge badge-warning"
                                                                 style="position: absolute; right: 20px;">Verfié</div>
-                                                            <br>
-                                                            <div class="form-group col-md-6" style="margin-top:8%;">
-
-                                                                <label style="font-size:14px;">Valeur à
-                                                                    rembourser</label>
+                                                                <br>-->
+                                                                <label >Valeur à rembourser</label>
                                                                 <div class="input-group">
                                                                     <input type="text" class="form-control"
                                                                         placeholder="125.000" min="1" disabled>
@@ -1252,7 +1247,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group col-md-6" style="margin-top:8%;">
+                                                            <div class="form-group col-md-6" style="margin-top:2%;">
                                                                 <label>'</label>
                                                                 <div class="input-group">
                                                                     <select class="custom-select form-control-sm"
@@ -1266,24 +1261,50 @@
                                                         </div>
                                                         <!--END : Valeur a rembourser-->
                                                         <!--BEGIN : Date-->
-                                                        <div class="form-row">
+                                                        <div class="form-row" style=" margin-top:-3%;">
                                                             <div class="form-group col-md-6">
-                                                                <label style="font-size:14px;">Période</label>
-                                                                <div class="input-group">
-                                                                    <input type="date" class="form-control">
+                                                                <label >Période</label>
+                                                                <div class="input-group ">
+                                                                    <input type="date" class="form-control form-control-sm">
                                                                 </div>
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label>.</label>
                                                                 <div class="input-group">
-                                                                    <input type="date" class="form-control">
+                                                                    <input type="date" class="form-control form-control-sm">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <!--END : Date -->
-
+                                                        <!--Moyen de paiement
+                                                                <div class="form-group"  style="margin-bottom: -1%;">
+                                                                    <label style="margin-top:20px;">  Sélectionnez l'état du note
+                                                                    </label>
+                                                                    <select class="custom-select form-control-sm" formControlName="etatDepense" 
+                                                                    [ngClass]="
+                                                                    (myFormDepense.get('etatDepense').touched ||
+                                                                    myFormDepense.get('etatDepense').dirty) &&
+                                                                    myFormDepense.get('etatDepense').hasError('required')
+                                                                    ? 'is-invalid'
+                                                                    : '' ||
+                                                                        ((myFormDepense.get('etatDepense').touched ||
+                                                                        myFormDepense.get('etatDepense').dirty) &&
+                                                                        !myFormDepense.get('etatDepense').invalid)
+                                                                    ? 'is-valid'
+                                                                    : ''
+                                                                    ">
+                                                                        <option selected value="0">Zero</option>
+                                                                        <option value="1">One</option>
+                                                                        <option value="2">Two</option>
+                                                                        <option value="3">Three</option>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">État de depense est
+                                                                        obligatoire
+                                                                    </div>
+                                                                </div>
+                                                                -->
                                                         <!--BEGIN : Note frais-->
-                                                        <div class="form-row">
+                                                        <div class="form-row" style=" margin-top:-3%;">
                                                             <div class="form-group col-md-12">
                                                                 <label> Sélectionnez le note frais </label>
                                                                 <select class="custom-select form-control-sm">
@@ -1298,30 +1319,43 @@
                                                         <!-- END : Note frais -->
 
                                                         <!--BEGIN : Commenataire-->
-                                                        <div class="form-row">
+                                                        <div class="form-row" style=" margin-top:-3%;margin-bottom:-5%;">
                                                             <div class="form-group col-md-12">
-                                                                <label style="font-size:14px;">Commentaire</label>
-                                                                <textarea class="form-control"
+                                                                <label >Commentaire</label>
+                                                                <textarea class="form-control form-control-sm"
                                                                     placeholder="Commentaire"></textarea>
                                                             </div>
                                                         </div>
                                                         <!--END : Commenataire-->
-
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--END : First Card -->
+                                            <!--BEGIN : Second Card -->
+                                            <div class="col-4 col-md-6 col-lg-6">
+                                                <div class="card shadow-none border-0" id="card2"
+                                                style="height:100%;margin-left:-8%;margin-bottom:-10%;">
+                                                    <div class="card-body" style="margin-top:0%;">
+                                                        <app-second-modal></app-second-modal>
+                                                        <button (click)="printDistance()">Distance</button>
                                                     </div>
                                                 </div>
                                                 <!---->
-                                                <div style="max-height: 100%;"></div>
+                                                <div style="max-height: 100%; "></div>
                                                 <!---->
                                             </div>
+                                            <!--END : Second Card -->
+                                            <!--BEGIN : Third Card 
                                             <div class="col-4 col-md-6 col-lg-4">
                                                 <div class="card shadow-none border-0" id="card3"
                                                     style="margin-right:5px;">
 
                                                     <div class="card-body" style="margin-top:0%;">
-
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
+                                            END : Third Card -->
                                             <!--<div id="div2" >
                                             <Pays
                                             <label></label>
@@ -1344,7 +1378,7 @@
                                         <!-->
                                         </div>
                                         <!--////////////////////////////////////////////////////////////-->
-                                        <div class="modal-footer">
+                                        <div class="modal-footer" >
                                             <button type="button" class="btn btn-light"
                                                 (click)="modal.close('Close click')">Close</button>
                                             <button type="button" class="btn btn-info"
@@ -1477,6 +1511,7 @@
                                                     </div>
                                                     <!--END : Total-->
                                                     <!--BEGIN : Valeur a rembourser -->
+         <!-- £££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££££-->
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                             <label style="font-size:14px;">Valeur à rembourser</label>

@@ -32,16 +32,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
-
-
-
-                //api
+//api
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TestHereComponent } from './test-here/test-here.component';
 import { ListusersComponent } from './listusers/listusers.component';
 import { Test2Component } from './tests/test2/test2.component';
 import { ToastrModule } from 'ngx-toastr';
-
+import { NgToastModule } from 'ng-angular-popup';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,9 +75,8 @@ import { ToastrModule } from 'ngx-toastr';
     DynamicDialogModule,
     ToastModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
-
-
+    BrowserAnimationsModule,
+    NgToastModule
 
   ],
   providers: [],
