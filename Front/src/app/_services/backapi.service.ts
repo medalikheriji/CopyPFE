@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -41,6 +42,11 @@ deletetimesheet(id:any){
 
 envoyee(data:any,id:any){
   return this.http.put(`http://localhost:1000/api/stylesheet/envoye/`+id,data)
+}
+
+AddFeuill(feuill:any)
+{
+  return this.http.post(`http://localhost:1000/api/stylesheet/add`,feuill)
 }
 
 }

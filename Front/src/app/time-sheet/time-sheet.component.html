@@ -57,7 +57,7 @@
                           </span>
                         </div>
                         <div class="btn-ajoutFeuille full_container">
-                          <button type="button" (click)="openXl(content)" class="btn btn-primary btn-sm">
+                          <button type="button" (click)="openXl(content)"  class="btn btn-primary btn-sm">
                             Ajouter une feuille
                           </button>
                         </div>
@@ -226,36 +226,32 @@
                 (click)="modal.dismiss('Cross click')"></button>
             </div>
             <div class="modal-body">
-              <form>
+              <form #timeform="ngForm">
                 <div class="input-group">
-                  <label for="">Types d’heures</label>
-                  <input type="text" class="form-control ms-3" placeholder="Normal" />
+                  <label for="">date_deb</label>
+                  <input type="text" class="form-control ms-3" placeholder="Normal" name="date_deb" ngModel #date_deb="ngModel"
+                  required />
                 </div>
                 <div class="input-group">
-                  <label for="">Nature du projet</label>
-                  <input type="text" class="form-control ms-3" placeholder="Facturable" />
+                  <label for="">date_fin</label>
+                  <input type="text" class="form-control ms-3" placeholder="Facturable" name="date_fin" ngModel #date_fin="ngModel"
+                  required/>
                 </div>
                 <div class="input-group">
-                  <label for="">Projet</label>
-                  <input type="text" class="form-control ms-3" placeholder="MBT, Audit total 2017" />
+                  <label for="">ajouter_par</label>
+                  <textarea class="form-control ms-3" placeholder="Commentaire….." name="ajouter_par" ngModel #ajouter_par="ngModel"
+                  required></textarea>
                 </div>
                 <div class="input-group">
-                  <label for="">Activité</label>
-                  <input type="text" class="form-control ms-3" placeholder="Planification" />
-                </div>
-                <div class="input-group">
-                  <label for="">Description </label>
-                  <textarea class="form-control ms-3" placeholder="Commentaire….."></textarea>
-                </div>
-                <div class="input-group">
-                  <label for="">Site</label>
-                  <input type="text" class="form-control ms-3" placeholder="Tunisie – TN (Par défaut)
-                        " />
+                  <label for="">matricule</label>
+                  <input type="text" class="form-control ms-3" placeholder="Tunisie – TN (Par défaut)"
+                   name="matricule" ngModel #matricule="ngModel"
+                        required />
                 </div>
               </form>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-              <button class="btn btn-light" type="submit" style="
+              <button class="btn btn-light" type="reset" style="
                   border: none;
                   border-radius: 8px;
                   font-size: 12px;
@@ -271,12 +267,12 @@
                   background-color: #2a73e8;
                   width: 200px;
                   height: 30px;
-                  font-size: 12px;
-                ">
+                  font-size: 12px;"
+                  (click)="addfeuill(timeform)" (click)="modal.close('Close click')">
                 <i class="fas fa-solid fa-paper-plane"></i>&nbsp;&nbsp;
                 Enregistrer et Suivant
               </button>
-              <button type="submit" class="btn btn-light" style="
+              <button type="reset" class="btn btn-light" style="
                   border: none;
                   border-radius: 8px;
                   font-size: 12px;

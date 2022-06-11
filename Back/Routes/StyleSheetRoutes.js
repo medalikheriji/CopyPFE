@@ -10,7 +10,6 @@ const StyleSheetRoutes = express.Router();
 
 StyleSheetRoutes.post(
     "/add",
-    protect,
     asyncHandler(async (req, res) => {
         const { date_deb, date_fin,ajouter_par,matricule } = req.body;
         const ss = StyleSheet.create({
