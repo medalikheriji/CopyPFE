@@ -38,7 +38,8 @@ import { TestHereComponent } from './test-here/test-here.component';
 import { ListusersComponent } from './listusers/listusers.component';
 import { Test2Component } from './tests/test2/test2.component';
 import { ToastrModule } from 'ngx-toastr';
-import { NgToastModule } from 'ng-angular-popup';
+ import { NgToastModule } from 'ng-angular-popup' ;
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,8 +77,7 @@ import { NgToastModule } from 'ng-angular-popup';
     ToastModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    NgToastModule
-
+   NgToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
