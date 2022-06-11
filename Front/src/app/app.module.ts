@@ -39,6 +39,8 @@ import { ListusersComponent } from './listusers/listusers.component';
 import { Test2Component } from './tests/test2/test2.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NgToastModule } from 'ng-angular-popup';
+import { ProjectsComponent } from './intervention/projects/projects.component';
+import { ListProjectsComponent } from './intervention/list-projects/list-projects.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +57,8 @@ import { NgToastModule } from 'ng-angular-popup';
     TestHereComponent,
     ListusersComponent,
     Test2Component,
+    ProjectsComponent,
+    ListProjectsComponent,
   ],
   imports: [
     BrowserModule,

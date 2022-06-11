@@ -29,7 +29,7 @@ datarray:any=[]
   }
 
   openXl(content : any) {
-    this.modalService.open(content, { size: 'xl' });
+    this.modalService.open(content, { size: 'lg' });
   }
   show(){
 this.aff=!this.aff
