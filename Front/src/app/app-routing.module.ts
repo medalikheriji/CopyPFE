@@ -1,3 +1,5 @@
+import { StepsComponent } from './steps/steps.component';
+import { TimeSheet2Component } from './time-sheet2/time-sheet2.component';
 import { Test2Component } from './tests/test2/test2.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -27,8 +29,10 @@ const routes: Routes = [
   {path:'e',component:ExpenseComponent,canActivate:[AuthuserguardGuard]},
   {path:'ex',component:SecondModalComponent,canActivate:[AuthuserguardGuard]},
   {path:'time',component:TimeSheetComponent,canActivate:[AuthuserguardGuard]},
+  {path:'time2',component:TimeSheet2Component,canActivate:[AuthuserguardGuard]},
   {path:'test-here',component:TestHereComponent,canActivate:[AuthuserguardGuard]},
   {path:'test2',component:Test2Component,canActivate:[AuthuserguardGuard]},
+  {path:'steps',component:StepsComponent,canActivate:[AuthuserguardGuard]},
   {path:'list-users',component:ListusersComponent,canActivate:[AuthuserguardGuard]}
 
 
