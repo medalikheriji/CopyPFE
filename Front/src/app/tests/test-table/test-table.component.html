@@ -1,4 +1,4 @@
-<input type="search" class="form-control" name="firstName" placeholder="Enter your name " [(ngModel)] ="categorie" (ngModelChange)="Search()" />
+<input type="search" class="form-control" name="firstName" placeholder="Enter your name " [(ngModel)] ="categorie"  />
 <!-- <table class="table table-bordered">
     <thead>
         <tr>
@@ -39,7 +39,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let expenses of membersList |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
+      <tr *ngFor="let expenses of membersList | filter : categorie |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
         <td> {{ expenses.date }}</td>
         <td> {{ expenses.description }} </td>
         <td>

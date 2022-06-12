@@ -88,6 +88,18 @@ import { MapCustomService } from 'src/app/_services/map-custom.service';
       border: transparent !important;
     }
 
+    /** */
+    table {
+      border-collapse: collapse;
+      border-radius: 1%;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 2px;
+      border-bottom: 2px solid white; 
+    }
+
   `]
 })
 export class ExpenseComponent implements OnInit {

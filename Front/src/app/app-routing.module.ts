@@ -14,6 +14,9 @@ import { ExpensesComponent } from './spending-management/expenses/expenses.compo
 import { TestHereComponent } from './test-here/test-here.component';
 import { TestTableComponent } from './tests/test-table/test-table.component';
 import { TimeSheetComponent } from './time-sheet/time-sheet.component';
+import { ProjectsComponent } from './intervention/projects/projects.component';
+import { ListProjectsComponent } from './intervention/list-projects/list-projects.component';
+import { TempTableComponent } from './tests/temp-table/temp-table.component';
 
 
 const routes: Routes = [
@@ -29,7 +32,10 @@ const routes: Routes = [
   {path:'time',component:TimeSheetComponent,canActivate:[AuthuserguardGuard]},
   {path:'test-here',component:TestHereComponent,canActivate:[AuthuserguardGuard]},
   {path:'test2',component:Test2Component,canActivate:[AuthuserguardGuard]},
-  {path:'list-users',component:ListusersComponent,canActivate:[AuthuserguardGuard]}
+  {path:'list-users',component:ListusersComponent,canActivate:[AuthuserguardGuard]},
+  {path:'Projects',component:ProjectsComponent,canActivate:[AuthuserguardGuard]},
+  {path:'list',component:ListProjectsComponent,canActivate:[AuthuserguardGuard]},
+  {path:'t',component:TempTableComponent,canActivate:[AuthuserguardGuard]}
 
 
 ];

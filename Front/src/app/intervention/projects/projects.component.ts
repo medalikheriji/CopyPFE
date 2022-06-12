@@ -127,7 +127,7 @@ export class ProjectsComponent implements OnInit {
   titleOfOperation : string ="";
 
   /** */
-
+  imageURL = "assets/img/noFile.png";
 
 
   constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _projectsService: ProjectsService , private aRouter : ActivatedRoute , private toast : NgToastService ) {

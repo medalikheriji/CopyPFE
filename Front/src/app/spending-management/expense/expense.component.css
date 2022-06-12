@@ -16,6 +16,7 @@ table { border-collapse: separate; border-spacing: 0 -10em; }
 
 tr.spaceUnder>td {
   padding-bottom: -5em;
+
 }
 #div1{
   float:left;
@@ -31,6 +32,28 @@ tr.spaceUnder>td {
   background-color:yellow;
 }
 
+/** */
+.ngx-pagination {
+  padding-left: 0px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/**  .btn-info  */
+.ngx-pagination .current {
+  background: #17a2b8 !important;
+  border: transparent !important;
+  border-radius: 25px !important;
+}
+
+.ngx-pagination .current:hover {
+  background: #17a2b8 !important;
+  border-radius: 25px !important; 
+  border: transparent !important;
+}
+h1 {
+  background-color:red;
+}
 /* .table>tbody>tr>td, .table>tbody>tr>th,
 .table>tfoot>tr>td, .table>tfoot>tr>th,
 .table>thead>tr>td, .table>thead>tr>th

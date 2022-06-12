@@ -42,7 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProjectsComponent } from './intervention/projects/projects.component';
 import { ListProjectsComponent } from './intervention/list-projects/list-projects.component';
 
- import { NgToastModule } from 'ng-angular-popup' ;
+ import { NgToastModule } from 'ng-angular-popup';
+import { TempTableComponent } from './tests/temp-table/temp-table.component' ;
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ListProjectsComponent } from './intervention/list-projects/list-project
     Test2Component,
     ProjectsComponent,
     ListProjectsComponent,
+    TempTableComponent,
   ],
   imports: [
     BrowserModule,

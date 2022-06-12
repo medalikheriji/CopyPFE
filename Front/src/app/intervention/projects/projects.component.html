@@ -23,6 +23,7 @@
                                 <input type="search" class="form-control mb-2 me-2" name="categorie" placeholder="Entrer le titre du projet" style="width:20%;position:absolute;right:225px;"
                                 [(ngModel)]="searchedProject" (ngModelChange)="Search()" />
                                 <button class="btn btn-outline-info mb-2 me-2" style="position:absolute;right:50px;" (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau projet</button>
+
                             </div>
                             <!-- BEGIN : MODAL - ADD PROJECT -->
                             
@@ -328,7 +329,7 @@
                                         </tbody>
                                         <div class="form-group" *ngIf="projectsList.length == 0">
                                             <img alt="Image" height="300"
-                                                width="300" src="src/assets/img/aucuneElement.png" >
+                                                width="300" [src]= "imageURL">
                                             <h5 >Aucune projet</h5>
                                         </div>
                                         

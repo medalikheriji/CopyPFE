@@ -13,51 +13,36 @@
                         <div class="col-12 col-md-6 col-lg-12">
                             <div class="card card-light">
                                 <div class="card-header" style="margin-top:1%;">
-                                    <h4><b> Liste de mes dépenses</b></h4>
+                                    <h4><label class="modal-title"> Liste de mes dépenses</label></h4>
+                                    <br>
+                                <!--
+                                <input type="search" class="form-control mb-2 me-2" name="categorie" placeholder="Entrer le titre du projet" style="width:20%;position:absolute;right:25px;" (ngModelChange)="Search()" />
+                                <button class="btn  btn-outline-info mb-2 me-2"  style="width:20%;position:absolute;right:225px" (click)="openXl(content)"><i class="fa-solid fa-plus"></i>Dépense</button>
+                                -->
 
-                                </div>
-
-                                <div class="card-body" style="margin-top:-1%;">
-                                    <!---->
-                                    <table>
-                                        <tr>
-                                            <td>
-
-                                                <div class="input-group mb-2 me-6">
-                                                    <div class="input-group-prepend">
-                                                        <div class="input-group-text form-control-sm">
-                                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                                        </div>
-                                                    </div>
-                                                    <input type="search" class="form-control " name="firstName"
-                                                        placeholder="Titre de la dépense " [(ngModel)]="titreDep"
-                                                        (ngModelChange)="Search()" />
-                                                </div>
-
-                                            </td>
                                             <!--<td>
                                             <button class="btn btn-sm btn-outline-warning mb-2 me-6" (click)="openScrollableContent(longContent)"><i class="fa-solid fa-plus"></i>Dépense</button>
                                             </td>-->
-                                            <td>
-                                                <button class="btn btn-lg btn-outline-info mb-2 me-6"
-                                                    (click)="openXl(content)"><i
-                                                        class="fa-solid fa-plus"></i>Dépense</button>
-                                            </td>
+                                            
+                                                <input type="search" class="form-control " name="firstName"
+                                                    placeholder="Rechercher " [(ngModel)]="titreDep"
+                                                        (ngModelChange)="Search()" style="width:20%;position:absolute;right:25px;"/>
+
+                                                <button class="btn btn-outline-info mb-2 me-2"
+                                                    (click)="openXl(content)" style="position:absolute;right:270px;margin-top:0.5%;margin:10px;font-size:14px;">
+                                                    <i class="fa-solid fa-plus"></i>&nbsp;Dépense</button>
+       
                                             <!--<td>
                                             <button class="btn btn-lg btn-outline-info mb-2 me-4" (click)="openScrollableContent1(longContent1)" ><i class="fa-solid fa-plus"></i>Frais kilométrique</button>
                                             </td>-->
-                                            <td>
-                                                <button class="btn btn-lg btn-outline-info mb-2 me-6"
-                                                    (click)="openXl(content1)"><i class="fa-solid fa-plus"></i>Frais
-                                                    kilométrique</button>
-                                            </td>
-                                            <td>
-                                                <!-- <button class="btn btn-sm btn-light" (click)="openSm(content2)"><i class="fa-solid fa-circle-plus" style="color:#7C83FD;"></i></button> -->
-                                                <button class="btn btn-lg btn-outline-info mb-2 me-6"
-                                                    (click)="openLg(content2)"><i class="fa-solid fa-plus"></i>Ajouter
-                                                    note frais</button>
-                                            </td>
-
+                                         
+                                            <button class="btn btn-outline-info mb-2 me-2" style="position:absolute;right:390px;margin-top:0.5%;font-size:14px;"
+                                                    (click)="openXl(content1)"><i class="fa-solid fa-plus"></i>&nbsp;Frais kilométrique</button>
+                                   
+                                            <!-- <button class="btn btn-sm btn-light" (click)="openSm(content2)"><i class="fa-solid fa-circle-plus" style="color:#7C83FD;"></i></button> -->
+                                            <button class="btn btn-outline-info mb-2 me-2"
+                                                    (click)="openLg(content2)" style="position:absolute;right:570px;margin-top:0.5%;font-size:14px;"><i class="fa-solid fa-plus"></i>&nbsp;Note du frais</button>
+                                            
                                             <!-- RADIO BUTTON 
                                         <td>
                                             <label class="custom-switch">
@@ -81,10 +66,8 @@
                                             </label>
                                         </td>  
                                         RADIO BUTTON -->
-                                        </tr>
-
-                                    </table>
-
+                                    </div>
+                                    <div class="card-body" style="margin-top:-1%;">
                                     <!---->
                                     <ngb-accordion #acc="ngbAccordion">
                                         <ngb-panel id="toggle-2" title="Filtres Standards" hidden="">
@@ -286,8 +269,8 @@
 
                                     <font size="2">
 
-                                        <table width="100%" class="table  table-light table-hover table-md" id="albums"
-                                            cellspacing="0" border="1px">
+                                        <table width="100%" class="table table-light table-hover table-md" id="albums"
+                                            cellspacing="0" border="1px" style="border-radius:2.5%;">
                                             <thead >
                                                 <tr class="spaceUnder" border="1px">
                                                     <th (click)="sortField('date')">Date &nbsp; <i
@@ -315,7 +298,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr class="spaceUnder"
-                                                    *ngFor="let expenses of expensesList |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
+                                                    *ngFor="let expenses of expensesList | filter : titreDep |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
                                                     <td style="width:3%;"> {{ expenses.date }}</td>
                                                     <td style="width:10%;"> {{ expenses.titre }}</td>
                                                     <td style="width:12%;"> {{ expenses.description }} </td>
@@ -341,8 +324,9 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                            <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+
                                         </table>
+                                        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
                                     </font>
                                 </div>
                                 <!---->
@@ -542,10 +526,9 @@
                                                                 </div>
                                                                 <!--Categorie-->
                                                                 <!-- <label style="font-size:14px;" >État de note</label> -->
-                                                                <div class="form-group" style="margin-bottom: -1%;">
+                                                                <div class="form-group" style="margin-bottom: -10%;">
                                                                     <label style="margin-top:20px;"> Sélectionnez la
-                                                                        catégorie
-                                                                        de dépense</label>
+                                                                        catégorie de dépense</label>
                                                                     <select class="custom-select form-control-sm"
                                                                         formControlName="cateDepense" 
                                                                         [ngClass]="
@@ -1210,7 +1193,7 @@
                                                             <div class="form-group col-md-6">
                                                                 <label>Tarification</label>
                                                                 <div class="input-group">
-                                                                    <input type="number" class="form-control"
+                                                                    <input type="number" class="form-control form-control-sm "
                                                                         placeholder="3.750 DT" min="1">
                                                                 </div>
                                                             </div>
@@ -1250,7 +1233,7 @@
                                                             <div class="form-group col-md-6" style="margin-top:2%;">
                                                                 <label>'</label>
                                                                 <div class="input-group">
-                                                                    <select class="custom-select form-control-sm"
+                                                                    <select class="custom-select "
                                                                         id="inputGroupSelect">
                                                                         <option value="1" selected>100%</option>
                                                                         <option value="2">50%</option>
