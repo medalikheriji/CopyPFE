@@ -8,8 +8,9 @@
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-12">
                         <div class="card card-light">
-                            <div class="card-header" style="margin-top:1%;">
-                                <h4><label class="modal-title"> Liste des projets</label></h4>
+                            <div class="card-header" style="margin-bottom:-2%;margin-top:2%">
+                                <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des projets</label></h4>
+
                                 <!--
                                 <div class="form-group" style="width:20%;position:absolute;right:225px;">
                                     <div class="input-group mb-2" >
@@ -20,9 +21,10 @@
                                     </div>
                                 </div>
                                 -->
-                                <input type="search" class="form-control mb-2 me-2" name="categorie" placeholder="Entrer le titre du projet" style="width:20%;position:absolute;right:225px;"
-                                [(ngModel)]="searchedProject" (ngModelChange)="Search()" />
-                                <button class="btn btn-outline-info mb-2 me-2" style="position:absolute;right:50px;" (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau projet</button>
+                                <button class="btn btn-outline-info mb-2 me-2" style="position:absolute;right:290px;font-size:14px;" (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau projet</button>
+                                <input type="search" class="form-control mb-2 me-2" name="categorie" placeholder="Rechercher" style="width:20%;position:absolute;right:32px;"
+                                [(ngModel)]="searchField" (ngModelChange)="Search()" />
+
 
                             </div>
                             <!-- BEGIN : MODAL - ADD PROJECT -->
@@ -252,92 +254,49 @@
                             <!-- END : MODAL - ADD PROJECT -->
                             <!-- //////////////////////////////// BEGIN : MODAL OF PROJECT ///////////////////////////////////-->
        
-                            <!-- //////////////////////////////// END : MODAL OF PROJECT ///////////////////////////////////-->
-                            <div class="card-body" style="margin-top:-1%;">
-                                <font size="2">
-                                    <table width="100%" class="table   table-hover " id="albums"
-                                        cellspacing="0" border="1px">
-                                        <thead class="table-light">
-                                            <tr class="spaceUnder" border="1px">
-                                                <th (click)="sortField('nameProject')">Titre &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('descProject')"> Description &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('createdAtProject')">Date du création &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('departmentProject')">Département &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('serviceLine')">Ligne du service &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('stateOfProject')">Statu &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('activatedProject')">Activé &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('priorityOfProject')" style="text-align:center;"> Priorité &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody *ngIf="projectsList.length > 0">
-                                            <tr class="spaceUnder"
-                                                *ngFor="let project of projectsList |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
-                                                <td style="width:10%;"> {{ project.nameProject }}</td>
-                                                <td style="width:15%;"> {{ project.descProject }}</td>
-                                                <td style="width:12%;"> {{ project.createdAtProject | date: 'dd/MM/yyyy' }} </td>
-                                                <td style="width:12%;">
-                                                    {{ project.departmentProject }}
-                                                </td>
-                                                <td style="width:10%;">
-                                                    {{ project.serviceLine }}
-                                                </td>
-
-                                                <td style="width:0%;text-align:center;" [ngSwitch]="project.stateOfProject">
-                                                    <div class="badge badge-success badge-shadow ">{{ project.stateOfProject }}</div>
-                                                    <!--*ngSwitchCase="'planifié'"-->
-                                                    <!--
-                                                    <div class="badge badge-light badge-shadow " *ngSwitchCase="'En cours'">{{ project.stateOfProject }}</div>
-                                                    <div class="badge badge-danger badge-shadow " *ngSwitchCase="'suspendu'">{{ project.stateOfProject }}</div>
-                                                    <div class="badge badge-success badge-shadow " *ngSwitchCase="'terminé'">{{ project.stateOfProject }}</div>
-                                                    -->
-                                                </td>
-                                                <td style="width:7%;">
-                                                    <div class="badge badge-success badge-shadow " *ngIf="project.activatedProject===true"> Activé</div>
-                                                    <div class="badge badge-success badge-shadow " *ngIf="project.activatedProject===false"> Désactivé</div>
-                                                </td>
-                                                <td style="width:8%;text-align:center;align-items: center;">
-                                                    <div class="badge badge-warning badge-shadow">{{
-                                                        project.priorityOfProject
-                                                        }}</div>
-                                                </td>
-                                                <td style="width:10%">
-                                                    <!--<a href="#" id="btn1"
-                                                        class="btn btn-sm btn-primary "
-                                                        style=" margin : auto ; display:inline-block;justify-content: center;">Detail</a>
-                                                    <a href="#" id="btn1"
-                                                        class="btn btn-sm btn-outline "
-                                                        style=" margin : auto ; display:inline-block;justify-content: center;">Detail</a>-->
-
-                                                    <button type="button" class="btn btn-outline-info btn-sm"
-                                                            (click)="deleteProject(project._id)"><i
-                                                            class="fa-solid fa-trash-can"></i></button>
-                                                    &nbsp;
-                                                    <button type="button" class="btn btn-outline-info btn-sm "
-                                                            (click)="openSmEdit(content,project)"><i class="fa-solid fa-pen-to-square"></i></button>
-                                                </td>
-                                                <!--[routerLink]="['/Projects' , project._id]"-->
-                                            </tr>
-                                        </tbody>
-                                        <div class="form-group" *ngIf="projectsList.length == 0">
-                                            <img alt="Image" height="300"
-                                                width="300" [src]= "imageURL">
-                                            <h5 >Aucune projet</h5>
+                            <div class="card-body full_container">
+                                <div class="selector_body">
+                                  <div class="selector_item align-items-center d-flex">
+            
+                                    <label  class="selector_label" style="background-color: lightgray">
+                                      <!--<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">-->
+            
+                                        <div class="d-flex justify-content-around" id="label_att">
+                                          <p style="max-width:100px;height:100%;">Titre&nbsp;&nbsp; </p>
+                                          <p style="max-width:100px;height:100%;">&nbsp;&nbsp; Description</p>
+                                          <p class="" style="max-width:100px;height:100%;">&nbsp; &nbsp;Date du création</p>
+                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp; Département</p>
+                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp;Ligne du service</p>
+                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp; Statu</p>
+                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp; Activé</p>
+                                          <p class="" style="max-width:100px;height:100%;"  >&nbsp;&nbsp; Actions </p>
                                         </div>
+                                    </label>
+                                  </div>
+                                  <div class="selector_item" *ngFor="let project of projectsList  | filter : searchField | orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;" style="margin-top: -5px;">
+                                    <label class="selector_label">
+                                      <div class="d-flex justify-content-around" id="label_att">
                                         
-                                    </table>
-                                        <!--padding-left:20%;padding-right:20%;-->
-                                        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-                                </font>
-                            </div>
+                                          <p style="max-width:100px;height:100%;">{{project.nameProject}}</p>
+                                        
+
+                                        <p  style="max-width:100px;height:100%;">{{project.descProject}}</p>
+
+                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.createdAtProject | date: 'dd/MM/yyyy'}}</p>
+                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.departmentProject}}</p>
+                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.serviceLine }}</p>
+                                        <p class="me-1 ms-4 badge badge-success badge-shadow" style="max-width:100px;height:100%;">{{project.stateOfProject}}</p>
+                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.activatedProject}}</p>
+                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.activatedProject}}</p>
+                                      </div>
+                                    </label>
+                                  </div>
+                                  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+                                </div>
+            
+                              </div>
+                            
+                            <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
                         </div>
                     </div>
                 </div>

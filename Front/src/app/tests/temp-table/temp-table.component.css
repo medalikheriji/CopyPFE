@@ -1,3 +1,25 @@
+/** */
+.ngx-pagination {
+    padding-left: 0px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/**  .btn-info  */
+.ngx-pagination .current {
+    background:  #2a73e8 !important;
+    border: transparent !important;
+    border-radius: 20px !important;
+}
+
+.ngx-pagination .current:hover {
+    background:  #2a73e8 !important;
+    border-radius: 20px !important; 
+    border: transparent !important;
+}
+
+/** */
+
 .card-body {
     color: #2a73e8;
     font-weight: bold;

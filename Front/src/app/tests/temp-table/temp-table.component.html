@@ -1,4 +1,4 @@
-<app-aside-bar></app-aside-bar>
+<!--<app-aside-bar></app-aside-bar>
 
 <body class="full_container">
   <div class="loader"></div>
@@ -9,54 +9,65 @@
           <div class="row full_container">
             <div class="col-12 col-md-6 col-lg-12 full_container">
               <div class="card card-light full_container">
-                <div class="card-body full_container">
-                  
 
+                <div class="card-header full_container" style="margin-top:1%;margin-bottom:-2%;">
+                  <h4><label class="modal-title"> Liste de mes dépenses</label></h4>
+                  <input type="search" class="form-control" name="firstName" placeholder="Rechercher " [(ngModel)] ="searchField" style="width:20%;position:absolute;right:40px;" />   
+                </div>
+              -->
+
+                  <div class="card-body full_container">
                     <div class="selector_body">
                       <div class="selector_item align-items-center d-flex">
-                        
                         <label  class="selector_label" style="background-color: lightgray">
                           <!--<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">-->
 
                             <div class="d-flex justify-content-around" id="label_att">
                               <p class="me-1 ms-4">Période du …………. Au ………….</p>
-                              <p class="" (click)="sortField('id')">&nbsp;&nbsp; <i class="fa-solid fa-sort"></i>Identifiant</p>
-                              <p class="" (click)="sortField('stateOfProject')">&nbsp; &nbsp;<i class="fa-solid fa-sort"></i>Statut</p>
-                              <p class="" (click)="sortField('expiredAtProject')">&nbsp;&nbsp; <i class="fa-solid fa-sort"></i>Date d’envoi</p>
-                              <p class="" (click)="sortField('createdAtProject')">&nbsp;&nbsp; <i class="fa-solid fa-sort"></i>Date d’approbation</p>
-                              <p class="" (click)="sortField('priorityOfProject')">&nbsp;&nbsp; <i class="fa-solid fa-sort"></i>Priorité</p>
-                              <p class="" (click)="sortField('nameProject')">&nbsp;&nbsp; <i class="fa-solid fa-sort"></i>Nom du projet</p>
+                              <p class="" >&nbsp;&nbsp; Identifiant</p>
+                              <p class="" >&nbsp; &nbsp;Statut</p>
+                              <p class="">&nbsp;&nbsp; Date d’envoi</p>
+                              <p class="" >&nbsp;&nbsp;Date d’approbation</p>
+                              <p class="" >&nbsp;&nbsp; Priorité</p>
+                              <p class="">&nbsp;&nbsp; Nom du projet</p>
                             </div>
-
                         </label>
                       </div>
-                      <div class="selector_item" *ngFor="let e of timesheet ; index as i" style="margin-top: -5px;">
+
+                      <div class="selector_item" *ngFor="let e of timesheet  | filter : searchField | orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;" style="margin-top: -5px;">
                         <label class="selector_label">
                           <div class="d-flex justify-content-around" id="label_att">
 
                             <div class="d-flex"> 
                               <p class="ms-2">&nbsp;Du {{e.createdAtProject}} Au {{e.deadlineProject}}</p>
                             </div>
-                            <p class="me-1 ms-4" >{{e.id}}</p>
-                            <p class="" >{{e.stateOfProject}}</p>
-                            <p class="">{{e.expiredAtProject}}</p>
-                            <p class="" >{{e.expiredAtProject }}</p>
-                            <p class="">{{e.priorityOfProject}}</p>
-                            <p class="">{{e.nameProject}}</p>
+                            <p class="me-1 ms-4" >&nbsp;{{e.id}}</p>
+                            <p class="me-1 ms-4" style="margin-left:50%;">&nbsp;{{e.stateOfProject}}</p>
+                            <p class="me-1 ms-4">&nbsp;{{e.expiredAtProject}}</p>
+                            <p class="me-1 ms-4" >&nbsp;{{e.expiredAtProject }}</p>
+                            <p class="me-1 ms-4">&nbsp;{{e.priorityOfProject}}</p>
+                            <p class="me-1 ms-4">{{e.nameProject}}</p>
                           </div>
                         </label>
                       </div>
+                      <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
                     </div>
+
                   </div>
-                </div>
+                  <!--°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°-->
+                  
+                <!--</div>
+                
               </div>
             </div>
           </div>
-  
         <div class="card-body p-4 mb-4" style="border-radius: 20px; border-top-left-radius: 30%">
-          <!-- BEGIN : MODEL TEMPLATE ( Expenses )-->
+ 
+
         </div>
       </section>
     </div>
   </div>
+  
 </body>
+-->
