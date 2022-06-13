@@ -5,3 +5,13 @@
 .mat-form-field {
   margin-top: 16px;
 }
+
+
+.line {
+  content: "";
+  background-color: #2a73e8;
+  font-weight: bolder;
+  height: 0.2em;
+  width: 10em;
+  border-radius: 8px;
+}

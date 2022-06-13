@@ -1,36 +1,86 @@
-<mat-stepper #stepper>
+<div class="container card shadow w-75 mt-5" style="border-radius: 10px;">
+<mat-stepper #stepper class="card-body m-2">
+
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
+    <form [formGroup]="firstFormGroup" >
+      <ng-template matStepLabel>Les cordonnées de l'entité</ng-template>
+
+      <div class="form-group">
+        <label>  Le nom de l'entité </label>
+        <input class="form-control" placeholder="Sopra HR, Expensya, Vermeg..." formControlName="firstCtrl" required>
+
+      </div>
+
+      <select class="form-select">
+        <option>Le domaine de l'entité</option>
+        <option>Informatique</option>
+        <option>Agréculture</option>
+        <option>Porno</option>
+      </select>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button class="btn mt-2 float-end" style="background-color: #2a73e8; color:white;" matStepperNext>Suivant</button>
       </div>
     </form>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
+      <ng-template matStepLabel>Le profile de l'administrateur</ng-template>
+
+        <label class="form-check-label m-2">Profile</label>
+
+        <div class="form-check">
+          <input type="radio"  class="me-2" id="radio1" name="optradio" value="option1" checked>Manger
+        </div>
+        <div class="form-check">
+          <input type="radio"  class="me-2" id="radio1" name="optradio" value="option1" checked>Partenaire
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Avez-vous une idée sur le nombre des collaborateurs enregistré dans votre entité ? (Facultatif)</label>
+          <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Répondre ici">
+        </div>
+
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button class="btn mt-2 float-end" style="background-color: #2a73e8; color:white;" matStepperNext>Suivant</button>
+        <button class="btn mt-2 float-start" style="background-color: #2a73e8; color:white;" matStepperPrevious>Précedent</button>
+
       </div>
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
+    <ng-template matStepLabel>Ajouter les collaborateurs</ng-template>
+    <label class="form-check-label">Liste des collaborateurs</label>
+    <div class="line mb-2"></div>
+    <table class="table">
+      <thead>
+
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Matricule</th>
+        <th>Email</th>
+        <th>Numéro</th>
+        <th>Pays</th>
+        <th>Etat</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; index as i">
+          <td>{{ user.firstname }}</td>
+          <td>{{ user.lastname }}</td>
+          <td>{{ user.matricule }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phonenum }}</td>
+          <td>{{ user.pays }}</td>
+          <td>{{ user.etat }}</td>
+
+        </tr>
+      </tbody>
+    </table>
+
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button class="btn mt-2 float-start" style="background-color: #2a73e8; color:white;" matStepperPrevious>Précédent</button>
+      <button class="btn mt-2 float-end" style="background-color: #2a73e8; color:white;" (click)="stepper.reset()">Terminé  </button>
     </div>
   </mat-step>
+
 </mat-stepper>
+</div>
