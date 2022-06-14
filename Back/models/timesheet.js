@@ -1,13 +1,31 @@
 const mongoose = require('mongoose');
 
+
+const ligneSchema = mongoose.Schema(
+  {
+    typeH: { type: String, required: true},
+    NatureProjet: { type: String, required: true},
+    Projet: { type:String },
+    Activité: { type: String, required: true},
+    Description: { type: String, required: true},
+    Site: { type: String, required: true},
+    date: [{
+      day: { type: String, },
+      nbh: { type: Number, },
+    }]
+
+  }
+)
+
+
 const timesheetSchema = mongoose.Schema(
     {
       date_deb: {
-        type: String,
+        type: Date,
         required: true,
       },
       date_fin: {
-        type: String,
+        type: Date,
         required: true,
       },
       Statut: {
@@ -21,21 +39,16 @@ const timesheetSchema = mongoose.Schema(
       },
       date_approb: {
         type: Date,
-        required: true,
+        required: false,
       },
-      ajouter_par: {
-          type: String,
-          required: true,
-        },
+      ajouter_par: { type: String},
       matricule:{
         type:String,
         required:true,
-      }
-    
+      },
+      ligne:[ligneSchema]
     },
-    {
-      timestamps: true,
-    }
+    
   );
   
 module.exports = mongoose.model('timesheet', timesheetSchema);

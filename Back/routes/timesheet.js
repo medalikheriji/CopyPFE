@@ -2,11 +2,14 @@
 const express = require('express');
 const router = express.Router();
 const timesheetController = require('../controllers/timesheetController');
+const protect = require('../middleware/authMiddleware');
 
-router.post('/',timesheetController.addTimesheet);
+router.post('/add',protect,timesheetController.addTimesheet);
 router.get('/',timesheetController.findTimesheet);
 router.delete('/:id',timesheetController.deleteTimesheet);
 router.put('/:id',timesheetController.updateTimesheet);
+router.put('updatetime/:id',timesheetController.updateTimesheetTime);
+
 
 module.exports = router ; 
 
