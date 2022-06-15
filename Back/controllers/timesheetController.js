@@ -9,8 +9,7 @@ exports.addTimesheet =async (req, res) => {
         date_fin,
         date_envoi  : Date.now(),
         date_approb,
-        ajouter_par :"jjjj",
-        matricule: "hamza",
+        ajouter_par :req.user._id,
         ligne
     })
     if (ss)

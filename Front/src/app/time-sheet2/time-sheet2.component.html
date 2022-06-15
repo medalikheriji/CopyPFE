@@ -58,28 +58,9 @@
 
                           <div class="d-flex" style="margin-left: 200px;">
                             <p class="font-weight-bold" style="margin-top: -5px;">Période  </p>
-                            <div class="ms-3">
-                            <span class="p-input-icon-left">
-                              <i class="pi pi-users"></i>
-                              <select id="collabSelect">
-                                &nbsp;&nbsp;
-                                <option selected hidden>
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <h6 id="nomCol">Choisir une période</h6>
-                                </option>
-                                &nbsp;&nbsp;
-                                <option value="name">
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <h6 id="nomCol">Med Ali Kheriji</h6>
-                                </option>
-                                &nbsp;&nbsp;
-                                <option value="name">
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <h6 id="nomCol">Karim Mehwechi</h6>
-                                </option>
-                              </select>
-                            </span>
-                          </div>
+                            <form #form="ngForm" class="ms-3">
+                              <input type="date" #date_deb="ngModel" ngModel name="date_deb" (change)="getdate(date_deb.value)" id="collabSelect" >
+                          </form>
                           </div>
 
 
@@ -91,7 +72,7 @@
                   <!-- voici la duxiéme section (secondGrayContent) -->
                   <div class="card-content2 mb-2 full_container">
                     <div class="d-flex pt-2 ms-3">
-                     <button class="btn btn-light btn-sm btn-rounded m-1" style="border-radius: 10px;">Enregister</button>
+                     <button class="btn btn-light btn-sm btn-rounded m-1" (click)="send()" style="border-radius: 10px;">Enregister</button>
                      <button class="btn btn-light btn-sm btn-rounded m-1" style="background: #2a73e8; color:white; border-radius:10px;">Envoyer</button>
                      <button class="btn btn-light btn-sm btn-rounded m-1" style="border-radius: 10px;">Imprimer</button>
                     </div>
@@ -100,15 +81,15 @@
                       <div class="col-lg-10">
                     <div class="mb-2" style="border-radius:16px; background-color: lightgrey;">
                       <div class="d-flex justify-content-evenly text-dark m-2">
-                      <span class="w-50">La semaine du ... au ....</span>
+                      <span class="w-50">La semaine du <span *ngIf="!today">...</span> {{today}} au <span *ngIf="!today">....</span><span *ngIf="today"> {{today+7}}</span></span>
+                      <span class="w-25" *ngFor="let e of allweek">{{e}}</span>
+                      <!-- <span class="w-25">Lundi, 18</span>
                       <span class="w-25">Lundi, 18</span>
                       <span class="w-25">Lundi, 18</span>
                       <span class="w-25">Lundi, 18</span>
                       <span class="w-25">Lundi, 18</span>
                       <span class="w-25">Lundi, 18</span>
-                      <span class="w-25">Lundi, 18</span>
-                      <span class="w-25">Lundi, 18</span>
-                      <span class="w-25">Lundi, 18</span>
+                      <span class="w-25">Lundi, 18</span> -->
                     </div>
                     </div>
                     <div class="bg-light mb-2" style="border-radius:16px;">
@@ -179,15 +160,15 @@
 
                   </div>
 
-                  <div class="card-content3 full_container">
+                  <div *ngIf="today" class="card-content3 full_container">
                     <div class="d-flex">
                         <button type="button" class="btn btn-primary btn-sm mt-3 m-1 ms-3" (click)="openXl(content)" style="border-radius: 10px; color:white; background:#2a73e8;">
                          Ajouter une ligne
                         </button>
-                        <button type="button" class="btn btn-sm btn-light mt-3 m-1 ms-3" style="border-radius: 10px;" (click)="delete()">
+                        <button type="button" class="btn btn-sm btn-light mt-3 m-1 ms-3" style="border-radius: 10px;" >
                          Duppliquer
                         </button>
-                        <button type="button" class="btn btn-light btn-sm mt-3 m-1 ms-3" style="border-radius: 10px;" (click)="change()">
+                        <button type="button" class="btn btn-light btn-sm mt-3 m-1 ms-3" style="border-radius: 10px;">
                         Supprimer                        </button>
                         <button type="button" class="btn btn-light btn-sm mt-3 m-1 ms-3" style="border-radius: 10px;">
                           Activer un projet
@@ -205,112 +186,37 @@
                           <span class="w-50">Nature projet</span>
                           <span class="w-25">Projet</span>
                           <span class="w-50">Description du projet</span>
-                          <span class="w-25">Activité</span>
+                          <span class="w-25">Activite</span>
                           <span class="w-25"><i class="fa-solid fa-message me-2" style="visibility: hidden;"></i>Site</span>
-                          <span class="w-25">LUN 18</span>
-                          <span class="w-25">MAR 19</span>
-                          <span class="w-25">MER 20</span>
-                          <span class="w-25">JEU 21</span>
-                          <span class="w-25">VEN 22</span>
-                          <span class="w-25">SAM 23</span>
-                          <span class="w-25">DIM 24</span>
+                          <span class="w-25" *ngFor="let e of allweek">{{e}}</span>
                           <span class="w-25">Total</span>
                         </div>
                         </div>
 
-                        <div class="mb-2 bg-light" style="border-radius:16px;padding-top: 0.01px;padding-bottom: 0.01px;">
-                          <div class="d-flex justify-content-evenly align-items-center text-dark m-2">
+
+                        <!-- LIGNES -->
+                        <div *ngFor="let l of lignes;index as j" class="mb-2 bg-light" style="border-radius:16px;padding-top: 0.01px;padding-bottom: 0.01px;">
+                          <div class="d-flex justify-content-evenly  text-dark m-2">
                             <div class="mt-1 d-flex">
                               <input type="radio"  class="me-2" id="radio1" name="optradio" value="option1">
-
                             </div>
-                            <span class="w-50"> <i class="fa fa-search me-2 w-25"></i>Normal</span>
-                          <span class="w-50">Facturable</span>
-                          <span class="w-25">5632546</span>
-                          <span class="w-50">MBT, Audit total 2017</span>
-                          <span class="w-25">Module3</span>
-                          <span class="w-25"><i class="fa-solid fa-message me-2"></i>TN</span>
-                          <span class="w-25">2</span>
-                          <span class="w-25">3</span>
-                          <span class="w-25"></span>
-                          <span class="w-25">8</span>
-                          <span class="w-25">2</span>
-                          <span class="w-25"></span>
-                          <span class="w-25"></span>
-                          <span class="w-25">9</span>
+
+                            <span class="w-50"> <i class="fa fa-search me-2 w-25"></i>{{l.typeH}}</span>
+                          <span class="w-50">{{l.NatureProjet}}</span>
+                          <span class="w-25">{{l.Projet}}</span>
+                          <span class="w-50">{{l.Description}}</span>
+                          <span class="w-25">{{l.Activite}}</span>
+                          <span class="w-25"><i class="fa-solid fa-message me-2"></i>{{l.Site}}</span>
+                          <span class="w-25" *ngFor="let e of allweek ;index as i"><input type="number" value="{{l[j][i]}}" (change)="heures(i,heure,j)" #heure="ngModel" ngModel name="heure"  class="bg-light"></span>
+                          <span class="w-25">{{calcultotalperline(j)}}</span>
                         </div>
                         </div>
 
 
-                        <div class="mb-2 bg-light" style="border-radius:16px;padding-top: 0.01px;padding-bottom: 0.01px;">
-                          <div class="d-flex justify-content-evenly align-items-center text-dark m-2">
-                            <div class="mt-1 d-flex">
-                              <input type="radio"  class="me-2" id="radio1" name="optradio" value="option1">
-
-                            </div>
-                            <span class="w-50"> <i class="fa fa-search me-2 w-25"></i>Normal</span>
-                          <span class="w-50">Facturable</span>
-                          <span class="w-25">5632546</span>
-                          <span class="w-50">MBT, Audit total 2017</span>
-                          <span class="w-25">Module3</span>
-                          <span class="w-25"><i class="fa-solid fa-message me-2"></i>TN</span>
-                          <span class="w-25"><input type="text" class="bg-light" placeholder="2"></span>
-                          <span class="w-25"><input type="text" class="bg-light" placeholder="3"></span>
-                          <span class="w-25"><input type="text" class="bg-light" placeholder=""></span>
-                          <span class="w-25"><input type="text" class="bg-light" placeholder=""></span>
-                          <span class="w-25"><input type="text" class="bg-light" placeholder="2"> </span>
-                          <span class="w-25"><input type="text" class="bg-light" placeholder=""></span>
-                          <span class="w-25"><input type="text" class="bg-light" placeholder=""></span>
-                          <span class="w-25">9 </span>
-                        </div>
-                        </div>
 
 
-                        <div class="mb-2 bg-light" style="border-radius:16px;padding-top: 0.01px;padding-bottom: 0.01px;">
-                          <div class="d-flex justify-content-evenly align-items-center text-dark m-2">
-                            <div class="mt-1 d-flex">
-                              <input type="radio"  class="me-2" id="radio1" name="optradio" value="option1">
 
-                            </div>
-                            <span class="w-50"> <i class="fa fa-search me-2 w-25"></i>Normal</span>
-                          <span class="w-50">Facturable</span>
-                          <span class="w-25">5632546</span>
-                          <span class="w-50">MBT, Audit total 2017</span>
-                          <span class="w-25">Module3</span>
-                          <span class="w-25"><i class="fa-solid fa-message me-2"></i>TN</span>
-                          <span class="w-25">2</span>
-                          <span class="w-25">3</span>
-                          <span class="w-25"></span>
-                          <span class="w-25">8</span>
-                          <span class="w-25">2</span>
-                          <span class="w-25"></span>
-                          <span class="w-25"></span>
-                          <span class="w-25">9</span>
-                        </div>
-                        </div>
 
-                        <div class="mb-2 bg-light" style="border-radius:16px;padding-top: 0.01px;padding-bottom: 0.01px;">
-                          <div class="d-flex justify-content-evenly align-items-center text-dark m-2">
-                            <div class="mt-1 d-flex">
-                              <input type="radio"  class="me-2" id="radio1" name="optradio" value="option1">
-
-                            </div>
-                            <span class="w-50"> <i class="fa fa-search me-2 w-25"></i>Normal</span>
-                          <span class="w-50">Facturable</span>
-                          <span class="w-25">5632546</span>
-                          <span class="w-50">MBT, Audit total 2017</span>
-                          <span class="w-25">Module3</span>
-                          <span class="w-25"><i class="fa-solid fa-message me-2"></i>TN</span>
-                          <span class="w-25">2</span>
-                          <span class="w-25">3</span>
-                          <span class="w-25"></span>
-                          <span class="w-25">8</span>
-                          <span class="w-25">2</span>
-                          <span class="w-25"></span>
-                          <span class="w-25"></span>
-                          <span class="w-25">9</span>
-                        </div>
-                        </div>
 
                     </form>
                     </div>
@@ -335,47 +241,15 @@
               <button type="button" class="btn-close" aria-label="Close"
                 (click)="modal.dismiss('Cross click')"></button>
             </div>
-            <!--<form>
-            <div class="modal-body">
-              <form #timeform="ngForm">
-                <div class="input-group">
-                  <label for="">date_deb</label>
-                  <input type="text" class="form-control ms-3" placeholder="Normal" name="date_deb" ngModel #date_deb="ngModel"
-                  required />
-                </div>
-                <div class="input-group">
-                  <label for="">date_fin</label>
-                  <input type="text" class="form-control ms-3" placeholder="Facturable" name="date_fin" ngModel #date_fin="ngModel"
-                  required/>
-                </div>
-                <div class="input-group">
-                  <label for="">ajouter_par</label>
-                  <textarea class="form-control ms-3" placeholder="Commentaire….." name="ajouter_par" ngModel #ajouter_par="ngModel"
-                  required></textarea>
-                </div>
-                <div class="input-group">
 
-                  <label for="">Activité</label>
-                  <input type="text" class="form-control ms-3" placeholder="Planification" />
-                </div>
-                <div class="input-group">
-                  <label for="">Description </label>
-                  <textarea class="form-control ms-3" placeholder="Commentaire….."></textarea>
-                </div>
-                <div class="input-group">
-                  <label for="">Site</label>
-                  <input type="text" class="form-control ms-3" placeholder="Tunisie – TN (Par défaut)
-                        " />
-                </div>
-              </form>-->
-              <form >
+              <form #ligne="ngForm" (ngSubmit)="addligne(ligne)">
               <div class="modal-body" style="margin-bottom:0%;" >
                   <!--*****************************************************************************-->
                   <div class="form-row">
                     <div class="form-group col-md-12">
                         <!--Types d’heures-->
                         <label>Types d’heures</label>
-                        <select id="inputCategorie" class="custom-select form-control-sm" formControlName="hoursNatureTimesheet">
+                        <select id="inputCategorie" name="typeH" #typeH="ngModel" ngModel required class="custom-select form-control-sm">
                             <option value="élevé">Élevé</option>
                             <option value="normale">Normale</option>
                             <option value="faible">Faible</option>
@@ -388,7 +262,7 @@
                     <div class="form-group col-md-12">
                         <!--Nature du projet-->
                         <label>Nature du projet</label>
-                        <select id="inputCategorie" class="custom-select form-control-sm" formControlName="natureOfProjectTimesheet">
+                        <select id="inputCategorie" class="custom-select form-control-sm" name="NatureProjet" #NatureProjet="ngModel" ngModel required >
                             <option value="Facturable">Facturable</option>
                             <option value="Non facturable">Non facturable</option>
                             <option value="Interne">Interne</option>
@@ -400,29 +274,29 @@
                   <div class="form-row">
                       <div class="form-group col-md-12">
                         <label>Nom du projet</label>
-                        <input type="text" class="form-control" id="inputTitre" formControlName="projectNameTimesheet">
+                        <input type="text"  ngModel name="Projet" class="form-control" id="inputTitre" #Projet="ngModel">
                         <div class="invalid-feedback">Nom du projet est obligatoire </div>
                       </div>
                   </div>
                   <!--*************************************************************************************-->
                   <div class="form-row">
                     <div class="form-group col-md-12">
-                        <!--Activité-->
-                        <label>Activité</label>
-                        <select id="inputCategorie" class="custom-select form-control-sm" formControlName="taskTimesheet">
-                            <option value="Activité n°1">Activité n°1</option>
-                            <option value="Activité n°2">Activité n°2</option>
-                            <option value="Activité n°3">Activité n°3</option>
+                        <!--Activite-->
+                        <label>Activite</label>
+                        <select id="inputCategorie" class="custom-select form-control-sm" name="Activite" #Activite="ngModel" ngModel>
+                            <option value="Activite n°1">Activite n°1</option>
+                            <option value="Activite n°2">Activite n°2</option>
+                            <option value="Activite n°3">Activite n°3</option>
                         </select>
-                        <div class="invalid-feedback">Indication d'activité est obligatoire </div>
+                        <div class="invalid-feedback">Indication d'Activite est obligatoire </div>
                      </div>
                   </div>
                   <!--*************************************************************************************-->
                   <div class="form-row">
                     <div class="form-group col-md-12">
-                      <!--Commentaire -->
-                      <label>Commentaire</label>
-                      <textarea id="descProjet" class="form-control" name="descProjet"rows="1" cols="13" formControlName="commentTimesheet"></textarea>
+                      <!--Description -->
+                      <label>Description</label>
+                      <textarea id="descProjet" class="form-control" name="Description" #Description="ngModel" ngModel rows="1" cols="13" ></textarea>
                     </div>
                   </div>
                   <!--*************************************************************************************-->
@@ -430,17 +304,17 @@
                       <div class="form-group col-md-12">
                          <!--Site -->
                         <label>Site</label>
-                        <input type="text" class="form-control" id="inputTitre" formControlName="siteTimesheet">
+                        <input type="text" class="form-control" id="inputTitre" name="Site" #Site="ngModel" ngModel>
                         <div class="invalid-feedback">Indication du site est obligatoire </div>
                       </div>
                   </div>
                   <!--*************************************************************************************-->
                 </div>
 
-             
+
 
             <div class="modal-footer d-flex justify-content-center">
-              <button class="btn btn-light" type="reset" style="
+              <button class="btn btn-light" type="submit"  style="
                   border: none;
                   border-radius: 8px;
                   font-size: 12px;
@@ -473,3 +347,6 @@
             </div>
           </form>
           </ng-template>
+
+
+

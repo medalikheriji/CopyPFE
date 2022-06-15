@@ -70,7 +70,8 @@ const ProjectSchema = mongoose.Schema({
     serviceLine: {
         type:String,
         required:r=true
-    }
+    },
+    listColab: [[{type: mongoose.Schema.Types.ObjectId , ref: 'User'}]]
 
 });
 

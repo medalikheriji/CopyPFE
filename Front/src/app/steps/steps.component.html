@@ -1,8 +1,11 @@
 <div class="container card shadow w-75 mt-5" style="border-radius: 10px;">
+  <div class="container card shadow w-75 mt-5 d-flex text-center" style="background-color: #2a73e8;color:white;"><h1>Bienvenue cher Utilisateur</h1><h4>Il faut que vous suivre ces étapes là pour que vous pouvez créer votre entité </h4></div>
 <mat-stepper #stepper class="card-body m-2">
 
   <mat-step [stepControl]="firstFormGroup">
+
     <form [formGroup]="firstFormGroup" >
+
       <ng-template matStepLabel>Les cordonnées de l'entité</ng-template>
 
       <div class="form-group">

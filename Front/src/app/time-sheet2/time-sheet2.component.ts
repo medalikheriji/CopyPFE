@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-time-sheet2',
@@ -22,36 +23,78 @@ export class TimeSheet2Component implements OnInit {
 aff:Boolean = false
 hide:Boolean = true
 timesheet:any
-datarray:any=[]
 
+
+allweek:any=[]
+today:any
+lignes:any=[]
+hoursperday:any=[]
+nbh=0
+totalline=0
   constructor(private modalService: NgbModal,private route:Router,private api:BackapiService) {
-    this.api.gettimesheet().subscribe(data => this.timesheet=data)  }
+    this.api.gettimesheet().subscribe(data => this.timesheet=data)
+
+}
 
   ngOnInit(): void {
     this.api.gettimesheet().subscribe(data => this.feuill=data)
+
   }
 
+  getdate(date:Date){
+    this.today=new Date(date)
+    this.today=this.today.getDate()
+    moment(date).format('llll')
+    console.log(this.today)
+for (let i=0 ; i<=6;i++){
+  const day = this.today+i
+  this.allweek.push(day)}
 
-  getdata(date_deb:string,date_fin:string,ajouter_par:any,matricule:any)
-  {
-    this.datarraydetail.date_deb=date_deb
-    this.datarraydetail.date_fin=date_fin
-    this.datarraydetail.ajouter_par=ajouter_par
-    this.datarraydetail.matricule=matricule
-  }
-
-
-  addfeuill(context:NgForm)
-  {
-  let data = context.value
-  console.log(context.value)
-  this.api.AddFeuill(data).subscribe(data => {console.log(data)
-  })
-  this.ngOnInit()
-  location.reload();
-  }
+      }
 
 
+      addligne(f:NgForm){
+         let i=0
+         const hoursperday=[]
+         for (i=0;i<=this.allweek.length-1;i++){
+          let day = {day: 'day'+i};
+          let nbh = {nbh: 0};
+          let days = Object.assign(day,nbh);
+           hoursperday.push(days)
+         }
+         const ligne= f.value
+       this.lignes.push(Object.assign(ligne,hoursperday))
+         console.log(this.lignes)
+         console.log(hoursperday)
+return this.nbh
+      }
+
+      heures(i:number,heure:any,j:number){
+        this.lignes[j][i].nbh=heure.value
+
+      }
+
+calcultotalperline(j:number){
+  let i
+   let totalline=0
+ for(i=0;i<=6;i++){
+      totalline+=this.lignes[j][i].nbh
+ }
+ return totalline
+}
+
+
+
+
+
+// week(i:number){
+//   this.allweek.push(this.today)
+// for (i=1 ; i<=7;i++){
+//   const day = this.today.getDate()+1
+//   this.allweek.push(day)
+// }
+
+// }
 
   displayStyle = "none";
 
@@ -81,28 +124,23 @@ goto()
   this.route.navigate(['/test-here'])
 }
 
-add(e:any)
-{
-    this.datarray.push(e)
-}
 
 
-delete(){
-  for (var i = 0; i < this.datarray.length; i++) {
-    this.api.deletetimesheet(this.datarray[i]._id).subscribe(data => {
-      this.timesheet.splice(i,1)
-      })
-  }  location.reload();
+
+  send(){
+    const date_deb=new Date(this.today)
+    const date_fin=new Date(this.today)
+    const date_envoi=new Date(this.today)
+    const ajouter_par="karim"
+    const matricule="qsdqsd"
+    const ligne=this.lignes
+    const arrayA :any={date_deb,date_fin,date_envoi,ajouter_par,matricule,ligne}
+  this.api.AddFeuill(arrayA).subscribe(data => {console.log(arrayA)
+    console.log(data)  })
 
   }
 
-change(){
-  let data ="Envoyé"
-  for (var i = 0; i < this.datarray.length; i++) {
-    this.api.envoyee(data,this.datarray[i]._id).subscribe(data => {
-      location.reload();
-    })
-  }
-}
+
+
 
 }

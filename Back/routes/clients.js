@@ -1,4 +1,3 @@
-// routes for clients
 const express = require('express');
 const router = express.Router();
 

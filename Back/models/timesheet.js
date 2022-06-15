@@ -6,7 +6,7 @@ const ligneSchema = mongoose.Schema(
     typeH: { type: String, required: true},
     NatureProjet: { type: String, required: true},
     Projet: { type:String },
-    Activité: { type: String, required: true},
+    Activite: { type: String, required: true},
     Description: { type: String, required: true},
     Site: { type: String, required: true},
     date: [{
@@ -41,11 +41,7 @@ const timesheetSchema = mongoose.Schema(
         type: Date,
         required: false,
       },
-      ajouter_par: { type: String},
-      matricule:{
-        type:String,
-        required:true,
-      },
+      ajouter_par: {type: mongoose.Schema.Types.ObjectId , ref: 'User'},
       ligne:[ligneSchema]
     },
     
