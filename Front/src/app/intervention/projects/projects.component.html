@@ -1,17 +1,19 @@
 <app-aside-bar></app-aside-bar>
-<body>
-<div class="loader"></div>
-<div id="app">
-    <div class="main-content">
-        <section class="section" style="margin-top:-2%;">
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-12">
-                        <div class="card card-light">
-                            <div class="card-header" style="margin-bottom:-2%;margin-top:2%">
-                                <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des projets</label></h4>
 
-                                <!--
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-content">
+            <section class="section" style="margin-top:-2%;">
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-light">
+                                <div class="card-header" style="margin-bottom:-2%;margin-top:2%">
+                                    <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des
+                                            projets</label></h4>
+
+                                    <!--
                                 <div class="form-group" style="width:20%;position:absolute;right:225px;">
                                     <div class="input-group mb-2" >
                                      
@@ -21,54 +23,62 @@
                                     </div>
                                 </div>
                                 -->
-                                <button class="btn btn-outline-info mb-2 me-2" style="position:absolute;right:290px;font-size:14px;" (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau projet</button>
-                                <input type="search" class="form-control mb-2 me-2" name="categorie" placeholder="Rechercher" style="width:20%;position:absolute;right:32px;"
-                                [(ngModel)]="searchField" (ngModelChange)="Search()" />
+                                    <button class="btn btn-outline-info mb-2 me-2"
+                                        style="position:absolute;right:290px;font-size:14px;"
+                                        (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau
+                                        projet</button>
+                                    <input type="search" class="form-control mb-2 me-2" name="categorie"
+                                        placeholder="Rechercher" style="width:20%;position:absolute;right:32px;"
+                                        autocomplete="off" (keyup)="filterData($event)" />
 
 
-                            </div>
-                            <!-- BEGIN : MODAL - ADD PROJECT -->
-                            
-                            <ng-template #content let-modal>
-                                <form [formGroup]="projectForm" (ngSubmit)="addProject()">
-                                <div class="modal-header">
-                                    <div class="form-group col-md-9" style="margin-bottom:0%;">
-                                        <label class="modal-title" style="font-size: 16px;">Ajouter un projet </label>
-                                    </div>
-
-                                    <button type="button" class="btn-close" aria-label="Close" data-dismiss="modal"
-                                        (click)="modal.dismiss('Cross click')"></button>
                                 </div>
-                                <div class="modal-body" style="margin-bottom:-5%;" >
-                                    <div class="form-group">
-                                        <div class="form-row">
-                                            <!--<div class="form-group col-md-4">
-                                            <div class="pretty p-switch p-outline"  style="width:20%;position:absolute;left:100px;">
-                                                <input type="checkbox" formControlName="activatedProject"/>
-                                                <div class="state p-info">
-                                                    <label >Activier ce projet</label>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <div class="pretty p-switch p-slim" style="width:20%;position:absolute;right:20px;">
-                                                    <input type="checkbox"/>
-                                                    <div class="state p-info">
-                                                    <label style="font-size:12px">Activier ce projet</label>
-                                                    </div>
-                                                </div>
-                                            </div>-->
+                                <!-- BEGIN : MODAL - ADD PROJECT -->
 
+                                <ng-template #content let-modal>
+                                    <form [formGroup]="projectForm" (ngSubmit)="addProject()">
+                                        <div class="modal-header">
+                                            <div class="form-group col-md-9" style="margin-bottom:0%;">
+                                                <label class="modal-title" style="font-size: 16px;"><i
+                                                        class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;Ajouter
+                                                    un projet
+                                                </label>
+                                            </div>
+
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                data-dismiss="modal" (click)="modal.dismiss('Cross click')"></button>
                                         </div>
-                                        <!-- //////////////////////////////// MODAL OF PROJECT ///////////////////////////////////-->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-4">
-                                                <!-- ID -->
-                                                <input type="text"  hidden="" class="form-control" id="inputTitre" formControlName="_id">
-                                                <!--Nom-->
-                                                <label>Nom du projet</label>
-                                                <input type="text" class="form-control" id="inputTitre" formControlName="nameProject"
-                                                [ngClass]="
+                                        <!---->
+                                        <div class="modal-body" style="margin-bottom:-5%;">
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <!--<div class="form-group col-md-4">
+                                                        <div class="pretty p-switch p-outline"  style="width:20%;position:absolute;left:100px;">
+                                                            <input type="checkbox" formControlName="activatedProject"/>
+                                                            <div class="state p-info">
+                                                                <label >Activier ce projet</label>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <div class="pretty p-switch p-slim" style="width:20%;position:absolute;right:20px;">
+                                                                <input type="checkbox"/>
+                                                                <div class="state p-info">
+                                                                <label style="font-size:12px">Activier ce projet</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                                                </div>
+                                                <!-- //////////////////////////////// MODAL OF PROJECT ///////////////////////////////////-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <!-- ID -->
+                                                        <input type="text" hidden="" class="form-control "
+                                                            id="inputTitre" formControlName="_id">
+                                                        <!--Nom-->
+                                                        <label>Intitulé du projet</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="inputTitre" formControlName="nameProject" [ngClass]="
                                                             (projectForm.get('nameProject')?.touched ||
                                                             projectForm.get('nameProject')?.dirty) &&
                                                             projectForm.get('nameProject')?.hasError('required')
@@ -80,35 +90,18 @@
                                                                 ? 'is-valid'
                                                                 : ''
                                                             ">
-                                                <div class="invalid-feedback">Nom du projet est obligatoire </div>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <!--Priorité-->
-                                                <label>Priorité</label>
-                                                <select id="inputCategorie" class="custom-select form-control-sm" formControlName="priorityOfProject"
-                                                [ngClass]="
-                                                            (projectForm.get('priorityOfProject')?.touched ||
-                                                            projectForm.get('priorityOfProject')?.dirty) &&
-                                                            projectForm.get('priorityOfProject')?.hasError('required')
-                                                              ? 'is-invalid'
-                                                              : '' ||
-                                                            ((projectForm.get('priorityOfProject')?.touched ||
-                                                            projectForm.get('priorityOfProject')?.dirty) &&
-                                                            !projectForm.get('priorityOfProject')?.invalid)
-                                                              ? 'is-valid'
-                                                              : ''
-                                                            ">
-                                                    <option value="élevé">Élevé</option>
-                                                    <option value="normale">Normale</option>
-                                                    <option value="faible">faible</option>
-                                                </select>
-                                                <div class="invalid-feedback">Indication du priorité du projet est obligatoire </div>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <!--Priorité-->
-                                                <label>Type du projet</label>
-                                                <select id="inputCategorie" class="custom-select form-control-sm" formControlName="typeOfProject"
-                                                [ngClass]="
+                                                        <div class="invalid-feedback">Intitulé du projet est obligatoire
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                    <div class="form-group col-md-6">
+                                                        <!--Priorité-->
+                                                        <label>Type du projet</label>
+                                                        <select id="inputCategorie"
+                                                            class="custom-select form-control-sm"
+                                                            formControlName="typeOfProject" [ngClass]="
                                                             (projectForm.get('typeOfProject')?.touched ||
                                                             projectForm.get('typeOfProject')?.dirty) &&
                                                             projectForm.get('typeOfProject')?.hasError('required')
@@ -120,104 +113,49 @@
                                                               ? 'is-valid'
                                                               : ''
                                                             ">
-                                                    <option value="facturable">Facturable</option>
-                                                    <option value="non facturable">Non facturable</option>
-                                                    <option value="interne">Interne</option>
-                                                </select>
-                                                <div class="invalid-feedback">Indication du type du projet est obligatoire </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-4">
-                                                <!--Date limite-->
-                                                <label>Date du création</label>
-                                                <input type="date"  min="{{actualDate1 | date:'yyyy/MM/dd'}}" value=" actualDate1 | date:'yyyy/MM/dd'" class="form-control" formControlName="createdAtProject"
-                                                [ngClass]="
-                                                (projectForm.get('createdAtProject')?.touched ||
-                                                projectForm.get('createdAtProject')?.dirty) &&
-                                                projectForm.get('createdAtProject')?.hasError('required')
-                                                  ? 'is-invalid'
-                                                  : '' ||
-                                                ((projectForm.get('createdAtProject')?.touched ||
-                                                projectForm.get('createdAtProject')?.dirty) &&
-                                                !projectForm.get('createdAtProject')?.invalid)
-                                                  ? 'is-valid'
-                                                  : ''
-                                                ">
-                                                <div class="invalid-feedback">L'indication de la date de création du projet est obligatoire </div>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <!--Date limite-->
-                                                <label>Département</label>
-                                                <input type="text"  class="form-control" formControlName="departmentProject"
-                                                [ngClass]="
-                                                (projectForm.get('departmentProject')?.touched ||
-                                                projectForm.get('departmentProject')?.dirty) &&
-                                                projectForm.get('departmentProject')?.hasError('required')
-                                                  ? 'is-invalid'
-                                                  : '' ||
-                                                ((projectForm.get('departmentProject')?.touched ||
-                                                projectForm.get('departmentProject')?.dirty) &&
-                                                !projectForm.get('departmentProject')?.invalid)
-                                                  ? 'is-valid'
-                                                  : ''
-                                                ">
-                                                <div class="invalid-feedback">L'indication du département du projet est obligatoire </div>
-                                            </div>
-                                            <div class="form-group col-md-4">
-                                                <!--Priorité-->
-                                                <label>Statu</label>
-                                                <select id="inputCategorie" class="custom-select form-control-sm" formControlName="stateOfProject"
-                                                [ngClass]="
-                                                            (projectForm.get('stateOfProject')?.touched ||
-                                                            projectForm.get('stateOfProject')?.dirty) &&
-                                                            projectForm.get('stateOfProject')?.hasError('required')
-                                                              ? 'is-invalid'
-                                                              : '' ||
-                                                            ((projectForm.get('stateOfProject')?.touched ||
-                                                            projectForm.get('stateOfProject')?.dirty) &&
-                                                            !projectForm.get('stateOfProject')?.invalid)
-                                                              ? 'is-valid'
-                                                              : ''
-                                                            ">
-                                                    <option value="planifié">Planifié</option>
-                                                    <option value="en cours">En cours</option>
-                                                    <option value="suspendu">Suspendu</option>
-                                                    <option value="terminé">Terminé</option>
-                                                </select>
-                                                <div class="invalid-feedback">Indication du statu du projet est obligatoire </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            
-                                            <div class="form-group col-md-12">
-                                                <!--Description -->
-                                                <label>Description du projet</label>
-                                                <textarea id="descProjet" class="form-control" name="descProjet"rows="1" cols="13" formControlName="descProject"></textarea>
-                                            </div> 
-                                            
-                                            <!--<div class="pretty p-switch " style="position:absolute;right:20px;">
-                                                <input type="checkbox"/>
-                                                <div class="state p-info">
-                                                <label >Activier ce projet</label>
+                                                            <option value="facturable">Facturable</option>
+                                                            <option value="non facturable">Non facturable</option>
+                                                            <option value="interne">Interne</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">Indication du type du projet est
+                                                            obligatoire </div>
+                                                    </div>
                                                 </div>
-                                            </div>  -->
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <!--Nom-->
+                                                        <label>Département</label>
+                                                        <select id="inputCategorie"
+                                                            class="custom-select form-control-sm"
+                                                            formControlName="departmentProject" [ngClass]=" 
+                                                        (projectForm.get('departmentProject')?.touched ||
+                                                        projectForm.get('departmentProject')?.dirty) &&
+                                                        projectForm.get('departmentProject')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((projectForm.get('departmentProject')?.touched ||
+                                                        projectForm.get('departmentProject')?.dirty) &&
+                                                        !projectForm.get('departmentProject')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                            <option value="planifié">Planifié</option>
+                                                            <option value="en cours">En cours</option>
+                                                            <option value="suspendu">Suspendu</option>
+                                                            <option value="terminé">Terminé</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">L'indication du département du
+                                                            projet est obligatoire </div>
+                                                    </div>
 
-                                            <div class="pretty p-icon p-jelly p-round p-bigger" style="position:absolute;right:20px;">
-                                                <input type="checkbox" formControlName="activatedProject" checked />
-                                                <div class="state p-info">
-                                                  <i class="icon material-icons">done</i>
-                                                  <label >Activer ce projet</label>
-                                                </div>
-                                            </div>      
-                                              
-                                        </div>
-                                        <div class="form-row">
-                                            
-                                            <div class="form-group col-md-12">
-                                                <label>Ligne du service</label>
-                                                <select id="inputCategorie" class="custom-select form-control-sm" formControlName="serviceLine"
-                                                [ngClass]=" 
+                                                    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                    <div class="form-group col-md-6">
+                                                        <label>Ligne du service</label>
+                                                        <select id="inputCategorie"
+                                                            class="custom-select form-control-sm"
+                                                            formControlName="serviceLine" [ngClass]=" 
                                                             (projectForm.get('serviceLine')?.touched ||
                                                             projectForm.get('serviceLine')?.dirty) &&
                                                             projectForm.get('serviceLine')?.hasError('required')
@@ -229,79 +167,257 @@
                                                               ? 'is-valid'
                                                               : ''
                                                             ">
-                                                    <option value="planifié">Planifié</option>
-                                                    <option value="en cours">En cours</option>
-                                                    <option value="suspendu">Suspendu</option>
-                                                    <option value="terminé">Terminé</option>
-                                                </select>
-                                                <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                            <option value="planifié">Planifié</option>
+                                                            <option value="en cours">En cours</option>
+                                                            <option value="suspendu">Suspendu</option>
+                                                            <option value="terminé">Terminé</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                    </div>
+                                                </div>
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <!--Description -->
+                                                        <label>Description du projet</label>
+                                                        <textarea id="descProjet" class="form-control" name="descProjet"
+                                                            rows="1" cols="13" formControlName="descProject"></textarea>
+                                                    </div>
+                                                    <div class="pretty p-icon p-jelly p-round p-bigger"
+                                                    style="position:absolute;right:20px;">
+                                                    <input type="checkbox" formControlName="activatedProject"
+                                                        checked />
+                                                    <div class="state p-info">
+                                                        <i class="icon material-icons">done</i>
+                                                        <label>Activer ce projet</label>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <!-- __________________________________________________________________________________-->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Client</label>
+                                                    <select id="inputCategorie"
+                                                        class="custom-select form-control-sm"
+                                                        formControlName="serviceLine" [ngClass]=" 
+                                                        (projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        !projectForm.get('serviceLine')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                        <option value="planifié">Planifié</option>
+                                                        <option value="en cours">En cours</option>
+                                                        <option value="suspendu">Suspendu</option>
+                                                        <option value="terminé">Terminé</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                </div>
                                             </div> 
-                                                                                          
+                                            <!-- __________________________________________________________________________________-->
+ 
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Partner</label>
+                                                    <select id="inputCategorie"
+                                                        class="custom-select form-control-sm"
+                                                        formControlName="serviceLine" [ngClass]=" 
+                                                        (projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        !projectForm.get('serviceLine')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                        <option value="planifié">Planifié</option>
+                                                        <option value="en cours">En cours</option>
+                                                        <option value="suspendu">Suspendu</option>
+                                                        <option value="terminé">Terminé</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                </div>
+                                            
+                                            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+                                            
+                                                <div class="form-group col-md-6">
+                                                    <label>Manager</label>
+                                                    <select id="inputCategorie"
+                                                        class="custom-select form-control-sm"
+                                                        formControlName="serviceLine" [ngClass]=" 
+                                                        (projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        !projectForm.get('serviceLine')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                        <option value="planifié">Planifié</option>
+                                                        <option value="en cours">En cours</option>
+                                                        <option value="suspendu">Suspendu</option>
+                                                        <option value="terminé">Terminé</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                </div>
+                                            </div> 
+                                            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Client</label>
+                                                    <select id="inputCategorie"
+                                                        class="custom-select form-control-sm"
+                                                        formControlName="serviceLine" [ngClass]=" 
+                                                        (projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((projectForm.get('serviceLine')?.touched ||
+                                                        projectForm.get('serviceLine')?.dirty) &&
+                                                        !projectForm.get('serviceLine')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                        <option value="planifié">Planifié</option>
+                                                        <option value="en cours">En cours</option>
+                                                        <option value="suspendu">Suspendu</option>
+                                                        <option value="terminé">Terminé</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                </div>
+                                            </div> 
+                                            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+
+
                                         </div>
 
-                                        
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light"
-                                        (click)="modal.close('Close click')">Annuler</button>
-                                    <button type="submit" class="btn btn-outline-info mb-2 me-2"
-                                        [disabled]="projectForm.invalid"
-                                        (click)="modal.close('Close click')">Sauvgarder</button>
-                                </div>
-                            </form>
-                            </ng-template>
-                            <!-- END : MODAL - ADD PROJECT -->
-                            <!-- //////////////////////////////// BEGIN : MODAL OF PROJECT ///////////////////////////////////-->
-       
-                            <div class="card-body full_container">
-                                <div class="selector_body">
-                                  <div class="selector_item align-items-center d-flex">
-            
-                                    <label  class="selector_label" style="background-color: lightgray">
-                                      <!--<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">-->
-            
-                                        <div class="d-flex justify-content-around" id="label_att">
-                                          <p style="max-width:100px;height:100%;">Titre&nbsp;&nbsp; </p>
-                                          <p style="max-width:100px;height:100%;">&nbsp;&nbsp; Description</p>
-                                          <p class="" style="max-width:100px;height:100%;">&nbsp; &nbsp;Date du création</p>
-                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp; Département</p>
-                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp;Ligne du service</p>
-                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp; Statu</p>
-                                          <p class="" style="max-width:100px;height:100%;">&nbsp;&nbsp; Activé</p>
-                                          <p class="" style="max-width:100px;height:100%;"  >&nbsp;&nbsp; Actions </p>
+                                        <!--<div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                (click)="modal.close('Close click')">Annuler</button>
+                                            <button type="submit" class="btn btn-outline-info mb-2 me-2"
+                                                [disabled]="projectForm.invalid"
+                                                (click)="modal.close('Close click')">Sauvgarder</button>
+                                        </div>-->
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-light" style="
+                                                border: none;
+                                                border-radius: 8px;
+                                                font-size: 12px;
+                                                width: 100px;
+                                                height: 30px;
+                                                color: rgb(109, 109, 109);
+                                            " (click)="modal.close('Close click')">
+                                                <i class="fa fa-times"></i>&nbsp;&nbsp; Annuler
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" style="
+                                                border: none;
+                                                border-radius: 8px;
+                                                background-color: #2a73e8;
+                                                width: 200px;
+                                                height: 30px;
+                                                font-size: 12px;" (click)="modal.close('Close click')
+                                                " [disabled]="projectForm.invalid">
+                                                <i class="fas fa-solid fa-paper-plane"></i>&nbsp;&nbsp;
+                                                Enregistrer et Suivant
+                                            </button>
                                         </div>
-                                    </label>
-                                  </div>
-                                  <div class="selector_item" *ngFor="let project of projectsList  | filter : searchField | orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;" style="margin-top: -5px;">
-                                    <label class="selector_label">
-                                      <div class="d-flex justify-content-around" id="label_att">
-                                        
-                                          <p style="max-width:100px;height:100%;">{{project.nameProject}}</p>
-                                        
 
-                                        <p  style="max-width:100px;height:100%;">{{project.descProject}}</p>
+                                    </form>
+                                </ng-template>
+                                <!-- END : MODAL - ADD PROJECT -->
+                                <!-- //////////////////////////////// BEGIN : MODAL OF PROJECT ///////////////////////////////////-->
 
-                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.createdAtProject | date: 'dd/MM/yyyy'}}</p>
-                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.departmentProject}}</p>
-                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.serviceLine }}</p>
-                                        <p class="me-1 ms-4 badge badge-success badge-shadow" style="max-width:100px;height:100%;">{{project.stateOfProject}}</p>
-                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.activatedProject}}</p>
-                                        <p class="me-1 ms-4" style="max-width:100px;height:100%;">{{project.activatedProject}}</p>
-                                      </div>
-                                    </label>
-                                  </div>
-                                  <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+
+                                <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+                                <div class="container">
+                                    <table mat-table [dataSource]="dataSource" style="margin-top:5%;width:100%" matSort>
+
+                                        <!--- Note that these columns can be defined in any order.
+                                            The actual rendered columns are set as a property on the row definition" -->
+
+                                        <!-- Position Column 
+                                            <ng-container matColumnDef="Id">
+                                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                            </ng-container> -->
+
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="nameProject">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Titre</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.nameProject}} </td>
+                                        </ng-container>
+
+                                        <!-- Weight Column -->
+                                        <ng-container matColumnDef="descProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Description</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.descProject}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="createdAtProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Date du création</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.createdAtProject |
+                                                date: 'dd/MM/yyyy' }} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="stateOfProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Statu</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.stateOfProject}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="priorityOfProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef> Priorité </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.priorityOfProject}}
+                                            </td>
+                                        </ng-container>
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="actions">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Actions</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <button type="button" class="btn btn-outline-info btn-sm"
+                                                    (click)="deleteProject(element._id)"><i
+                                                        class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                                &nbsp;&nbsp;
+                                                <button type="button" class="btn btn-outline-info btn-sm "
+                                                    (click)="openSmEdit(content,element)"><i
+                                                        class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+
+
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                            [ngClass]="{'highlight': row.isSeen }"></tr>
+                                    </table>
+                                    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                        showFirstLastButtons aria-label="Select page of periodic elements">
+                                    </mat-paginator>
+                                    <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
                                 </div>
-            
-                              </div>
-                            
-                            <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
-</div>
 </body>

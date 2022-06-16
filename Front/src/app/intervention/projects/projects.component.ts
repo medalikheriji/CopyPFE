@@ -6,6 +6,10 @@ import { Project } from 'src/app/_models/project';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { DatePipe } from '@angular/common';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+// import {MatSort, Sort} from '@angular/material/sort';
 
 
 @Component({
@@ -481,6 +485,11 @@ import { DatePipe } from '@angular/common';
     border: 2px solid #2a73e8;
   }
 
+  .mat-header-cell {
+    background-color: #EEEEEE;
+    font-size:14px;
+}
+
   `]
 })
 export class ProjectsComponent implements OnInit {
@@ -521,7 +530,7 @@ export class ProjectsComponent implements OnInit {
   /** */
   // id : string | null;
   /** */
-  actualDate1 = new Date;
+  actualDate1 : Date;
 
   /** */
   titleOfOperation : string ="";
@@ -529,7 +538,7 @@ export class ProjectsComponent implements OnInit {
   /** */
   imageURL = "assets/img/noFile.png";
 
-  /** */
+  /** 
   timesheetCopy : Array<{id: string , nameProject: string, descProject: string, createdAtProject:string,expiredAtProject:string,deadlineProject:string,stateOfProject:string,priorityOfProject:string}> = [
     {id : "1", nameProject: "Projet n°1", descProject: "Description n°1 ", createdAtProject:"20/01/2022",expiredAtProject:"21/05/2022",deadlineProject:"15/06/2022",stateOfProject:"en cours",priorityOfProject:"faible"},
     {id : "2", nameProject: "Projet n°2", descProject: "Description n°2 ", createdAtProject:"17/02/2022",expiredAtProject:"21/05/2022",deadlineProject:"15/06/2022",stateOfProject:"terminé",priorityOfProject:"élevé"},
@@ -544,10 +553,13 @@ export class ProjectsComponent implements OnInit {
     {id : "4", nameProject: "Projet n°4", descProject: "Description n°4 ", createdAtProject:"19/12/2022",expiredAtProject:"21/05/2022",deadlineProject:"15/06/2022",stateOfProject:"en cours",priorityOfProject:"faible"},
     {id : "5", nameProject: "Projet n°5", descProject: "Description n°5 ", createdAtProject:"01/04/2022",expiredAtProject:"21/05/2022",deadlineProject:"15/06/2022",stateOfProject:"terminé",priorityOfProject:"noramle"}
   ]
-
+  */
 
   searchField : string ="";
- 
+  displayedColumns: string[] = ["nameProject", "descProject", "createdAtProject","stateOfProject","priorityOfProject","actions"];
+  dataSource !: MatTableDataSource<any>;
+  @ViewChild('paginator') paginator! : MatPaginator;
+  @ViewChild(MatSort) mySort! : MatSort ;
   /** */
   constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _projectsService: ProjectsService , private aRouter : ActivatedRoute , private toast : NgToastService ) {
     this.projectForm = this.formbuilder.group({
@@ -558,11 +570,24 @@ export class ProjectsComponent implements OnInit {
       priorityOfProject:['',Validators.required],
       stateOfProject:['',Validators.required],
       activatedProject:[true],
-      typeOfProject:[''],
-      departmentProject:[''],
-      serviceLine:['']
+      typeOfProject:['',Validators.required],
+      departmentProject:['',Validators.required],
+      serviceLine:['',Validators.required]
     })
     // this.id = this.aRouter.snapshot.paramMap.get('id');
+    this._projectsService.findAllProjects().subscribe(data => {
+      console.log(data);
+      this.projectsList=data;
+      this.dataSource= new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.mySort;
+      console.log('-------------><------------');
+      console.log('---->',this.dataSource);
+    }, error => {
+      console.log(error);
+    })
+    this.actualDate1 = new Date();
+    console.log("----->",this.actualDate1);
   }
 
   ngOnInit(): void {
@@ -576,8 +601,11 @@ export class ProjectsComponent implements OnInit {
 
     // this.projectsList1 = this.projects;
     this.getAllProjects();
-    this.timesheet = this.timesheetCopy;
+    // this.timesheet = this.timesheetCopy;
 
+  }
+  ngAfterViewInit (){
+    this.dataSource.sort = this.mySort;
   }
 
   /** search the name of the project */
@@ -603,6 +631,11 @@ export class ProjectsComponent implements OnInit {
     this._projectsService.findAllProjects().subscribe(data => {
       console.log(data);
       this.projectsList=data;
+      this.dataSource= new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.mySort;
+      console.log('-------------><------------');
+      console.log('---->',this.dataSource);
     }, error => {
       console.log(error);
     })
@@ -754,5 +787,9 @@ export class ProjectsComponent implements OnInit {
 
 today = new Date();
 
+/** FILTER FUNCTION */
+filterData($event : any){
+  this.dataSource.filter = $event.target.value; 
+}
 
 }

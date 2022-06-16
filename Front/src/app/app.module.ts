@@ -93,6 +93,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { ClientsComponent } from './intervention/clients/clients.component';
 
 
 @NgModule({
@@ -116,6 +117,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
     TempTableComponent,
     TimeSheet2Component,
     StepsComponent,
+    ClientsComponent,
   ],
   imports: [
     BrowserModule,
@@ -174,8 +176,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
     MatSliderModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    MatSortModule,
     MatTableModule,
+    MatSortModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
@@ -192,3 +194,5 @@ import {OverlayModule} from '@angular/cdk/overlay';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// MatTableModule,
+//     MatSortModule

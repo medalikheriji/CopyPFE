@@ -21,4 +21,5 @@ export class Project{
         this.departmentProject = departmentProject ;
         this.serviceLine = serviceLine ;
     }
+    
 }

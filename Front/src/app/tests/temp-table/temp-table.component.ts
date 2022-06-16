@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, ElementRef, OnInit , ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-temp-table',
@@ -459,19 +460,16 @@ export class TempTableComponent implements OnInit {
   key : string ='id';
   reverse : boolean = false;
 
+  dataSource !: MatTableDataSource<any>;
   constructor() { }
 
   ngOnInit(): void {
     this.timesheet = this.timesheetCopy;
-  }
-  add(){
-
+    this.dataSource = new MatTableDataSource(this.timesheet);
   }
 
-  sortField(key:any){
-    this.key = key ;
-    this.reverse = !this.reverse;
-  }
+  displayedColumns: string[] = ['Id', 'Nom du projet', 'Description', 'Crée le ','Statu','Priorité'];
+
   
 
 }
