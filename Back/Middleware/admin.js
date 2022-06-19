@@ -1,5 +1,3 @@
-
-
 const admin = (req, res, next) => {
     if (req.user && req.user.isAdmin) {
       next();
@@ -8,7 +6,4 @@ const admin = (req, res, next) => {
       throw new Error("Not authorized as an Admin");
     }
   };
-
-  
-
-  export default admin;
+  module.exports = admin;

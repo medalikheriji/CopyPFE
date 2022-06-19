@@ -1,3 +1,4 @@
+import { BackapiService } from './../_services/backapi.service';
 import {Component} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
@@ -20,6 +21,11 @@ export class StepsComponent {
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
+  users:any
 
-  constructor(private _formBuilder: FormBuilder) {}
+
+  constructor(private _formBuilder: FormBuilder,private api:BackapiService) {
+    this.api.userlist().subscribe(data => this.users=data
+      )
+  }
 }

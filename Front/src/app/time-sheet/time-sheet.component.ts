@@ -25,7 +25,8 @@ timesheet:any
 datarray:any=[]
 
   constructor(private modalService: NgbModal,private route:Router,private api:BackapiService) {
-    this.api.gettimesheet().subscribe(data => this.timesheet=data)  }
+    this.api.gettimesheet().subscribe(data => {this.timesheet=data
+    console.log(data)})  }
 
   ngOnInit(): void {
     this.api.gettimesheet().subscribe(data => this.feuill=data)

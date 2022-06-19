@@ -31,22 +31,26 @@ resetpass(token:any,data:any){
 
 
 gettimesheet(){
-  return this.http.get(`http://localhost:1000/api/stylesheet/`)
+  return this.http.get(`http://localhost:1000/api/timesheet/`)
 }
 
 
 deletetimesheet(id:any){
-  return this.http.delete(`http://localhost:1000/api/stylesheet/`+id)
+  return this.http.delete(`http://localhost:1000/api/timesheet/`+id)
 }
 
 
 envoyee(data:any,id:any){
-  return this.http.put(`http://localhost:1000/api/stylesheet/envoye/`+id,data)
+  return this.http.put(`http://localhost:1000/api/timesheet/envoye/`+id,data)
 }
 
 AddFeuill(feuill:any)
 {
-  return this.http.post(`http://localhost:1000/api/stylesheet/add`,feuill)
+  return this.http.post(`http://localhost:1000/api/timesheet/add`,feuill)
 }
+
+
+
+
 
 }

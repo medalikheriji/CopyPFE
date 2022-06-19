@@ -385,3 +385,9 @@
   visibility: visible;
   border: 2px solid #2a73e8;
 }
+
+
+span input{
+  width: 45px;
+  border:none ;
+}

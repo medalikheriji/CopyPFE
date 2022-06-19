@@ -29,7 +29,7 @@ export class ApiauthService {
     localStorage.setItem('user',JSON.stringify(data.user))
   }
 
-  
+
 
   LoggedIn(){
   let token:any = localStorage.getItem('usertoken')
