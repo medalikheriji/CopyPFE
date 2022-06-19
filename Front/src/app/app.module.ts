@@ -94,6 +94,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { ClientsComponent } from './intervention/clients/clients.component';
+import { SupervisorsComponent } from './intervention/supervisors/supervisors.component';
 
 
 @NgModule({
@@ -118,6 +119,7 @@ import { ClientsComponent } from './intervention/clients/clients.component';
     TimeSheet2Component,
     StepsComponent,
     ClientsComponent,
+    SupervisorsComponent,
   ],
   imports: [
     BrowserModule,

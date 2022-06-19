@@ -19,6 +19,8 @@ import { TimeSheetComponent } from './time-sheet/time-sheet.component';
 import { ProjectsComponent } from './intervention/projects/projects.component';
 import { ListProjectsComponent } from './intervention/list-projects/list-projects.component';
 import { TempTableComponent } from './tests/temp-table/temp-table.component';
+import { ClientsComponent } from './intervention/clients/clients.component';
+import { SupervisorsComponent } from './intervention/supervisors/supervisors.component';
 
 
 const routes: Routes = [
@@ -39,7 +41,9 @@ const routes: Routes = [
   {path:'list',component:ListProjectsComponent,canActivate:[AuthuserguardGuard]},
   {path:'t',component:TempTableComponent,canActivate:[AuthuserguardGuard]},
   {path:'steps',component:StepsComponent,canActivate:[AuthuserguardGuard]},
-  {path:'list-users',component:ListusersComponent,canActivate:[AuthuserguardGuard]}
+  {path:'list-users',component:ListusersComponent,canActivate:[AuthuserguardGuard]},
+  {path:'Clients',component:ClientsComponent,canActivate:[AuthuserguardGuard]},
+  {path:'Supervisors',component:SupervisorsComponent,canActivate:[AuthuserguardGuard]}
 ];
 
 @NgModule({

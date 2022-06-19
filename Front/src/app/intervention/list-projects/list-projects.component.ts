@@ -5,6 +5,11 @@ import { ProjectsService } from 'src/app/_services/projects.service';
 import { Project } from 'src/app/_models/project';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-list-projects',
@@ -79,6 +84,24 @@ import { NgToastService } from 'ng-angular-popup';
       border: transparent !important;
     }
 
+    .swal2-title {
+    margin: 0px;
+    font-size: 10px;
+    font-family: 'Manrope';
+  }
+
+  .swal2-text {
+    background-color: #FEFAE3;
+    text-align: center;
+    color: #61534e;
+    font-family: 'Manrope';
+  }
+
+  .swal2-popup {
+    font-size: 12px !important;
+    font-family: 'Manrope';
+  }
+
   `]
 })
 export class ListProjectsComponent implements OnInit {
@@ -124,18 +147,27 @@ export class ListProjectsComponent implements OnInit {
   actualDate = new Date;
   /** */
   titleOfOperation : string ="";
+
+  displayedColumns: string[] = ["nameProject", "descProject","typeOfProject","clientOfProject","activatedProject"];
+  dataSource !: MatTableDataSource<any>;
+  @ViewChild('paginator') paginator! : MatPaginator;
+  @ViewChild(MatSort) mySort! : MatSort ;
+
   constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _projectsService: ProjectsService , private aRouter : ActivatedRoute , private toast : NgToastService) {
     this.projectForm = this.formbuilder.group({
       _id:['000000000000000000000000'],
       nameProject:['',Validators.required],
       descProject:['',Validators.required],
-      createdAtProject:['',Validators.required],
       priorityOfProject:['',Validators.required],
       stateOfProject:['',Validators.required],
       activatedProject:[false],
       typeOfProject:[''],
       departmentProject:[''],
-      serviceLine:['']
+      serviceLine:[''],
+      managerOfProject:[''],
+      partnerOfProject:[''],
+      clientOfProject:['']
+      
     })
     this.statuForm = this.formbuilder.group({
       activateProject:[false]
@@ -151,6 +183,17 @@ export class ListProjectsComponent implements OnInit {
       // typeOfProject:['']
     })
     // this.id = this.aRouter.snapshot.paramMap.get('id');
+    this._projectsService.findAllProjects().subscribe(data => {
+      console.log(data);
+      this.projectsList=data;
+      this.dataSource= new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.mySort;
+      console.log('-------------><------------');
+      console.log('---->',this.dataSource);
+    }, error => {
+      console.log(error);
+    })
   }
 
   ngOnInit(): void {
@@ -164,6 +207,10 @@ export class ListProjectsComponent implements OnInit {
 
     // this.projectsList1 = this.projects;
     this.getAllProjects();
+  }
+
+  ngAfterViewInit (){
+    this.dataSource.sort = this.mySort;
   }
 
   /** search the name of the project */
@@ -273,13 +320,16 @@ export class ListProjectsComponent implements OnInit {
       _id : project._id,
       nameProject : project.nameProject,
       descProject : project.descProject,
-      createdAtProject : project.createdAtProject,
       stateOfProject : project.stateOfProject,
       priorityOfProject : project.priorityOfProject,
       activatedProject : project.activatedProject,
       typeOfProject : project.typeOfProject,
       departmentProject : project.departmentProject,
       serviceLine : project.serviceLine,
+      managerOfProject : project.managerOfProject,
+       partnerOfProject:project. partnerOfProject,
+      clientOfProject:project.clientOfProject
+
     });
     this.ngOnInit();
   }
@@ -288,7 +338,7 @@ export class ListProjectsComponent implements OnInit {
 
     console.log(this.projectForm.get('nameProject')?.value);
     console.log(this.projectForm.get('descProject')?.value);
-    console.log(this.projectForm.get('createdAtProject')?.value);
+
     console.log(this.projectForm.get('deadlineProject')?.value);
     console.log(this.projectForm.get('stateOfProject')?.value);
 
@@ -300,10 +350,11 @@ export class ListProjectsComponent implements OnInit {
     priorityOfProject : this.projectForm.get('priorityOfProject')?.value,
     activatedProject : this.projectForm.get('activatedProject')?.value,
     typeOfProject : this.projectForm.get('typeOfProject')?.value,
-    createdAtProject : this.projectForm.get('createdAtProject')?.value,
     departmentProject : this.projectForm.get('departmentProject')?.value,
     serviceLine : this.projectForm.get('serviceLine')?.value,
-
+    managerOfProject : this.projectForm.get('managerOfProject')?.value,
+     partnerOfProject : this.projectForm.get(' partnerOfProject')?.value,
+    clientOfProject : this.projectForm.get('clientOfProject')?.value
     
    }
 
@@ -348,13 +399,15 @@ saveChange(_id : any , project : Project){
     _id : project._id,
     nameProject : project.nameProject,
     descProject : project.descProject,
-    createdAtProject : project.createdAtProject,
     stateOfProject : project.stateOfProject,
     priorityOfProject : project.priorityOfProject,
     typeOfProject : project.typeOfProject,
     activatedProject : project.activatedProject,
     departmentProject : project.departmentProject,
     serviceLine : project.serviceLine,
+    managerOfProject : project.managerOfProject,
+     partnerOfProject:project. partnerOfProject,
+    clientOfProject:project.clientOfProject
    }
 
   console.log(addedProject);
@@ -369,7 +422,8 @@ saveChange(_id : any , project : Project){
   console.log(addedProject);
   this._projectsService.editProjectByState(_id , addedProject ).subscribe( data => {
     // this.router.navigate(['/Projects']);
-    this.toast.success({detail:"Opération réalisée avec succès ...",summary:"Ce projet à modifié avec succès",duration:3000});
+    // this.toast.success({detail:"Opération réalisée avec succès ...",summary:"Ce projet à modifié avec succès",duration:3000});
+    this.successAlert();
     }, error => {
       console.log(error);
       this.toast.error({detail:"Message d'erreur",summary:error,duration:3000});
@@ -377,4 +431,21 @@ saveChange(_id : any , project : Project){
   });
 }
 
+  /** FILTER FUNCTION */
+  filterData($event : any){
+    this.dataSource.filter = $event.target.value; 
+  }
+
+  successAlert(){
+    // Swal.fire("Thank you ..",'You submitted successfully','success');
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Cette opération est réalisée avec succès .. ',
+      text : 'Le statut de ce projet a été modifié avec succès',
+      // title : 'CETTE OPÉRATION EST '+ action+' RÉALISÉE AVEC SUCCÈS ..',
+      showConfirmButton: false,
+      timer: 2000
+    });
+  }
 }

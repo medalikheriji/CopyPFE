@@ -1,0 +1,314 @@
+<app-aside-bar></app-aside-bar>
+
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-content">
+            <section class="section" style="margin-top:-2%;">
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-light">
+                                <div class="card-header" style="margin-bottom:-2%;margin-top:2%">
+                                    <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des
+                                            superviseurs</label></h4>
+
+                                    <!--
+                                <div class="form-group" style="width:20%;position:absolute;right:225px;">
+                                    <div class="input-group mb-2" >
+                                     
+                                        &nbsp;<div class="input-group-text" style="border-radius: 45% 0% 0% 45%; height:31px;background-color:transparent;"><i class="fa-solid fa-magnifying-glass" style="color:#48dbfb;"></i></div>
+                                     
+                                      <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                                    </div>
+                                </div>
+                                -->
+                                    <button class="btn btn-outline-info mb-2 me-2"
+                                        style="position:absolute;right:320px;font-size:14px;"
+                                        (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau
+                                        Superviseur</button>
+                                    <input type="search" class="form-control mb-2 me-2" name="categorie"
+                                        placeholder="Rechercher" style="width:20%;position:absolute;right:32px;"
+                                        autocomplete="off" (keyup)="filterData($event)" />
+
+
+                                </div>
+                                <!-- BEGIN : MODAL - ADD PROJECT -->
+
+                                <ng-template #content let-modal>
+                                    <form [formGroup]="superForm" (ngSubmit)="addSuper()">
+                                        <div class="modal-header">
+                                            <div class="form-group col-md-9" style="margin-bottom:0%;">
+                                                <label class="modal-title" style="font-size: 16px;"><i
+                                                        class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ modalName }}
+                                                </label>
+                                            </div>
+
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                data-dismiss="modal" (click)="modal.dismiss('Cross click')"></button>
+                                        </div>
+                                        <!---->
+                                        <div class="modal-body" style="margin-bottom:-5%;">
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <!--<div class="form-group col-md-4">
+                                                        <div class="pretty p-switch p-outline"  style="width:20%;position:absolute;left:100px;">
+                                                            <input type="checkbox" formControlName="activatedProject"/>
+                                                            <div class="state p-info">
+                                                                <label >Activier ce projet</label>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <div class="pretty p-switch p-slim" style="width:20%;position:absolute;right:20px;">
+                                                                <input type="checkbox"/>
+                                                                <div class="state p-info">
+                                                                <label style="font-size:12px">Activier ce projet</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                                                </div>
+                                                <!-- //////////////////////////////// MODAL OF PROJECT ///////////////////////////////////-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <!-- ID -->
+                                                        <input type="text" hidden="" class="form-control "
+                                                            id="inputTitre" formControlName="_id">
+                                                        <!--Nom-->
+                                                        <label>Nom du superviseur</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="inputTitre" formControlName="fullnameSupervisor"
+                                                            [ngClass]="
+                                                            (superForm.get('fullnameSupervisor')?.touched ||
+                                                            superForm.get('fullnameSupervisor')?.dirty) &&
+                                                            superForm.get('fullnameSupervisor')?.hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                              ((superForm.get('fullnameSupervisor')?.touched ||
+                                                              superForm.get('fullnameSupervisor')?.dirty) &&
+                                                              !superForm.get('fullnameSupervisor')?.invalid)
+                                                                ? 'is-valid'
+                                                                : ''
+                                                            ">
+                                                        <div class="invalid-feedback">Nom du superviseur est obligatoire
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                    <div class="form-group col-md-6">
+                                                        <!--Priorité-->
+                                                        <label>Mail</label>
+                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                            formControlName="mailSupervisor" [ngClass]="
+                                                            (superForm.get('mailSupervisor')?.touched ||
+                                                            superForm.get('mailSupervisor')?.dirty) &&
+                                                            superForm.get('mailSupervisor')?.hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                            ((superForm.get('mailSupervisor')?.touched ||
+                                                            superForm.get('mailSupervisor')?.dirty) &&
+                                                            !superForm.get('mailSupervisor')?.invalid)
+                                                              ? 'is-valid'
+                                                              : ''
+                                                            ">
+                                                        <div class="invalid-feedback">Indication du mail du
+                                                            superviseur est obligatoire </div>
+                                                    </div>
+                                                </div>
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <!--Nom-->
+                                                        <label>Téléphone</label>
+                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                            formControlName="phoneSupervisor" [ngClass]=" 
+                                                        (superForm.get('phoneSupervisor')?.touched ||
+                                                        superForm.get('phoneSupervisor')?.dirty) &&
+                                                        superForm.get('phoneSupervisor')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((superForm.get('phoneSupervisor')?.touched ||
+                                                        superForm.get('phoneSupervisor')?.dirty) &&
+                                                        !superForm.get('phoneSupervisor')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+
+                                                        <div class="invalid-feedback">L'indication du téléphone du
+                                                            superviseur est obligatoire </div>
+                                                    </div>
+
+                                                    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                    <div class="form-group col-md-6">
+                                                        <label>Nationalité</label>
+                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                            formControlName="nationalitySupervisor" [ngClass]=" 
+                                                            (superForm.get('nationalitySupervisor')?.touched ||
+                                                            superForm.get('nationalitySupervisor')?.dirty) &&
+                                                            superForm.get('nationalitySupervisor')?.hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                            ((superForm.get('nationalitySupervisor')?.touched ||
+                                                            superForm.get('nationalitySupervisor')?.dirty) &&
+                                                            !superForm.get('nationalitySupervisor')?.invalid)
+                                                              ? 'is-valid'
+                                                              : ''
+                                                            ">
+
+                                                        <div class="invalid-feedback">Indication du nationalité
+                                                            du superviseur est obligatoire </div>
+                                                    </div>
+                                                </div>
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <!--Nom-->
+                                                        <label>Superviseur à</label>
+                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                            formControlName="supervisorAt" [ngClass]=" 
+                                                    (superForm.get('supervisorAt')?.touched ||
+                                                    superForm.get('supervisorAt')?.dirty) &&
+                                                    superForm.get('supervisorAt')?.hasError('required')
+                                                      ? 'is-invalid'
+                                                      : '' ||
+                                                    ((superForm.get('supervisorAt')?.touched ||
+                                                    superForm.get('supervisorAt')?.dirty) &&
+                                                    !superForm.get('supervisorAt')?.invalid)
+                                                      ? 'is-valid'
+                                                      : ''
+                                                    ">
+
+                                                        <div class="invalid-feedback">L'indication du
+                                                            client est obligatoire </div>
+                                                    </div>
+
+                                                    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                </div>
+
+                                                <!-- __________________________________________________________________________________-->
+
+                                            </div>
+                                        </div>
+
+
+                                        <!--<div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                (click)="modal.close('Close click')">Annuler</button>
+                                            <button type="submit" class="btn btn-outline-info mb-2 me-2"
+                                                [disabled]="projectForm.invalid"
+                                                (click)="modal.close('Close click')">Sauvgarder</button>
+                                        </div>-->
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <button type="button" class="btn btn-light" style="
+                                                        border: none;
+                                                        border-radius: 8px;
+                                                        font-size: 12px;
+                                                        width: 100px;
+                                                        height: 30px;
+                                                        color: rgb(109, 109, 109);
+                                                    " (click)="modal.close('Close click')">
+                                                <i class="fa fa-times"></i>&nbsp;&nbsp; Annuler
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" style="
+                                                        border: none;
+                                                        border-radius: 8px;
+                                                        background-color: #2a73e8;
+                                                        width: 200px;
+                                                        height: 30px;
+                                                        font-size: 12px;" (click)="modal.close('Close click')
+                                                        " [disabled]="superForm.invalid">
+                                                <i class="fas fa-solid fa-paper-plane"></i>&nbsp;&nbsp;
+                                                Enregistrer et Suivant
+                                            </button>
+                                        </div>
+                                    </form>
+                                </ng-template>
+                                <!-- END : MODAL - ADD PROJECT -->
+                                <!-- //////////////////////////////// BEGIN : MODAL OF PROJECT ///////////////////////////////////-->
+
+
+                                <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+                                <!--  displayedColumns: string[] = ["nameClient", "taxRegisterClient", "phoneSupervisor","countryClient","socialReasonClient","activitySectorClient","mailClient","actions"];-->
+                                <div class="container">
+                                    <table mat-table [dataSource]="dataSource" style="margin-top:5%;width:100%" matSort>
+
+                                        <!--- Note that these columns can be defined in any order.
+                                            The actual rendered columns are set as a property on the row definition" -->
+
+                                        <!-- Position Column 
+                                            <ng-container matColumnDef="Id">
+                                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                            </ng-container> -->
+
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="fullnameSupervisor">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom du superviseur
+                                            </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.fullnameSupervisor}} </td>
+                                        </ng-container>
+
+                                        <!-- Weight Column -->
+                                        <ng-container matColumnDef="mailSupervisor">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Mail du superviseur
+                                            </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.mailSupervisor}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="phoneSupervisor">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Téléphone</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.phoneSupervisor}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="nationalitySupervisor">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Nationalité</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.nationalitySupervisor}}
+                                            </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="supervisorAt">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef> Superviseur à </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.supervisorAt}}
+                                            </td>
+                                        </ng-container>
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="actions">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Actions</th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <button type="button" class="btn btn-outline-info btn-sm"
+                                                    (click)="deleteSuper(element._id)"><i
+                                                        class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                                &nbsp;&nbsp;
+                                                <button type="button" class="btn btn-outline-info btn-sm "
+                                                    (click)="openSmEdit(content,element)"><i
+                                                        class="fa-solid fa-pen-to-square"></i>
+                                                </button>
+                                            </td>
+                                        </ng-container>
+
+
+
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                            [ngClass]="{'highlight': row.isSeen }"></tr>
+                                    </table>
+                                    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                        showFirstLastButtons aria-label="Select page of periodic elements">
+                                    </mat-paginator>
+                                    <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>

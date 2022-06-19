@@ -237,8 +237,8 @@ export class ExpenseComponent implements OnInit {
       reader.onload=(event:any)=>{
         console.log("OOO",event.target.result);
         console.log("OOOPPPOOO",this.urlFile);
-        this.urlFile1=event.target.result;
-        console.log("TTT",this.urlFile1);
+        this.urlFile=event.target.result;
+        console.log("TTT",this.urlFile);
       }
     }
   }
@@ -287,7 +287,7 @@ export class ExpenseComponent implements OnInit {
   openVerticallyCentered(content:any) {
     this.modalService.open(content, { centered: true });
   }
-
+  
   openModalDialogCustomClass(content:any) {
     this.modalService.open(content, { modalDialogClass: 'dark-modal' });
   }
@@ -296,6 +296,7 @@ export class ExpenseComponent implements OnInit {
     console.log(this.myForm1.value);
     this.myForm1.reset();
   }
+
   printDepense(){
     console.log(this.myFormDepense.value);
     this.myFormDepense.reset();

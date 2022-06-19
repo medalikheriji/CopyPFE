@@ -10,8 +10,7 @@
                         <div class="col-12 col-md-6 col-lg-12">
                             <div class="card card-light">
                                 <div class="card-header" style="margin-bottom:-2%;margin-top:2%">
-                                    <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des
-                                            projets</label></h4>
+                                    <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des projets</label></h4>
 
                                     <!--
                                 <div class="form-group" style="width:20%;position:absolute;right:225px;">
@@ -24,7 +23,7 @@
                                 </div>
                                 -->
                                     <button class="btn btn-outline-info mb-2 me-2"
-                                        style="position:absolute;right:290px;font-size:14px;"
+                                        style="position:absolute;right:320px;font-size:14px;"
                                         (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau
                                         projet</button>
                                     <input type="search" class="form-control mb-2 me-2" name="categorie"
@@ -40,8 +39,8 @@
                                         <div class="modal-header">
                                             <div class="form-group col-md-9" style="margin-bottom:0%;">
                                                 <label class="modal-title" style="font-size: 16px;"><i
-                                                        class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;Ajouter
-                                                    un projet
+                                                        class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;{{
+                                                    modalName }}
                                                 </label>
                                             </div>
 
@@ -140,10 +139,11 @@
                                                           ? 'is-valid'
                                                           : ''
                                                         ">
-                                                            <option value="planifié">Planifié</option>
-                                                            <option value="en cours">En cours</option>
-                                                            <option value="suspendu">Suspendu</option>
-                                                            <option value="terminé">Terminé</option>
+                                                            <option value="Informatique">Informatique</option>
+                                                            <option value="Ressources Humaines">Ressources Humaines
+                                                            </option>
+                                                            <option value="Marketing">Marketing</option>
+                                                            <option value="Autre spécialité">Autre spécialité</option>
                                                         </select>
                                                         <div class="invalid-feedback">L'indication du département du
                                                             projet est obligatoire </div>
@@ -167,12 +167,23 @@
                                                               ? 'is-valid'
                                                               : ''
                                                             ">
-                                                            <option value="planifié">Planifié</option>
-                                                            <option value="en cours">En cours</option>
-                                                            <option value="suspendu">Suspendu</option>
-                                                            <option value="terminé">Terminé</option>
+                                                            <!--Création et dessign / Informatique / Création de logiciel / Marketing / Gestion de projet / Ventes / Realtions / Gestion des taches / Ressources Humaines / Opérations-->
+                                                            <option value="Création et dessign">Création et dessign
+                                                            </option>
+                                                            <option value="Informatique">Informatique</option>
+                                                            <option value="Création de logiciel">Création de logiciel
+                                                            </option>
+                                                            <option value="Marketing">Marketing</option>
+                                                            <option value="Gestion de projet">Gestion de projet</option>
+                                                            <option value="Ventes">Ventes</option>
+                                                            <option value="Relaions">Relations</option>
+                                                            <option value="Gestion des taches">Gestion des taches
+                                                            </option>
+                                                            <option value="Ressources Humaines">Ressources Humaines
+                                                            </option>
                                                         </select>
-                                                        <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                        <div class="invalid-feedback">Indication du ligne du service du
+                                                            projet est obligatoire </div>
                                                     </div>
                                                 </div>
                                                 <!-- __________________________________________________________________________________-->
@@ -181,124 +192,121 @@
                                                         <!--Description -->
                                                         <label>Description du projet</label>
                                                         <textarea id="descProjet" class="form-control" name="descProjet"
-                                                            rows="1" cols="13" formControlName="descProject"></textarea>
-                                                    </div>
-                                                    <div class="pretty p-icon p-jelly p-round p-bigger"
-                                                    style="position:absolute;right:20px;">
-                                                    <input type="checkbox" formControlName="activatedProject"
-                                                        checked />
-                                                    <div class="state p-info">
-                                                        <i class="icon material-icons">done</i>
-                                                        <label>Activer ce projet</label>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <!-- __________________________________________________________________________________-->
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12">
-                                                    <label>Client</label>
-                                                    <select id="inputCategorie"
-                                                        class="custom-select form-control-sm"
-                                                        formControlName="serviceLine" [ngClass]=" 
-                                                        (projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                            rows="1" cols="13" formControlName="descProject" [ngClass]=" 
+                                                        (projectForm.get('descProject')?.touched ||
+                                                        projectForm.get('descProject')?.dirty) &&
+                                                        projectForm.get('descProject')?.hasError('required')
                                                           ? 'is-invalid'
                                                           : '' ||
-                                                        ((projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        !projectForm.get('serviceLine')?.invalid)
+                                                        ((projectForm.get('descProject')?.touched ||
+                                                        projectForm.get('descProject')?.dirty) &&
+                                                        !projectForm.get('descProject')?.invalid)
                                                           ? 'is-valid'
                                                           : ''
-                                                        ">
-                                                        <option value="planifié">Planifié</option>
-                                                        <option value="en cours">En cours</option>
-                                                        <option value="suspendu">Suspendu</option>
-                                                        <option value="terminé">Terminé</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                        "></textarea>
+                                                    </div>
+                                                    <div class="pretty p-icon p-jelly p-round p-bigger"
+                                                        style="position:absolute;right:20px;">
+                                                        <input type="checkbox" formControlName="activatedProject"
+                                                            checked />
+                                                        <div class="state p-info">
+                                                            <i class="icon material-icons">done</i>
+                                                            <label>Activer ce projet</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div> 
+                                            </div>
+
                                             <!-- __________________________________________________________________________________-->
- 
+
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label>Partner</label>
-                                                    <select id="inputCategorie"
-                                                        class="custom-select form-control-sm"
-                                                        formControlName="serviceLine" [ngClass]=" 
-                                                        (projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                        formControlName="partnerOfProject" [ngClass]=" 
+                                                        (projectForm.get('partnerOfProject')?.touched ||
+                                                        projectForm.get('partnerOfProject')?.dirty) &&
+                                                        projectForm.get('partnerOfProject')?.hasError('required')
                                                           ? 'is-invalid'
                                                           : '' ||
-                                                        ((projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        !projectForm.get('serviceLine')?.invalid)
+                                                        ((projectForm.get('partnerOfProject')?.touched ||
+                                                        projectForm.get('partnerOfProject')?.dirty) &&
+                                                        !projectForm.get('partnerOfProject')?.invalid)
                                                           ? 'is-valid'
                                                           : ''
                                                         ">
-                                                        <option value="planifié">Planifié</option>
-                                                        <option value="en cours">En cours</option>
-                                                        <option value="suspendu">Suspendu</option>
-                                                        <option value="terminé">Terminé</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                    <div class="invalid-feedback">Indication du partner du projet est
+                                                        obligatoire </div>
                                                 </div>
-                                            
-                                            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
-                                            
+
+                                                <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+
                                                 <div class="form-group col-md-6">
                                                     <label>Manager</label>
-                                                    <select id="inputCategorie"
-                                                        class="custom-select form-control-sm"
-                                                        formControlName="serviceLine" [ngClass]=" 
-                                                        (projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                        formControlName="managerOfProject" [ngClass]=" 
+                                                        (projectForm.get('managerOfProject')?.touched ||
+                                                        projectForm.get('managerOfProject')?.dirty) &&
+                                                        projectForm.get('managerOfProject')?.hasError('required')
                                                           ? 'is-invalid'
                                                           : '' ||
-                                                        ((projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        !projectForm.get('serviceLine')?.invalid)
+                                                        ((projectForm.get('managerOfProject')?.touched ||
+                                                        projectForm.get('managerOfProject')?.dirty) &&
+                                                        !projectForm.get('managerOfProject')?.invalid)
                                                           ? 'is-valid'
                                                           : ''
                                                         ">
-                                                        <option value="planifié">Planifié</option>
-                                                        <option value="en cours">En cours</option>
-                                                        <option value="suspendu">Suspendu</option>
-                                                        <option value="terminé">Terminé</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+                                                    <div class="invalid-feedback">Indication du manager du projet est
+                                                        obligatoire </div>
                                                 </div>
-                                            </div> 
+                                            </div>
                                             <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                     <label>Client</label>
-                                                    <select id="inputCategorie"
-                                                        class="custom-select form-control-sm"
-                                                        formControlName="serviceLine" [ngClass]=" 
-                                                        (projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        projectForm.get('serviceLine')?.hasError('required')
+                                                    <select id="inputCategorie" class="custom-select form-control-sm"
+                                                        formControlName="clientOfProject" [ngClass]="
+                                                            (projectForm.get('clientOfProject')?.touched ||
+                                                            projectForm.get('clientOfProject')?.dirty) &&
+                                                            projectForm.get('clientOfProject')?.hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                            ((projectForm.get('clientOfProject')?.touched ||
+                                                            projectForm.get('clientOfProject')?.dirty) &&
+                                                            !projectForm.get('clientOfProject')?.invalid)
+                                                              ? 'is-valid'
+                                                              : ''
+                                                            ">
+                                                        <option *ngFor="let client of clientsList "
+                                                            [value]="client.nameClient">{{client.nameClient}}</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Indication du client du projet est
+                                                        obligatoire </div>
+                                                </div>
+                                            </div>
+                                            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+                                            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+                                            <!--<div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Date du création</label>
+                                                    <input id="inputCategorie"
+                                                        class="form-control form-control-sm"
+                                                        formControlName="createdAtProject" type="date" [ngClass]=" 
+                                                        (projectForm.get('createdAtProject')?.touched ||
+                                                        projectForm.get('createdAtProject')?.dirty) &&
+                                                        projectForm.get('createdAtProject')?.hasError('required')
                                                           ? 'is-invalid'
                                                           : '' ||
-                                                        ((projectForm.get('serviceLine')?.touched ||
-                                                        projectForm.get('serviceLine')?.dirty) &&
-                                                        !projectForm.get('serviceLine')?.invalid)
+                                                        ((projectForm.get('createdAtProject')?.touched ||
+                                                        projectForm.get('createdAtProject')?.dirty) &&
+                                                        !projectForm.get('createdAtProject')?.invalid)
                                                           ? 'is-valid'
                                                           : ''
                                                         ">
-                                                        <option value="planifié">Planifié</option>
-                                                        <option value="en cours">En cours</option>
-                                                        <option value="suspendu">Suspendu</option>
-                                                        <option value="terminé">Terminé</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Indication du ligne du service du projet est obligatoire </div>
+
+                                                    <div class="invalid-feedback">Indication du client du projet est obligatoire </div>
                                                 </div>
-                                            </div> 
+                                            </div> -->
                                             <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
 
 
@@ -368,22 +376,43 @@
                                         </ng-container>
 
                                         <!-- Symbol Column -->
-                                        <ng-container matColumnDef="createdAtProject">
-                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Date du création</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.createdAtProject |
-                                                date: 'dd/MM/yyyy' }} </td>
-                                        </ng-container>
-
-                                        <!-- Symbol Column -->
                                         <ng-container matColumnDef="stateOfProject">
                                             <th mat-header-cell mat-sort-header *matHeaderCellDef>Statu</th>
-                                            <td mat-cell *matCellDef="let element"> {{element.stateOfProject}} </td>
+                                            <td mat-cell *matCellDef="let element">
+                                                <div class="badge badge-success">
+                                                    {{element.stateOfProject}}
+                                                </div>
+                                            </td>
                                         </ng-container>
 
                                         <!-- Symbol Column -->
-                                        <ng-container matColumnDef="priorityOfProject">
-                                            <th mat-header-cell mat-sort-header *matHeaderCellDef> Priorité </th>
-                                            <td mat-cell *matCellDef="let element"> {{element.priorityOfProject}}
+                                        <ng-container matColumnDef="typeOfProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.typeOfProject}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="departmentProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef> Département </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.departmentProject}}
+                                            </td>
+                                        </ng-container>
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="managerOfProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Manager</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.managerOfProject}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="partnerOfProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef>Partner</th>
+                                            <td mat-cell *matCellDef="let element"> {{element.partnerOfProject}} </td>
+                                        </ng-container>
+
+                                        <!-- Symbol Column -->
+                                        <ng-container matColumnDef="clientOfProject">
+                                            <th mat-header-cell mat-sort-header *matHeaderCellDef> Client </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.clientOfProject}}
                                             </td>
                                         </ng-container>
                                         <!-- Symbol Column -->

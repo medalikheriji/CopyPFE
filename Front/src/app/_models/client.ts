@@ -1,4 +1,4 @@
-export class Project{
+export class Client{
     _id?:string;
     nameClient : String;
     taxRegisterClient: String;
@@ -8,14 +8,12 @@ export class Project{
     countryClient : String;
     socialReasonClient : String;
     activitySectorClient : String;
-    postCodeClient : String;
     phoneClient : String;
-    faxClient : String;
     mailClient : String;
-    siteWebClient : String;
 
 
-    constructor(nameClient:string,taxRegisterClient:string,addressClient:string,complementAddressClient:string,cityClient:string,countryClient:string,socialReasonClient:string , activitySectorClient:string , postCodeClient:string , phoneClient:string , faxClient:string, mailClient:string , siteWebClient:string ){
+
+    constructor(nameClient:string,taxRegisterClient:string,addressClient:string,complementAddressClient:string,cityClient:string,countryClient:string,socialReasonClient:string , activitySectorClient:string , phoneClient:string , mailClient:string ){
         this.nameClient=nameClient;
         this.taxRegisterClient=taxRegisterClient;
         this.addressClient=addressClient;
@@ -24,11 +22,9 @@ export class Project{
         this.countryClient=countryClient;
         this.socialReasonClient=socialReasonClient;
         this.activitySectorClient = activitySectorClient ;
-        this.postCodeClient = postCodeClient ;
         this.phoneClient = phoneClient ;
         this.mailClient = mailClient;
-        this.faxClient = faxClient ;
-        this.siteWebClient = siteWebClient ;
+
     }
     
 }

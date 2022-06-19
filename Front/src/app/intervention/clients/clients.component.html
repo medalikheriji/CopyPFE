@@ -1,1 +1,438 @@
-<p>clients works!</p>
+<app-aside-bar></app-aside-bar>
+
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-content">
+            <section class="section" style="margin-top:-2%;">
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-light">
+                                <div class="card-header" style="margin-bottom:-2%;margin-top:2%">
+                                    <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des
+                                            clients</label></h4>
+
+                                    <!--
+                                <div class="form-group" style="width:20%;position:absolute;right:225px;">
+                                    <div class="input-group mb-2" >
+                                     
+                                        &nbsp;<div class="input-group-text" style="border-radius: 45% 0% 0% 45%; height:31px;background-color:transparent;"><i class="fa-solid fa-magnifying-glass" style="color:#48dbfb;"></i></div>
+                                     
+                                      <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                                    </div>
+                                </div>
+                                -->
+                                    <button class="btn btn-outline-info mb-2 me-2"
+                                        style="position:absolute;right:290px;font-size:14px;"
+                                        (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau
+                                        Client</button>
+                                    <input type="search" class="form-control mb-2 me-2" name="categorie"
+                                        placeholder="Rechercher" style="width:20%;position:absolute;right:32px;"
+                                        autocomplete="off" (keyup)="filterData($event)" />
+
+
+                                </div>
+                                <!-- BEGIN : MODAL - ADD PROJECT -->
+
+                                <ng-template #content let-modal>
+                                    <form [formGroup]="clientForm" (ngSubmit)="addClient()">
+                                        <div class="modal-header">
+                                            <div class="form-group col-md-9" style="margin-bottom:0%;">
+                                                <label class="modal-title" style="font-size: 16px;"><i
+                                                        class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp; {{ modalName}}
+                                                </label>
+                                            </div>
+
+                                            <button type="button" class="btn-close" aria-label="Close"
+                                                data-dismiss="modal" (click)="modal.dismiss('Cross click')"></button>
+                                        </div>
+                                        <!---->
+                                        <div class="modal-body" style="margin-bottom:-5%;">
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <!--<div class="form-group col-md-4">
+                                                        <div class="pretty p-switch p-outline"  style="width:20%;position:absolute;left:100px;">
+                                                            <input type="checkbox" formControlName="activatedProject"/>
+                                                            <div class="state p-info">
+                                                                <label >Activier ce projet</label>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <div class="pretty p-switch p-slim" style="width:20%;position:absolute;right:20px;">
+                                                                <input type="checkbox"/>
+                                                                <div class="state p-info">
+                                                                <label style="font-size:12px">Activier ce projet</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                                                </div>
+                                                <!-- //////////////////////////////// MODAL OF PROJECT ///////////////////////////////////-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <!-- ID -->
+                                                        <input type="text" hidden="" class="form-control "
+                                                            id="inputTitre" formControlName="_id">
+                                                        <!--Nom-->
+                                                        <label>Intitulé du client</label>
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="inputTitre" formControlName="nameClient" [ngClass]="
+                                                            (clientForm.get('nameClient')?.touched ||
+                                                            clientForm.get('nameClient')?.dirty) &&
+                                                            clientForm.get('nameClient')?.hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                              ((clientForm.get('nameClient')?.touched ||
+                                                              clientForm.get('nameClient')?.dirty) &&
+                                                              !clientForm.get('nameClient')?.invalid)
+                                                                ? 'is-valid'
+                                                                : ''
+                                                            ">
+                                                        <div class="invalid-feedback">Intitulé du client est obligatoire
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                    <div class="form-group col-md-6">
+                                                        <!--Priorité-->
+                                                        <label>Matricule fiscale</label>
+                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                            formControlName="taxRegisterClient" [ngClass]="
+                                                            (clientForm.get('taxRegisterClient')?.touched ||
+                                                            clientForm.get('taxRegisterClient')?.dirty) &&
+                                                            clientForm.get('taxRegisterClient')?.hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                            ((clientForm.get('taxRegisterClient')?.touched ||
+                                                            clientForm.get('taxRegisterClient')?.dirty) &&
+                                                            !clientForm.get('taxRegisterClient')?.invalid)
+                                                              ? 'is-valid'
+                                                              : ''
+                                                            ">
+                                                        <div class="invalid-feedback">Indication du matricule fiscale du
+                                                            client est
+                                                            obligatoire </div>
+                                                    </div>
+                                                </div>
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-6">
+                                                        <!--Nom-->
+                                                        <label>Addresse</label>
+                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                            formControlName="addressClient" [ngClass]=" 
+                                                        (clientForm.get('addressClient')?.touched ||
+                                                        clientForm.get('addressClient')?.dirty) &&
+                                                        clientForm.get('addressClient')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((clientForm.get('addressClient')?.touched ||
+                                                        clientForm.get('addressClient')?.dirty) &&
+                                                        !clientForm.get('addressClient')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+
+                                                        <div class="invalid-feedback">L'indication d'addresse du
+                                                            client est obligatoire </div>
+                                                    </div>
+
+                                                    <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                    <div class="form-group col-md-6">
+                                                        <label>Complément d'adresse</label>
+                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                            formControlName="complementAddressClient" [ngClass]=" 
+                                                            (clientForm.get('complementAddressClient')?.touched ||
+                                                            clientForm.get('complementAddressClient')?.dirty) &&
+                                                            clientForm.get('complementAddressClient')?.hasError('required')
+                                                              ? 'is-invalid'
+                                                              : '' ||
+                                                            ((clientForm.get('complementAddressClient')?.touched ||
+                                                            clientForm.get('complementAddressClient')?.dirty) &&
+                                                            !clientForm.get('complementAddressClient')?.invalid)
+                                                              ? 'is-valid'
+                                                              : ''
+                                                            ">
+
+                                                        <div class="invalid-feedback">Indication du complément d'dresse
+                                                            du client est obligatoire </div>
+                                                    </div>
+                                                </div>
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <!--Nom-->
+                                                    <label>Ville</label>
+                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                        formControlName="cityClient" [ngClass]=" 
+                                                    (clientForm.get('cityClient')?.touched ||
+                                                    clientForm.get('cityClient')?.dirty) &&
+                                                    clientForm.get('cityClient')?.hasError('required')
+                                                      ? 'is-invalid'
+                                                      : '' ||
+                                                    ((clientForm.get('cityClient')?.touched ||
+                                                    clientForm.get('cityClient')?.dirty) &&
+                                                    !clientForm.get('cityClient')?.invalid)
+                                                      ? 'is-valid'
+                                                      : ''
+                                                    ">
+
+                                                    <div class="invalid-feedback">L'indication du ville du
+                                                        client est obligatoire </div>
+                                                </div>
+
+                                                <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                <div class="form-group col-md-6">
+                                                    <label>Pays</label>
+                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                        formControlName="countryClient" [ngClass]=" 
+                                                        (clientForm.get('countryClient')?.touched ||
+                                                        clientForm.get('countryClient')?.dirty) &&
+                                                        clientForm.get('countryClient')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((clientForm.get('countryClient')?.touched ||
+                                                        clientForm.get('countryClient')?.dirty) &&
+                                                        !clientForm.get('countryClient')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                    <div class="invalid-feedback">Indication du pays du client est
+                                                        obligatoire </div>
+                                                </div>
+                                            </div>
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <!--Nom-->
+                                                    <label>Raison sociale</label>
+                                                    <select id="inputCategorie" class="custom-select form-control-sm"
+                                                        formControlName="socialReasonClient" [ngClass]=" 
+                                                    (clientForm.get('socialReasonClient')?.touched ||
+                                                    clientForm.get('socialReasonClient')?.dirty) &&
+                                                    clientForm.get('socialReasonClient')?.hasError('required')
+                                                      ? 'is-invalid'
+                                                      : '' ||
+                                                    ((clientForm.get('socialReasonClient')?.touched ||
+                                                    clientForm.get('socialReasonClient')?.dirty) &&
+                                                    !clientForm.get('csocialReasonClient')?.invalid)
+                                                      ? 'is-valid'
+                                                      : ''
+                                                    ">
+                                                        <option value="SCI">SCI</option>
+                                                        <option value="SCEA">SCEA</option>
+                                                        <option value="SCE">SCE</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">L'indication du raison sociale du
+                                                        client est obligatoire </div>
+                                                </div>
+
+                                                <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                <div class="form-group col-md-6">
+                                                    <label>Secteur d'activité</label>
+                                                    <select id="inputCategorie" class="custom-select form-control-sm"
+                                                        formControlName="activitySectorClient" [ngClass]=" 
+                                                        (clientForm.get('activitySectorClient')?.touched ||
+                                                        clientForm.get('activitySectorClient')?.dirty) &&
+                                                        clientForm.get('activitySectorClient')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((clientForm.get('activitySectorClient')?.touched ||
+                                                        clientForm.get('activitySectorClient')?.dirty) &&
+                                                        !clientForm.get('activitySectorClient')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                        <option value="Services informatiques">Services informatiques</option>
+                                                        <option value="Industries manufacturières">Industries manufacturières</option>
+                                                        <option value="Les communications">Les communications</option>
+                                                        <option value="Transport">Transport</option>
+                                                        <option value="Education et enseignement">Education et enseignement</option>
+                                                        <option value="Formation professionnelle">Formation professionnelle</option>
+                                                        <option value="Promotion immobilière">Promotion immobilière</option>
+                                                        <option value="Services d'études et d'expertise">Services d'études et d'expertise</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Indication du secteur d'activité du
+                                                        client est obligatoire </div>
+                                                </div>
+                                            </div>
+                                                <!-- __________________________________________________________________________________-->
+                                                <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <!--Nom-->
+                                                    <label>Téléphone </label>
+                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                        formControlName="phoneClient" [ngClass]=" 
+                                                    (clientForm.get('phoneClient')?.touched ||
+                                                    clientForm.get('phoneClient')?.dirty) &&
+                                                    clientForm.get('phoneClient')?.hasError('required')
+                                                      ? 'is-invalid'
+                                                      : '' ||
+                                                    ((clientForm.get('phoneClient')?.touched ||
+                                                    clientForm.get('phoneClient')?.dirty) &&
+                                                    !clientForm.get('phoneClient')?.invalid)
+                                                      ? 'is-valid'
+                                                      : ''
+                                                    ">
+
+                                                    <div class="invalid-feedback">L'indication du téléphone du client
+                                                        est obligatoire </div>
+                                                </div>
+
+                                                <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+
+                                                <div class="form-group col-md-6">
+                                                    <label>E-Mail</label>
+                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                        formControlName="mailClient" [ngClass]=" 
+                                                        (clientForm.get('mailClient')?.touched ||
+                                                        clientForm.get('mailClient')?.dirty) &&
+                                                        clientForm.get('mailClient')?.hasError('required')
+                                                          ? 'is-invalid'
+                                                          : '' ||
+                                                        ((clientForm.get('mailClient')?.touched ||
+                                                        clientForm.get('mailClient')?.dirty) &&
+                                                        !clientForm.get('mailClient')?.invalid)
+                                                          ? 'is-valid'
+                                                          : ''
+                                                        ">
+                                                    <div class="invalid-feedback">Indication d'email du client est
+                                                        obligatoire </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!--<div class="modal-footer">
+                                            <button type="button" class="btn btn-light"
+                                                (click)="modal.close('Close click')">Annuler</button>
+                                            <button type="submit" class="btn btn-outline-info mb-2 me-2"
+                                                [disabled]="projectForm.invalid"
+                                                (click)="modal.close('Close click')">Sauvgarder</button>
+                                        </div>-->
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <button type="button" class="btn btn-light" style="
+                                                        border: none;
+                                                        border-radius: 8px;
+                                                        font-size: 12px;
+                                                        width: 100px;
+                                                        height: 30px;
+                                                        color: rgb(109, 109, 109);
+                                                    " (click)="modal.close('Close click')">
+                                            <i class="fa fa-times"></i>&nbsp;&nbsp; Annuler
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" style="
+                                                        border: none;
+                                                        border-radius: 8px;
+                                                        background-color: #2a73e8;
+                                                        width: 200px;
+                                                        height: 30px;
+                                                        font-size: 12px;" (click)="modal.close('Close click')
+                                                        " [disabled]="clientForm.invalid">
+                                            <i class="fas fa-solid fa-paper-plane"></i>&nbsp;&nbsp;
+                                            Enregistrer et Suivant
+                                        </button>
+                                    </div>
+                                </form>
+                            </ng-template>
+                            <!-- END : MODAL - ADD PROJECT -->
+                            <!-- //////////////////////////////// BEGIN : MODAL OF PROJECT ///////////////////////////////////-->
+
+
+                            <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+                            <!--  displayedColumns: string[] = ["nameClient", "taxRegisterClient", "addressClient","countryClient","socialReasonClient","activitySectorClient","mailClient","actions"];-->
+                            <div class="container">
+                                <table mat-table [dataSource]="dataSource" style="margin-top:5%;width:100%" matSort>
+
+                                    <!--- Note that these columns can be defined in any order.
+                                            The actual rendered columns are set as a property on the row definition" -->
+
+                                    <!-- Position Column 
+                                            <ng-container matColumnDef="Id">
+                                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                            </ng-container> -->
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="nameClient">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom du client</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.nameClient}} </td>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="taxRegisterClient">
+                                        <th mat-header-cell mat-sort-header *matHeaderCellDef>Matricule fiscale</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.taxRegisterClient}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="addressClient">
+                                        <th mat-header-cell mat-sort-header *matHeaderCellDef>Adresse</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.addressClient}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="countryClient">
+                                        <th mat-header-cell mat-sort-header *matHeaderCellDef>Pays</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.countryClient}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="socialReasonClient">
+                                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Raison sociale </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.socialReasonClient}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="activitySectorClient">
+                                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Secteur d'activité </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.activitySectorClient}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="mailClient">
+                                        <th mat-header-cell mat-sort-header *matHeaderCellDef> Mail </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.mailClient}}
+                                        </td>
+                                    </ng-container>
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="actions">
+                                        <th mat-header-cell mat-sort-header *matHeaderCellDef>Actions</th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button type="button" class="btn btn-outline-info btn-sm"
+                                                (click)="deleteClient(element._id)"><i
+                                                    class="fa-solid fa-trash-can"></i>
+                                            </button>
+                                            &nbsp;&nbsp;
+                                            <button type="button" class="btn btn-outline-info btn-sm "
+                                                (click)="openSmEdit(content,element)"><i
+                                                    class="fa-solid fa-pen-to-square"></i>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
+
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        [ngClass]="{'highlight': row.isSeen }"></tr>
+                                </table>
+                                <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                    showFirstLastButtons aria-label="Select page of periodic elements">
+                                </mat-paginator>
+                                <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    </div>
+</body>

@@ -1,16 +1,17 @@
 <app-aside-bar></app-aside-bar>
+
 <body>
-<div class="loader"></div>
-<div id="app">
-    <div class="main-content">
-        <section class="section" style="margin-top:-2%;">
-            <div class="section-body">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-12">
-                        <div class="card card-light">
-                            <div class="card-header" style="margin-top:1%;">
-                                <h4><label class="modal-title"> Liste des projets</label></h4>
-                                <!--
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-content">
+            <section class="section" style="margin-top:-2%;">
+                <div class="section-body">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-12">
+                            <div class="card card-light">
+                                <div class="card-header" style="margin-top:1%;">
+                                    <h4><label class="modal-title" style="margin-left:15%;width:100%;"> Liste des projets</label></h4>
+                                    <!--
                                 <div class="form-group" style="width:20%;position:absolute;right:225px;">
                                     <div class="input-group mb-2" >
                                      
@@ -20,106 +21,89 @@
                                     </div>
                                 </div>
                                 -->
-                                <input type="search" class="form-control mb-2 me-2" name="categorie" placeholder="Entrer le titre du projet" style="width:20%;position:absolute;right:20px;"
-                                [(ngModel)]="searchedProject" (ngModelChange)="Search()" />
-                                <!--<button class="btn btn-outline-info mb-2 me-2" style="position:absolute;right:50px;" (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau projet</button>-->
-                            </div>
-                            <div class="card-body" style="margin-top:-1%;">
-                                <font size="2">
-                                    <table width="100%" class="table   table-hover " id="albums"
-                                        cellspacing="0" border="1px">
-                                        <thead class="table-light">
-                                            <tr class="spaceUnder" border="1px">
-                                                <th (click)="sortField('nameProject')">Titre &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('descProject')"> Description &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <!--
-                                                <th (click)="sortField('createdAtProject')">Date du création &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('expiredAtProject')">Date d'éxpiration &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('deadlineProject')">Date limite &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                
-                                                <th (click)="sortField('stateOfProject')">Statu &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                -->
-                                                <th (click)="sortField('activatedProject')" style="text-align:center;">Activé &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                                <th (click)="sortField('priorityOfProject')" style="text-align:center;"> Priorité &nbsp; <i
-                                                        class="fa-solid fa-sort"></i></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody *ngIf="projectsList.length > 0">
-                                            <tr class="spaceUnder"
-                                                *ngFor="let project of projectsList |orderBy: key: reverse | paginate: {itemsPerPage: 10 , currentPage : p} ;">
-                                                <td style="width:10%;"> {{ project.nameProject }}</td>
-                                                <td style="width:15%;"> {{ project.descProject }}</td>
-                                                <!--
-                                                <td style="width:12%;"> {{ project.createdAtProject | date: 'dd/MM/yyyy' }} </td>
-                                                <td style="width:12%;">
-                                                    {{ project.expiredAtProject | date: 'dd/MM/yyyy' }}
+                                    <!--<input type="search" class="form-control mb-2 me-2" name="categorie" placeholder="Entrer le titre du projet" style="width:20%;position:absolute;right:20px;"
+                                [(ngModel)]="searchedProject" (ngModelChange)="Search()" />-->
+                                    <input type="search" class="form-control mb-2 me-2" name="categorie"
+                                        placeholder="Rechercher" style="width:20%;position:absolute;right:32px;"
+                                        autocomplete="off" (keyup)="filterData($event)" />
+                                    <!--<button class="btn btn-outline-info mb-2 me-2" style="position:absolute;right:50px;" (click)="openSm(content)"><i class="fa-solid fa-plus"></i>&nbsp;Nouveau projet</button>-->
+                                </div>
+                                <!--/////////////////////////////////////////////////////////-->
+                                <div class="card-body" style="margin-top:-1%;">
+                                    <div class="container">
+                                        <!--"nameProject", "descProject","typeOfProject","clientOfProject","activatedProject"-->
+                                        <table mat-table [dataSource]="dataSource" style="width:100%"
+                                            matSort>
+
+                                            <!--- Note that these columns can be defined in any order.
+                                        The actual rendered columns are set as a property on the row definition" -->
+
+                                            <!-- Position Column 
+                                        <ng-container matColumnDef="Id">
+                                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                        </ng-container> -->
+
+                                            <!-- Name Column -->
+                                            <ng-container matColumnDef="nameProject">
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Titre</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.nameProject}} </td>
+                                            </ng-container>
+
+                                            <!-- Weight Column -->
+                                            <ng-container matColumnDef="descProject">
+                                                <th mat-header-cell mat-sort-header *matHeaderCellDef>Description</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.descProject}} </td>
+                                            </ng-container>
+
+
+                                            <!-- Symbol Column -->
+                                            <ng-container matColumnDef="typeOfProject">
+                                                <th mat-header-cell mat-sort-header *matHeaderCellDef>Type</th>
+                                                <td mat-cell *matCellDef="let element"> {{element.typeOfProject}} </td>
+                                            </ng-container>
+
+
+                                            <!-- Symbol Column -->
+                                            <ng-container matColumnDef="clientOfProject">
+                                                <th mat-header-cell mat-sort-header *matHeaderCellDef> Client </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.clientOfProject}}
                                                 </td>
-                                                <td style="width:10%;">
-                                                    {{ project.deadlineProject | date: 'dd/MM/yyyy' }}
-                                                </td>
-                                                
-                                                <td style="width:0%;text-align:center;" [ngSwitch]="project.stateOfProject">
-                                                    <div class="badge badge-success badge-shadow ">{{ project.stateOfProject }}</div>
-                                                    <!--*ngSwitchCase="'planifié'"-->
-                                                    <!--
-                                                    <div class="badge badge-light badge-shadow " *ngSwitchCase="'En cours'">{{ project.stateOfProject }}</div>
-                                                    <div class="badge badge-danger badge-shadow " *ngSwitchCase="'suspendu'">{{ project.stateOfProject }}</div>
-                                                    <div class="badge badge-success badge-shadow " *ngSwitchCase="'terminé'">{{ project.stateOfProject }}</div>
-                                                
-                                                </td>
-                                                -->
-                                                <td style="width:2%;text-align:center;align-items: center;">
-                                                    <form [formGroup]="statuForm" (ngSubmit)="addAcProject()">
-                                                    <!-- 
-                                                    <div class="badge badge-success badge-shadow " *ngIf="project.activatedProject===true"> Activé</div>
-                                                    <div class="badge badge-success badge-shadow " *ngIf="project.activatedProject===false"> Désactivé</div>
-                                                    width:20%;position:absolute;right:20px;
-                                                    -->
-                                                    <!---->
-                                                    <!---->
+                                            </ng-container>
+                                            <!-- Symbol Column -->
+                                            <ng-container matColumnDef="activatedProject">
+                                                <th mat-header-cell mat-sort-header *matHeaderCellDef>Activé</th>
+                                                <td mat-cell *matCellDef="let element">
 
                                                     <div class="pretty p-switch" style="text-align:center;align-items: center;" >
-                                                        <input type="checkbox" *ngIf="project.activatedProject === true " checked="" (change)="saveChange(project._id , project)"/>
-                                                        <input type="checkbox" *ngIf="project.activatedProject === false" (change)="saveChange(project._id , project)"/>
+                                                        <input type="checkbox" *ngIf="element.activatedProject === true " checked="" (change)="saveChange(element._id , element)"/>
+                                                        <input type="checkbox" *ngIf="element.activatedProject === false" (change)="saveChange(element._id , element)"/>
                                                         <div class="state p-info">
                                                         <label ></label>
                                                         </div>
                                                     </div>
-                                                    <!--<button type="submit" class="btn btn-outline-info mb-2 me-2">Sauvgarder</button>-->
-                                                    </form>
-                                                </td>
-                                                <td style="width:8%;text-align:center;align-items: center;">
-                                                    <div class="badge badge-warning badge-shadow">{{
-                                                        project.priorityOfProject
-                                                        }}</div>
-                                                </td>
 
-                                                <!--[routerLink]="['/Projects' , project._id]"-->
-                                            </tr>
-                                        </tbody>
-                                        <div class="form-group" *ngIf="projectsList.length == 0">
-                                            <img alt="Image" height="300"
-                                                width="300" src="src/assets/img/aucuneElement.png" >
-                                            <h5 >Aucune projet</h5>
-                                        </div>
-                                        
-                                    </table>
-                                        <!--padding-left:20%;padding-right:20%;-->
-                                        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
-                                </font>
+                                                </td>
+                                            </ng-container>
+
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                                [ngClass]="{'highlight': row.isSeen }"></tr>
+                                        </table>
+                                        <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                            showFirstLastButtons aria-label="Select page of periodic elements">
+                                        </mat-paginator>
+                                        <!--|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+                                    </div>
+                                </div>
+                                <!--/////////////////////////////////////////////////////////-->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
-</div>
 </body>
+
+<!---->

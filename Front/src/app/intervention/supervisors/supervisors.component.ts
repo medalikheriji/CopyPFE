@@ -1,23 +1,22 @@
 import { Component, ElementRef, OnInit , ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProjectsService } from 'src/app/_services/projects.service';
-import { Project } from 'src/app/_models/project';
+import { ClientsService } from 'src/app/_services/clients.service';
+import { Supervisor } from 'src/app/_models/supervisor';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { DatePipe } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { SupervisorsService } from 'src/app/_services/supervisors.service';
 import Swal from 'sweetalert2';
-import { ClientsService } from 'src/app/_services/clients.service';
-import { Client } from 'src/app/_models/client';
 // import {MatSort, Sort} from '@angular/material/sort';
 
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
+  selector: 'app-supervisors',
+  templateUrl: './supervisors.component.html',
   // styleUrls: ['./projects.component.css']
   encapsulation: ViewEncapsulation.None,
   styles: [`
@@ -513,7 +512,7 @@ import { Client } from 'src/app/_models/client';
 
   `]
 })
-export class ProjectsComponent implements OnInit {
+export class SupervisorsComponent implements OnInit {
 
   minDate : Date = new Date();
   // membersList: Array<{Id: string, firstName: string, lastName:string,email:string,mobile:string,salary:string}> = [
@@ -545,9 +544,9 @@ export class ProjectsComponent implements OnInit {
   key : string ='id';
   reverse : boolean = false;
   /** */
-  projectForm : FormGroup ;
+  superForm : FormGroup ;
   /** */
-  projectsList : Project[] = [];
+  superList : Supervisor[] = [];
   /** */
   // id : string | null;
   /** */
@@ -560,10 +559,7 @@ export class ProjectsComponent implements OnInit {
   imageURL = "assets/img/noFile.png";
 
   /** */
-  modalName = "Ajouter un projet";
-
-  /** */
-  clientsList : Client[] = [];
+  modalName = "Ajouter un superviseur";
   /** 
   timesheetCopy : Array<{id: string , nameProject: string, descProject: string, createdAtProject:string,expiredAtProject:string,deadlineProject:string,stateOfProject:string,priorityOfProject:string}> = [
     {id : "1", nameProject: "Projet n°1", descProject: "Description n°1 ", createdAtProject:"20/01/2022",expiredAtProject:"21/05/2022",deadlineProject:"15/06/2022",stateOfProject:"en cours",priorityOfProject:"faible"},
@@ -582,37 +578,48 @@ export class ProjectsComponent implements OnInit {
   */
 
   searchField : string ="";
-  displayedColumns: string[] = ["nameProject", "descProject", "stateOfProject","typeOfProject","departmentProject", "managerOfProject","partnerOfProject","clientOfProject","actions"];
+  displayedColumns: string[] = ["fullnameSupervisor", "mailSupervisor", "phoneSupervisor","nationalitySupervisor","supervisorAt","actions"];
   dataSource !: MatTableDataSource<any>;
   @ViewChild('paginator') paginator! : MatPaginator;
   @ViewChild(MatSort) mySort! : MatSort ;
   /** */
-  constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _projectsService: ProjectsService , private aRouter : ActivatedRoute , private toast : NgToastService , private _clientsService: ClientsService  ) {
-    this.projectForm = this.formbuilder.group({
-      // 000000000000000000000000
-      _id:["000000000000000000000000"],
-      nameProject:['',Validators.required],
-      descProject:['',Validators.required],
-      priorityOfProject:["Moyenne"],
-      stateOfProject:["En cours"],
-      activatedProject:[true],
-      typeOfProject:['',Validators.required],
-      departmentProject:['',Validators.required],
-      serviceLine:['',Validators.required],
-      managerOfProject:['',Validators.required],
-      partnerOfProject:['',Validators.required],
-      clientOfProject:['',Validators.required]
+  constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _supervisorService: SupervisorsService , private aRouter : ActivatedRoute , private toast : NgToastService ) {
+    this.superForm = this.formbuilder.group({
+      _id:['000000000000000000000000'],
+      fullnameSupervisor:['',Validators.required],
+      mailSupervisor:['',Validators.required],
+      phoneSupervisor:['',Validators.required],
+      nationalitySupervisor:['',Validators.required],
+      supervisorAt:['',Validators.required]
       /**
-       *         this.managerOfProject= managerOfProject;
-        this.partnerOfProject = partnerOfProject;
-        this.clientOfProject = clientOfProject;
+       *         this.fullnameSupervisor=fullnameSupervisor;
+        this.mailSupervisor=mailSupervisor;
+        this.phoneSupervisor=phoneSupervisor;
+        this.photoSupervisor=photoSupervisor;
+        this.nationalitySupervisor=nationalitySupervisor;
+        this.supervisorAt=supervisorAt;
        */
 
     })
+    /**
+     *     nameClient : String;
+    taxRegisterClient: String;
+    addressClient : String;
+    complementAddressClient : string ;
+    cityClient : String;
+    countryClient : String;
+    socialReasonClient : String;
+    activitySectorClient : String;
+    postCodeClient : String;
+    phoneClient : String;
+    faxClient : String;
+    mailClient : String;
+    siteWebClient : String;
+     */
     // this.id = this.aRouter.snapshot.paramMap.get('id');
-    this._projectsService.findAllProjects().subscribe(data => {
+    this._supervisorService.findAllSuper().subscribe(data => {
       console.log(data);
-      this.projectsList=data;
+      this.superList=data;
       this.dataSource= new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.mySort;
@@ -623,14 +630,6 @@ export class ProjectsComponent implements OnInit {
     })
     this.actualDate1 = new Date();
     console.log("----->",this.actualDate1);
-    /** */
-    this._clientsService.findAllClients().subscribe(data => {
-      console.log(data);
-      this.clientsList=data;
-      console.log('-------------><------------');
-    }, error => {
-      console.log(error);
-    })
   }
 
   ngOnInit(): void {
@@ -643,7 +642,7 @@ export class ProjectsComponent implements OnInit {
     // ]
 
     // this.projectsList1 = this.projects;
-    this.getAllProjects();
+    this.getAllSuper();
     // this.timesheet = this.timesheetCopy;
 
   }
@@ -652,13 +651,13 @@ export class ProjectsComponent implements OnInit {
   }
 
   /** search the name of the project */
-  Search(){
-    if (this.searchedProject==''){
-      this.ngOnInit()
-    }else{this.projectsList = this.projectsList.filter(res => {
-      return res.nameProject.toLocaleLowerCase().match(this.searchedProject.toLocaleLowerCase());
-    })}
-  } 
+  // Search(){
+  //   if (this.searchedProject==''){
+  //     this.ngOnInit()
+  //   }else{this.superList = this.superList.filter(res => {
+  //     return res.nameProject.toLocaleLowerCase().match(this.searchedProject.toLocaleLowerCase());
+  //   })}
+  // } 
   /** sort columns */
   sortField(key:any){
     this.key = key ;
@@ -667,28 +666,22 @@ export class ProjectsComponent implements OnInit {
   /** open the modal  */
   openSm(content : any ) {
     this.modalService.open(content, { size: 'lg' });
-    this.modalName = "Ajouter un projet";
-    this.projectForm.reset({
+    this.modalName = "Ajouter un superviseur";
+    this.superForm.reset({
       _id : '000000000000000000000000',
-      nameProject : '',
-      descProject : '',
-      stateOfProject : 'En cours',
-      priorityOfProject : 'Moyenne',
-      activatedProject : true,
-      typeOfProject : '',
-      departmentProject :'',
-      serviceLine : '',
-      managerOfProject : '',
-      partnerOfProject:'',
-      clientOfProject:''  
+      fullnameSupervisor : '',
+      mailSupervisor : '',
+      phoneSupervisor : '',
+      nationalitySupervisor : '',
+      supervisorAt : ''
     });
   }
 
   /** API : find all project method */
-  getAllProjects(){
-    this._projectsService.findAllProjects().subscribe(data => {
+  getAllSuper(){
+    this._supervisorService.findAllSuper().subscribe(data => {
       console.log(data);
-      this.projectsList=data;
+      this.superList=data;
       this.dataSource= new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.mySort;
@@ -699,19 +692,19 @@ export class ProjectsComponent implements OnInit {
     })
   }
   /**API : remove an project  */
-  deleteProject(id : any){
-    // this._projectsService.deleteProject(id).subscribe(data=> {
-    //   console.log("Project has been removed");
-    //   this.toast.success({detail:"Opération réalisée avec succès",summary:"Ce projet à supprimé avec succès",duration:3000});
+  deleteSuper(id : any){
+    // this._supervisorService.deleteSuper(id).subscribe(data=> {
+    //   console.log("Supervisor has been removed");
+    //   this.toast.success({detail:"Opération réalisée avec succès",summary:"Ce superviseur à supprimé avec succès",duration:3000});
       
-    //   this.getAllProjects();
+    //   this.getAllSuper();
     // }, error => {
     //   console.log(error);
     //   this.toast.error({detail:"Message d'erreur",summary:error,duration:3000});
-    // })
+    // });
     Swal.fire({
-      title : 'Voulez-vous vraiment supprimer ce projet ?',
-      text : 'Vous ne pourrez pas récupérer ce projet !',
+      title : 'Voulez-vous vraiment supprimer ce superviseur ?',
+      text : 'Vous ne pourrez pas récupérer ce superviseur !',
       icon : 'info',
       showCancelButton : true,
       confirmButtonText:'Oui , confirmer l\'opération ...',
@@ -721,10 +714,10 @@ export class ProjectsComponent implements OnInit {
 
     }).then((result) => {
       if (result.value){
-        this._projectsService.deleteProject(id).subscribe(data=> {
-          console.log("Projet has been removed");
+        this._supervisorService.deleteSuper(id).subscribe(data=> {
+          console.log("Supervisor has been removed");
           // this.toast.success({detail:"Opération réalisée avec succès",summary:"Ce client à supprimé avec succès",duration:3000});        
-          this.getAllProjects();
+          this.getAllSuper();
         }, error => {
           console.log(error);
           this.toast.error({detail:"Message d'erreur",summary:error,duration:3000});
@@ -733,7 +726,7 @@ export class ProjectsComponent implements OnInit {
         // Swal.fire("Thank you ..",'You submitted successfully','success');
         Swal.fire({
           title : 'Opération réalisée avec succès ...',
-          text : 'Ce projet à supprimé avec succès',
+          text : 'Ce superviseur à supprimé avec succès',
           icon : 'success',
           confirmButtonColor: "#0dcaf0",
           confirmButtonText:'Parfait ..'
@@ -742,7 +735,7 @@ export class ProjectsComponent implements OnInit {
           // Swal.fire('Cancelled','Your imaginary file is safe','error');
           Swal.fire({
             title : 'Cette opération n\'est pas encore terminée ..',
-            text : 'Votre projet est en sécurité',
+            text : 'Votre superviseur est en sécurité',
             icon : 'question',
             confirmButtonColor: "#adb5bd",
             confirmButtonText:'D\'accord !'
@@ -812,88 +805,79 @@ export class ProjectsComponent implements OnInit {
 
   // }
   /** open the modal  */
-  openSmEdit(content : any , project : Project ) {
+  openSmEdit(content : any , superv : Supervisor ) {
     this.modalService.open(content, { size: 'lg' });
-    this.modalName = "Modifier ce projet";
-    this.projectForm.reset({
-      _id : project._id,
-      nameProject : project.nameProject,
-      descProject : project.descProject,
-      stateOfProject : project.stateOfProject,
-      priorityOfProject : project.priorityOfProject,
-      activatedProject : project.activatedProject,
-      typeOfProject : project.typeOfProject,
-      departmentProject : project.departmentProject,
-      serviceLine : project.serviceLine,
-      managerOfProject : project.managerOfProject,
-      partnerOfProject:project.partnerOfProject,
-      clientOfProject:project.clientOfProject
-    
+    this.modalName = "Modifier ce superviseur";
+    this.superForm.reset({
+      _id : superv._id,
+      fullnameSupervisor : superv.fullnameSupervisor,
+      mailSupervisor : superv.mailSupervisor,
+      phoneSupervisor : superv.phoneSupervisor,
+      nationalitySupervisor : superv.nationalitySupervisor,
+      supervisorAt : superv.supervisorAt
     });
+        /**
+        this.fullnameSupervisor=fullnameSupervisor;
+        this.mailSupervisor=mailSupervisor;
+        this.phoneSupervisor=phoneSupervisor;
+        this.photoSupervisor=photoSupervisor;
+        this.nationalitySupervisor=nationalitySupervisor;
+        this.supervisorAt=supervisorAt;
+     */
     this.ngOnInit();
   }
 
-  addProject(){
+  addSuper(){
 
-    console.log('NAME :',this.projectForm.get('nameProject')?.value);
-    console.log('DESC :',this.projectForm.get('descProject')?.value);
-    console.log('TYPE :',this.projectForm.get('typeOfProject')?.value);
-    console.log('DEPARTEMENT :',this.projectForm.get('departmentProject')?.value);
-    console.log('SERVCIE LINE :',this.projectForm.get('serviceLine')?.value);
-    console.log('MANAGER :',this.projectForm.get('managerOfProject')?.value);
-    console.log('PARTNER :',this.projectForm.get('partnerOfProject')?.value);
-    console.log('CLEINT :',this.projectForm.get('clientOfProject')?.value);
-    console.log('PRIORTY :',this.projectForm.get('priorityOfProject')?.value);
-    console.log('ACTIVATED :',this.projectForm.get('activatedProject')?.value);
-    console.log('*************************************************');
-    console.log('ID',this.projectForm.get('_id')?.value);
+    // console.log(this.clientForm.get('nameClient')?.value);
+    // console.log(this.clientForm.get('taxRegisterClient')?.value);
+    // console.log(this.clientForm.get('addressClient')?.value);
+    // console.log(this.clientForm.get('complementAddressClient')?.value);
+    // console.log(this.clientForm.get('cityClient')?.value);
 
-   const addedProject : Project = {
-    // _id : this.projectForm.get('_id')?.value,
-    nameProject : this.projectForm.get('nameProject')?.value,
-    descProject : this.projectForm.get('descProject')?.value,
-    stateOfProject : this.projectForm.get('stateOfProject')?.value,
-    priorityOfProject : this.projectForm.get('priorityOfProject')?.value,
-    activatedProject : this.projectForm.get('activatedProject')?.value,
-    typeOfProject : this.projectForm.get('typeOfProject')?.value,
-    departmentProject : this.projectForm.get('departmentProject')?.value,
-    serviceLine : this.projectForm.get('serviceLine')?.value,
-    managerOfProject : this.projectForm.get('managerOfProject')?.value,
-    partnerOfProject : this.projectForm.get('partnerOfProject')?.value,
-    clientOfProject : this.projectForm.get('clientOfProject')?.value
-
-    
+   const addedSuper : Supervisor = {
+    // _id : this.superForm.get('_id')?.value,
+    fullnameSupervisor : this.superForm.get('fullnameSupervisor')?.value,
+    mailSupervisor : this.superForm.get('mailSupervisor')?.value,
+    phoneSupervisor : this.superForm.get('phoneSupervisor')?.value,
+    nationalitySupervisor : this.superForm.get('nationalitySupervisor')?.value,
+    supervisorAt : this.superForm.get('supervisorAt')?.value 
    }
 
+   console.log(addedSuper);
   /** */
-  if (this.projectForm.get('_id')?.value != "000000000000000000000000" ){
+  if (this.superForm.get('_id')?.value != "000000000000000000000000"){
   /** Edit project */
-  // console.log(this.projectForm.get('_id')?.value);
-  console.log("*** UPDATE METHOD ***");
-  this._projectsService.editProject(this.projectForm.get('_id')?.value , this.projectForm.value ).subscribe( data => {
+  
+  console.log(this.superForm.get('_id')?.value);
+  console.log(this.superForm.value);
+  this._supervisorService.editSuper(this.superForm.get('_id')?.value , this.superForm.value ).subscribe( data => {
   // this.router.navigate(['/Projects']);
-  // this.toast.success({detail:"Opération réalisée avec succès ...",summary:"Ce projet à modifié avec succès",duration:3000});
+  // this.toast.success({detail:"Opération réalisée avec succès ...",summary:"Ce superviseur à modifié avec succès",duration:3000});
   this.successAlert('du modification');
-  this.projectForm.reset();
+  this.superForm.reset();
   this.ngOnInit();
   }, error => {
     console.log(error);
-    this.toast.error({detail:"Message d'erreur",summary:error,duration:3000});
-    this.projectForm.reset();
-  })
+    // this.toast.error({detail:"Message d'erreur",summary:error,duration:3000});
+    this.errorAlert('du modification');
+    this.superForm.reset();
+   })
   }else {
   /** Add project */
-  console.log("*** ADD METHOD ***");
-   this._projectsService.addProject(addedProject).subscribe(data => {
-    this.projectForm.reset();
-     console.log('Project added ');
+  console.log('ADD SUPERVISOR');
+  console.log(this.superForm.get('_id')?.value);
+   this._supervisorService.addSuper(addedSuper).subscribe(data => {
+    this.superForm.reset();
+     console.log('Supervisor added ');
      this.ngOnInit();
-    //  this.toast.success({detail:"Opération réalisée avec succès ...",summary:"Ce projet à ajouté avec succès",duration:5000});
+    //  this.toast.success({detail:"Opération réalisée avec succès ...",summary:"Ce superviseur à ajouté avec succès",duration:5000});
     this.successAlert('d\'ajout');
    } , error => {
     console.log(error);
-    this.projectForm.reset();
-    this.toast.error({detail:"Message d'erreur",summary:error,duration:3000});
+    this.superForm.reset();
+    // this.toast.error({detail:"Message d'erreur",summary:error,duration:3000});
+    this.errorAlert('d\'ajout');
    })
   }
   // console.log(this.projectForm.value);
@@ -901,9 +885,9 @@ export class ProjectsComponent implements OnInit {
   // console.log(addedProject);    
 }
 
-today = new Date();
+  today = new Date();
 
-/** FILTER FUNCTION */
+  /** FILTER FUNCTION */
   filterData($event : any){
     this.dataSource.filter = $event.target.value; 
   }
@@ -930,6 +914,4 @@ today = new Date();
       timer: 3000
     });
   }
-
-
 }
