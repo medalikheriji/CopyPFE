@@ -12,6 +12,8 @@ import { MatSort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
 import { ClientsService } from 'src/app/_services/clients.service';
 import { Client } from 'src/app/_models/client';
+import { User } from 'src/app/_models/user';
+import { UsersService } from 'src/app/_services/users.service';
 // import {MatSort, Sort} from '@angular/material/sort';
 
 
@@ -564,6 +566,9 @@ export class ProjectsComponent implements OnInit {
 
   /** */
   clientsList : Client[] = [];
+
+  /** */
+  usersList : User[] = [];
   /** 
   timesheetCopy : Array<{id: string , nameProject: string, descProject: string, createdAtProject:string,expiredAtProject:string,deadlineProject:string,stateOfProject:string,priorityOfProject:string}> = [
     {id : "1", nameProject: "Projet n°1", descProject: "Description n°1 ", createdAtProject:"20/01/2022",expiredAtProject:"21/05/2022",deadlineProject:"15/06/2022",stateOfProject:"en cours",priorityOfProject:"faible"},
@@ -587,7 +592,7 @@ export class ProjectsComponent implements OnInit {
   @ViewChild('paginator') paginator! : MatPaginator;
   @ViewChild(MatSort) mySort! : MatSort ;
   /** */
-  constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _projectsService: ProjectsService , private aRouter : ActivatedRoute , private toast : NgToastService , private _clientsService: ClientsService  ) {
+  constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _projectsService: ProjectsService , private aRouter : ActivatedRoute , private toast : NgToastService , private _clientsService: ClientsService , private _userService: UsersService ) {
     this.projectForm = this.formbuilder.group({
       // 000000000000000000000000
       _id:["000000000000000000000000"],
@@ -608,7 +613,9 @@ export class ProjectsComponent implements OnInit {
         this.clientOfProject = clientOfProject;
        */
 
-    })
+    });
+
+
     // this.id = this.aRouter.snapshot.paramMap.get('id');
     this._projectsService.findAllProjects().subscribe(data => {
       console.log(data);
@@ -631,6 +638,16 @@ export class ProjectsComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+    /** */
+    this._userService.findAllUsers().subscribe(data => {
+      console.log(data);
+      this.usersList=data;
+      console.log('-------------><------------');
+    }, error => {
+      console.log(error);
+    })
+
+
   }
 
   ngOnInit(): void {
@@ -645,10 +662,14 @@ export class ProjectsComponent implements OnInit {
     // this.projectsList1 = this.projects;
     this.getAllProjects();
     // this.timesheet = this.timesheetCopy;
+    this.getAllUsers();
+
+
 
   }
   ngAfterViewInit (){
     this.dataSource.sort = this.mySort;
+    
   }
 
   /** search the name of the project */
@@ -697,6 +718,16 @@ export class ProjectsComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+  getAllUsers(){
+    // GET ALL USERS
+    this._userService.findAllUsers().subscribe(data => {
+    console.log(data);
+    this.usersList=data;
+    // console.log('-------------><------------',this.usersList);
+    }, error => {
+    console.log(error);
+    });
   }
   /**API : remove an project  */
   deleteProject(id : any){

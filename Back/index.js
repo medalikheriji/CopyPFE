@@ -24,7 +24,7 @@ app.use('/api/users', require('./routes/user'));
 
 app.use('/api/entite', require('./routes/entiteRoute'));
 
-
+app.use('/frais',require('./routes/frais'));
 
 app.listen(1000,()=>{
     console.log("| ** server working successfully ** |")

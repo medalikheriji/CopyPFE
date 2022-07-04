@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { SupervisorsService } from 'src/app/_services/supervisors.service';
 import Swal from 'sweetalert2';
 // import {MatSort, Sort} from '@angular/material/sort';
+import { Client } from 'src/app/_models/client';
 
 
 @Component({
@@ -560,6 +561,9 @@ export class SupervisorsComponent implements OnInit {
 
   /** */
   modalName = "Ajouter un superviseur";
+
+  /** */
+  clientsList : Client[] = [];
   /** 
   timesheetCopy : Array<{id: string , nameProject: string, descProject: string, createdAtProject:string,expiredAtProject:string,deadlineProject:string,stateOfProject:string,priorityOfProject:string}> = [
     {id : "1", nameProject: "Projet n°1", descProject: "Description n°1 ", createdAtProject:"20/01/2022",expiredAtProject:"21/05/2022",deadlineProject:"15/06/2022",stateOfProject:"en cours",priorityOfProject:"faible"},
@@ -583,7 +587,7 @@ export class SupervisorsComponent implements OnInit {
   @ViewChild('paginator') paginator! : MatPaginator;
   @ViewChild(MatSort) mySort! : MatSort ;
   /** */
-  constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _supervisorService: SupervisorsService , private aRouter : ActivatedRoute , private toast : NgToastService ) {
+  constructor(private modalService: NgbModal,private formbuilder:FormBuilder,private _supervisorService: SupervisorsService , private aRouter : ActivatedRoute , private toast : NgToastService , private _clientsService: ClientsService ) {
     this.superForm = this.formbuilder.group({
       _id:['000000000000000000000000'],
       fullnameSupervisor:['',Validators.required],
@@ -630,6 +634,13 @@ export class SupervisorsComponent implements OnInit {
     })
     this.actualDate1 = new Date();
     console.log("----->",this.actualDate1);
+    this._clientsService.findAllClients().subscribe(data => {
+      console.log(data);
+      this.clientsList=data;
+      console.log('-------------><------------');
+    }, error => {
+      console.log(error);
+    })
   }
 
   ngOnInit(): void {

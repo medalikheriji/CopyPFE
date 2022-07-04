@@ -35,10 +35,7 @@ const ProjectSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    createdAtProject: {
-        type:Date,
-        required:true
-    },
+
     // expiredAtProject: {
     //     type:Date,
     //     required:false
@@ -53,7 +50,7 @@ const ProjectSchema = mongoose.Schema({
     },
     priorityOfProject: {
         type:String,
-        required :true
+        required :false
     },
     activatedProject: {
         type:Boolean,
@@ -71,7 +68,19 @@ const ProjectSchema = mongoose.Schema({
         type:String,
         required:r=true
     },
-    listColab: [[{type: mongoose.Schema.Types.ObjectId , ref: 'User'}]]
+    managerOfProject: {
+        type:String,
+        required:false
+    },
+    partnerOfProject: {
+        type:String,
+        required:false
+    },
+    clientOfProject:{
+        type:String,
+        required:false
+    },
+    // listColab: [[{type: mongoose.Schema.Types.ObjectId , ref: 'User'}]]
 
 });
 

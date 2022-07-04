@@ -129,64 +129,56 @@
             <li class="dropdown">
               <a href="" class="menu-toggle nav-link has-dropdown"><i class="fa-solid fa-users-rectangle"></i><span>Mes interventions</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="widget-chart.html">Mes projets</a></li>
-                <li><a class="nav-link" href="widget-data.html">Mes rôles</a></li>
+                <li><a class="nav-link" routerLink="/Projects">Mes projets</a></li>
+                <!--<li><a class="nav-link" href="widget-data.html">Mes rôles</a></li>-->
               </ul>
             </li>
             <li class="dropdown">
               <a href="" class="menu-toggle nav-link has-dropdown"><i class="fa-solid fa-business-time"></i><span>Gestion du temps</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="chat.html">Feuilles de temps</a></li>
-                <li><a class="nav-link" href="portfolio.html">Amendements</a></li>
-                <li><a class="nav-link" href="blog.html">Compensations</a></li>
+                <li><a class="nav-link" routerLink="/time">Feuilles de temps</a></li>
+                <!--<li><a class="nav-link" href="portfolio.html">Amendements</a></li>
+                <li><a class="nav-link" href="blog.html">Compensations</a></li>-->
               </ul>
             </li>
             <li class="dropdown">
               <a href="" class="menu-toggle nav-link has-dropdown"><i class="fa-solid fa-file-invoice-dollar"></i><span>Gestion des dépenses</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="email-inbox.html">Mes dépenses</a></li>
-                <li><a class="nav-link" href="email-inbox.html">Mes notes de frais</a></li>
+                <li><a class="nav-link" routerLink="/e">Mes dépenses</a></li>
+                <!--<li><a class="nav-link" href="email-inbox.html">Mes notes de frais</a></li>
                 <li><a class="nav-link" href="email-compose.html">Approbations</a></li>
-                <li><a class="nav-link" href="email-read.html">Mes paiements</a></li>
+                <li><a class="nav-link" href="email-read.html">Mes paiements</a></li>-->
               </ul>
             </li>
             <!--Begin : Centre de facturation -->
-            <li class="dropdown">
+            <!--<li class="dropdown">
               <a href="" class="menu-toggle nav-link has-dropdown"><i class="fa-solid fa-file-lines"></i><span>Centre de facturation</span></a>
               <ul class="dropdown-menu">
                 <li><a class="nav-link" href="avatar.html">Factures</a></li>
                 <li><a class="nav-link" href="card.html">Avoirs</a></li>
                 <li><a class="nav-link" href="modal.html">Règles de facturation</a></li>
               </ul>
-            </li>
+            </li>-->
             <!--End : Centre de facturation -->
-            <li class="dropdown">
-             <a href="" class="menu-toggle nav-link has-dropdown"><i class="fa-solid fa-chart-column"></i><span>Reports</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="basic-form.html">Etat du temps</a></li>
-                <li><a class="nav-link" href="forms-advanced-form.html">Etat des dépenses</a></li>
-                <li><a class="nav-link" href="forms-editor.html">Etat des factures</a></li>
-                <li><a class="nav-link" href="forms-validation.html">Etats d'analyse</a></li>
-              </ul>
-            </li>
+
             <!---->
             <li class="menu-header">Administartion</li>
             <li class="dropdown">
               <a href="" class="menu-toggle nav-link has-dropdown" ><i class="fa-solid fa-gear"></i><span>Général</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="basic-form.html">Gestion des utilisateurs</a></li>
+                <li><a class="nav-link"  routerLink="/list-users">Gestion des utilisateurs</a></li>
+                <!--
                 <li><a class="nav-link" href="forms-advanced-form.html">Gestion des profils</a></li>
                 <li><a class="nav-link" href="forms-editor.html">Gestion des rôles</a></li>
                 <li><a class="nav-link" href="forms-validation.html">Gestion des délégations </a></li>
                 <li><a class="nav-link" href="forms-validation.html">Gestion d'approbation </a></li>
+                -->
                 <hr>
-                <li><a class="nav-link" href="forms-validation.html">Gestion des clients </a></li>
-                <li><a class="nav-link" href="forms-validation.html">Gestion des projets</a></li>
+                <li><a class="nav-link" routerLink="/Clients">Gestion des clients </a></li>
+                <li><a class="nav-link" routerLink="/Projects">Gestion des projets</a></li>
+                <li><a class="nav-link" routerLink="/Supervisors">Gestion des superviseurs</a></li>
+                <li><a class="nav-link" routerLink="/list">Controller des projets</a></li>
                 <hr>
-                <li><a class="nav-link" href="forms-validation.html">Gestion des indemnités kilométrique </a></li>
-                <br>
-                <li><a class="nav-link" href="forms-validation.html">Gestion des catégories de dépense</a></li>
-                <br>
               </ul>
             </li>
             <!---->

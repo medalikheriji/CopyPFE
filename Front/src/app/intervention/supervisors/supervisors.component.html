@@ -166,19 +166,23 @@
                                                     <div class="form-group col-md-12">
                                                         <!--Nom-->
                                                         <label>Superviseur à</label>
-                                                        <input id="inputCategorie" class="form-control form-control-sm"
+                                                        <select id="inputCategorie" class="custom-select form-control-sm"
                                                             formControlName="supervisorAt" [ngClass]=" 
-                                                    (superForm.get('supervisorAt')?.touched ||
-                                                    superForm.get('supervisorAt')?.dirty) &&
-                                                    superForm.get('supervisorAt')?.hasError('required')
-                                                      ? 'is-invalid'
-                                                      : '' ||
-                                                    ((superForm.get('supervisorAt')?.touched ||
-                                                    superForm.get('supervisorAt')?.dirty) &&
-                                                    !superForm.get('supervisorAt')?.invalid)
-                                                      ? 'is-valid'
-                                                      : ''
-                                                    ">
+                                                            (superForm.get('supervisorAt')?.touched ||
+                                                            superForm.get('supervisorAt')?.dirty) &&
+                                                            superForm.get('supervisorAt')?.hasError('required')
+                                                            ? 'is-invalid'
+                                                            : '' ||
+                                                            ((superForm.get('supervisorAt')?.touched ||
+                                                            superForm.get('supervisorAt')?.dirty) &&
+                                                            !superForm.get('supervisorAt')?.invalid)
+                                                            ? 'is-valid'
+                                                            : ''
+                                                            ">
+                                                            <option *ngFor="let client of clientsList "
+                                                                [value]="client.nameClient">{{client.nameClient}}</option>
+
+                                                        </select>
 
                                                         <div class="invalid-feedback">L'indication du
                                                             client est obligatoire </div>

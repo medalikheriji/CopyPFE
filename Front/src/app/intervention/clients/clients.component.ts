@@ -916,7 +916,7 @@ export class ClientsComponent implements OnInit {
       title: 'Cette opération '+ action +' est réalisée avec succès .. ',
       // title : 'CETTE OPÉRATION EST '+ action+' RÉALISÉE AVEC SUCCÈS ..',
       showConfirmButton: false,
-      timer: 5000
+      timer: 2500
     });
   }
 
@@ -927,7 +927,7 @@ export class ClientsComponent implements OnInit {
       icon: 'error',
       title: 'Cette opération '+ action +' n\'est pas réalisée avec succès .. ',
       showConfirmButton: false,
-      timer: 3000
+      timer: 2500
     });
   }
 

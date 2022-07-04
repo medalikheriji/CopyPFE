@@ -60,7 +60,7 @@ exports.createSupervior = async (req,res) => {
 
 exports.findAllSupervisors = async (req,res) => {
     try {
-        const supervisor = await Supervisor.find().populate('supervisorAt');
+        const supervisor = await Supervisor.find();
         res.json(supervisor);
     console.log('|__  All supervisors have been successfully recovered __|')
     } catch (error) {

@@ -222,7 +222,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label>Partner</label>
-                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                    <select id="inputCategorie" class="custom-select form-control-sm"
                                                         formControlName="partnerOfProject" [ngClass]=" 
                                                         (projectForm.get('partnerOfProject')?.touched ||
                                                         projectForm.get('partnerOfProject')?.dirty) &&
@@ -235,6 +235,10 @@
                                                           ? 'is-valid'
                                                           : ''
                                                         ">
+                                                    <option *ngFor="let user of usersList "
+                                                            [value]="user.firstname">{{user.firstname}} {{user.lastname}}</option>
+                                                            <!--<option value="Karim Mahwechi"> Karim mahwechi</option>-->
+                                                </select>
                                                     <div class="invalid-feedback">Indication du partner du projet est
                                                         obligatoire </div>
                                                 </div>
@@ -243,7 +247,7 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label>Manager</label>
-                                                    <input id="inputCategorie" class="form-control form-control-sm"
+                                                    <select id="inputCategorie" class="custom-select form-control-sm"
                                                         formControlName="managerOfProject" [ngClass]=" 
                                                         (projectForm.get('managerOfProject')?.touched ||
                                                         projectForm.get('managerOfProject')?.dirty) &&
@@ -256,6 +260,10 @@
                                                           ? 'is-valid'
                                                           : ''
                                                         ">
+                                                    <option *ngFor="let user of usersList "
+                                                            [value]="user.firstname">{{user.firstname}} {{user.lastname}}</option>
+                                                            <!--<option value="Karim Mahwechi"> Karim mahwechi</option>-->
+                                                    </select>
                                                     <div class="invalid-feedback">Indication du manager du projet est
                                                         obligatoire </div>
                                                 </div>
@@ -279,6 +287,7 @@
                                                             ">
                                                         <option *ngFor="let client of clientsList "
                                                             [value]="client.nameClient">{{client.nameClient}}</option>
+
                                                     </select>
                                                     <div class="invalid-feedback">Indication du client du projet est
                                                         obligatoire </div>

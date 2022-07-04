@@ -9,7 +9,7 @@ import { Client } from '../_models/client';
 })
 export class ClientsService {
 
-  url = 'http://localhost:8000/clients/';
+  url = 'http://localhost:1000/clients/';
   constructor(private http : HttpClient) { }
 
   findAllClients(): Observable<any>{

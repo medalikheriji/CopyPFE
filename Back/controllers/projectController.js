@@ -9,19 +9,22 @@ exports.createProject = async (req,res) => {
         // // await project.save();
         // // res.send(project);
 
-        project = new Project({
-            _idProject: req.body._idProject,
-            nameProject: req.body.nameProject,
-            descProject: req.body.descProject,
-            createdAtProject: req.body.createdAtProject,
-            stateOfProject: req.body.stateOfProject,
-            priorityOfProject: req.body.priorityOfProject,
-            activatedProject : req.body.activatedProject, 
-            typeOfProject : req.body.typeOfProject,
-            departmentProject : req.body.departmentProject,
-            serviceLine : req.body.serviceLine
-
-        });
+        // project = new Project({
+        //     _id: req.body._id,
+        //     nameProject: req.body.nameProject,
+        //     descProject: req.body.descProject,
+        //     createdAtProject: req.body.createdAtProject,
+        //     stateOfProject: req.body.stateOfProject,
+        //     priorityOfProject: req.body.priorityOfProject,
+        //     activatedProject : req.body.activatedProject, 
+        //     typeOfProject : req.body.typeOfProject,
+        //     departmentProject : req.body.departmentProject,
+        //     serviceLine : req.body.serviceLine,
+        //     managerOfProject : req.body.managerOfProject,
+        //     partnerOfProject : req.body.partnerOfProject,
+        //     clientOfProject : req.body.clientOfProject
+        // });
+        project = new Project(req.body);
         await project.save();
         res.send(project);
     console.log('|__  Project have been created successfully __|')
@@ -46,7 +49,7 @@ exports.updateProject = async (req,res) => {
     try {
         // const projects = await Project.find();
         // res.json(projects);
-        const {  nameProject, descProject, createdAtProject, stateOfProject, priorityOfProject , activatedProject , typeOfProject ,departmentProject, serviceLine  } = req.body;
+        const {  nameProject, descProject,stateOfProject, priorityOfProject , activatedProject , typeOfProject ,departmentProject, serviceLine , managerOfProject , partnerOfProject , clientOfProject } = req.body;
         let project = await Project.findById(req.params.id);
         if (!project){
             res.statu(500).json({msg : 'Project does not exist'});
@@ -54,13 +57,15 @@ exports.updateProject = async (req,res) => {
 
         project.nameProject = nameProject;
         project.descProject = descProject ;
-        project.createdAtProject = createdAtProject ;
         project.stateOfProject = stateOfProject;
         project.priorityOfProject = priorityOfProject;
         project.activatedProject = activatedProject;
         project.typeOfProject = typeOfProject;
         project.departmentProject = departmentProject,
-        project.serviceLine = serviceLine
+        project.serviceLine = serviceLine,
+        project.managerOfProject = managerOfProject,
+        project.partnerOfProject = partnerOfProject,
+        project.clientOfProject = clientOfProject
         
         project = await Project.findByIdAndUpdate({ _id: req.params.id},project, {new : true})
         res.json(project);

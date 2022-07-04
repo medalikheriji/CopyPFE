@@ -69,7 +69,7 @@ exports.createClient = async (req,res) => {
 
 exports.findAllClients = async (req,res) => {
     try {
-        const clients = await Clients.find().populate('supervisors');
+        const clients = await Clients.find();
         res.json(clients);
     console.log('|__  All clients have been successfully recovered __|')
     } catch (error) {
@@ -95,7 +95,7 @@ exports.updateClient = async (req,res) => {
         // "faxClient":"",
         // "mailClient":"",
         // "sitewebClient":""
-        const {  nameClient, taxRegisterClient, addressClient, complementAddressClient, cityClient , countryClient , socialReasonClient , postCodeClient, phoneClient , faxClient , mailClient , sitewebClient , supervisors} = req.body;
+        const {  nameClient, taxRegisterClient, addressClient, complementAddressClient, cityClient , countryClient , socialReasonClient , phoneClient  , mailClient } = req.body;
         let client = await Clients.findById(req.params.id);
         if (!client){
             res.statu(500).json({msg : 'Client does not exist'});
@@ -108,12 +108,9 @@ exports.updateClient = async (req,res) => {
         client.cityClient = cityClient;
         client.countryClient = countryClient;
         client.socialReasonClient = socialReasonClient;
-        client.postCodeClient = postCodeClient,
-        client.phoneClient = phoneClient,
-        client.faxClient = faxClient;
+        client.phoneClient = phoneClient;
         client.mailClient = mailClient,
-        client.sitewebClient = sitewebClient,
-        client.supervisors = supervisors
+
 
         client = await Clients.findByIdAndUpdate({ _id: req.params.id},client, {new : true})
         res.json(client);

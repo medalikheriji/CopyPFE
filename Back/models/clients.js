@@ -69,27 +69,17 @@ const ClientSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    postCodeClient: {
-        type:String,
-        required:true
-    },
+
     phoneClient: {
-        type:String,
-        required:true
-    },
-    faxClient: {
         type:String,
         required:true
     },
     mailClient: {
         type:String,
         required:true
-    },
-    sitewebClient: {
-        type:String,
-        required:true
-    },
-    supervisors: [{type: mongoose.Schema.Types.ObjectId , ref: 'Supervisor'}]
+    }
+
+    // supervisors: [{type: mongoose.Schema.Types.ObjectId , ref: 'Supervisor'}]
 });
 
 module.exports = mongoose.model('Clients',ClientSchema);

@@ -358,3 +358,15 @@ exports.deleteUser = async (req, res, next) => {
     res.status(500).json(err);
   }
 }
+
+
+exports.findAllUsers = async (req,res) => {
+  try {
+      const users = await User.find();
+      res.json(users);
+  console.log('|__  All users have been successfully recovered __|')
+  } catch (error) {
+      console.log(error);
+      res.status(500).send('Something Wrong !!');
+  }
+}

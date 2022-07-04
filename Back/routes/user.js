@@ -13,7 +13,7 @@ router.post('/password/forgot',userController.forgetPasswordUser);
 router.put('/password/reset/:token',userController.resetPassword);
 router.get('/profile'/*,protect*/,userController.getProfile);
 router.put('/profile'/*,protect*/,userController.updateProfile);
-router.get('/',userController.getAllUsers);
+router.get('/',userController.findAllUsers);
 router.post('/ajouter'/*,protect*/,userController.addUser);
 router.delete('/:id'/*,protect,admin*/,userController.deleteUser);
 

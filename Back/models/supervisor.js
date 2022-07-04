@@ -39,7 +39,7 @@ const SupervisorSchema = mongoose.Schema({
         type:String,
         required :false
     },
-    supervisorAt: [{type: mongoose.Schema.Types.Array , ref: 'Clients'}]
+    // supervisorAt: [{type: mongoose.Schema.Types.Array , ref: 'Clients'}]
 });
 
 module.exports = mongoose.model('Supervisor',SupervisorSchema);

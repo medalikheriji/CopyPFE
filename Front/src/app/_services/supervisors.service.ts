@@ -8,7 +8,7 @@ import { Supervisor } from '../_models/supervisor';
 })
 export class SupervisorsService {
 
-  url = 'http://localhost:8000/supervisors/';
+  url = 'http://localhost:1000/supervisors/';
   constructor(private http : HttpClient) { }
 
   findAllSuper(): Observable<any>{

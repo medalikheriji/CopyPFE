@@ -8,7 +8,7 @@ import { Project } from '../_models/project';
 })
 export class ProjectsService {
 
-  url = 'http://localhost:8000/projects/';
+  url = 'http://localhost:1000/projects/';
   constructor(private http : HttpClient) { }
 
   findAllProjects(): Observable<any>{
@@ -34,5 +34,10 @@ export class ProjectsService {
   editProjectByState(id:string,project:Project):Observable<any>{
     return this.http.put( this.url + "updateState/"  + id , project);
   }
+
+  // findAllUsers(): Observable<any>{
+  //   this.url = 'http://localhost:1000/api/users/';
+  //   return this.http.get(this.url);
+  // }
 
 }
